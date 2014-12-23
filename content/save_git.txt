@@ -1,0 +1,12 @@
+
+## Usen bien el control de versiones
+
+Git, SVN, mercurial son sus amigos
+
+## Usen bien el control de versiones2
+
+Al terminar el proyecto es algo que el profe *sapea*, delatandolos en terminos de tiempo (Lo hicieron tranquilos en el semestre, o fue algo que hicieron a última hora), cuanto trabajo cada uno en el grupo o si fueron ordenados/desordenados a la hora de trabajar en equipo.
+
+# Siguiente tópico
+
+Hello finch
