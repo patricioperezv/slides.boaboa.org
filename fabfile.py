@@ -20,7 +20,7 @@ def clean():
 # Faltaria que esta magia se pegara un cp a todos los ficheros de content/images
 def build():
     clean()
-    local('cp -rf {0} {1}'.format(REVEAL_JS_SOURCE_DIR, DEST_DIR))
+    #local('cp -rf {0} {1}'.format(REVEAL_JS_SOURCE_DIR, DEST_DIR))
     local('cp -rf {0} {1}'.format(IMAGES_SOURCE_DIR, IMAGES_DEST_DIR))
     for fichero in glob.glob(SOURCE_FILES):
         nombre = os.path.splitext(os.path.split(fichero)[-1])[0]
