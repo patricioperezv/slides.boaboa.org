@@ -1,4 +1,4 @@
-% Curso Laravel 4
+% Workshop Laravel 4
 % Patricio Pérez patricio.perez@ceinf.cl
 % Primer semestre 2015
 
@@ -48,6 +48,3 @@ Hay algunas herramientas que utilizaremos a lo largo de esta travesía:
 
 
 ### Buenas (y malas) prácticas en el ramo
-
-<div class="notes">
-</div>
