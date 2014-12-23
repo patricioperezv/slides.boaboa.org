@@ -29,3 +29,7 @@ def build():
 
 def serve():
     local('cd {0} && python -m SimpleHTTPServer 9000'.format(DEST_DIR))
+
+def watch():
+    script = os.path.join(BASE_DIR, 'watcher.observr')
+    local('observr {0}'.format(script))
