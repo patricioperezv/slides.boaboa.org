@@ -1,9 +1,8 @@
 % Workshop Laravel 4
-% Patricio Pérez \<patricio.perez@ceinf.cl\>
+% Patricio Pérez <patricio.perez@ceinf.cl>
 % Primer semestre 2015
 
-
-### Que veremos
+# Que veremos
 
 . . .
 
@@ -14,7 +13,7 @@
 Un framework PHP para buenos tipos.
 
 
-### Que veremos
+# Que veremos
 
 - Buenas (y malas) prácticas en el ramo (A.K.A Tratando de no hacer rabiar al profe)
 - Instalacion del entorno de desarrollo (*Ubuntu + DB + IDE + Git + Framework*)
@@ -24,7 +23,7 @@ Un framework PHP para buenos tipos.
 - Migraciones de db (*Generación del modelo en DB*)
 - ORM (*Object Relational Mapping*): *Eloquent*
 
-### Que veremos
+# Que veremos
 
 - Rutas en el framework, verbos HTTP y controladores resourceful
 - Vistas: Templates *Blade*
@@ -34,8 +33,7 @@ Un framework PHP para buenos tipos.
 - Ejecución de tareas programadas (Mezclando CRON con laravel)
 - Deployment en apache2
 
-
-### Convenciones
+# Convenciones
 
 Hay algunas herramientas que utilizaremos a lo largo de esta travesía:
 
@@ -45,9 +43,18 @@ Hay algunas herramientas que utilizaremos a lo largo de esta travesía:
 - IDE: *Eclipse* (O alguno de su gusto)
 - Framework **MVC**: *Laravel 4.2*
 
-
-### Buenas (y malas) prácticas en el ramo
+# Buenas (y malas) prácticas
 
 Hay que tener en cuenta que ya estamos viejitos
+
 . . .
+
 Y honestamente hay varias cosas de las que no tenemos p*ta idea
+
+# Buenas prácticas
+
+![Pasemos de esto](images/no_idea_dog.jpg)
+
+# Buenas prácticas
+
+![A esto](images/badass_dog.jpg)
