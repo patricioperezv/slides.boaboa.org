@@ -1,5 +1,5 @@
 % Workshop Laravel 4
-% Patricio Pérez patricio.perez@ceinf.cl
+% Patricio Pérez \<patricio.perez@ceinf.cl\>
 % Primer semestre 2015
 
 
@@ -13,25 +13,25 @@
 
 Un framework PHP para buenos tipos.
 
+
 ### Que veremos
 
 - Buenas (y malas) prácticas en el ramo (A.K.A Tratando de no hacer rabiar al profe)
-- Uso básico de git(hub)
 - Instalacion del entorno de desarrollo (*Ubuntu + DB + IDE + Git + Framework*)
-- Uso de manejador de dependencias: *Composer*
-- Introducción rápida al modelo MVC (*Model View Controller*)
+- Uso básico de linux (Línea de comandos) + git(*hub*)
+- Uso de manejador de dependencias de PHP: *Composer*
+- Introducción rápida al patrón MVC (*Model View Controller*)
 - Migraciones de db (*Generación del modelo en DB*)
-
+- ORM (*Object Relational Mapping*): *Eloquent*
 
 ### Que veremos
 
-- ORM: Eloquent (*Object Relational Mapping*)
-- Rutas en el framework y verbos HTTP
-- Controladores Resourceful
-- Vistas: Blade Templating
+- Rutas en el framework, verbos HTTP y controladores resourceful
+- Vistas: Templates *Blade*
+- Probando código en la terminal: *Tinker*
 - Rutas avanzadas (Anidación de recursos, filtros)
 - Integración con un servicio REST
-- Ejecución de tareas programadas (Tipo CRON)
+- Ejecución de tareas programadas (Mezclando CRON con laravel)
 - Deployment en apache2
 
 
@@ -46,5 +46,8 @@ Hay algunas herramientas que utilizaremos a lo largo de esta travesía:
 - Framework **MVC**: *Laravel 4.2*
 
 
-
 ### Buenas (y malas) prácticas en el ramo
+
+Hay que tener en cuenta que ya estamos viejitos
+. . .
+Y honestamente hay varias cosas de las que no tenemos p*ta idea
