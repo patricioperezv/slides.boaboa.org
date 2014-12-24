@@ -40,31 +40,59 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
     <h3 class="date">Primer semestre 2015</h3>
 </section>
 
-<section id="que-veremos" class="slide level1">
-<h1>Que veremos</h1>
-<div class="fragment">
+<section><section id="que-aprenderemos-intentaremos" class="titleslide slide level1"><h1>Que aprenderemos (Intentaremos?)</h1></section><section id="como-no-hacerlo-enojar-..." class="slide level2">
+<h1>Como no hacerlo enojar ...</h1>
 <figure>
-<img src="images/laravel_logo.png" alt="Laravel" /><figcaption>Laravel</figcaption>
+<img src="images/jirafales.jpg" alt="Profesor Salazar" /><figcaption>Profesor Salazar</figcaption>
 </figure>
-</div>
 <div class="fragment">
-<p>Un framework PHP para buenos tipos.</p>
+<p>Es un _poco_ cascarrabias ...</p>
 </div>
-</section>
-<section id="que-veremos-1" class="slide level1">
-<h1>Que veremos</h1>
+</section><section id="para-ello-usaremos" class="slide level2">
+<h1>Para ello usaremos</h1>
+</section><section class="slide level2">
+
+<figure>
+<img src="images/github.jpg" alt="Github" /><figcaption>Github</figcaption>
+</figure>
+<div class="fragment">
+<p>Control de versiones distribuido</p>
+</div>
+</section><section class="slide level2">
+
+<figure>
+<img src="images/laravel.png" alt="Laravel" /><figcaption>Laravel</figcaption>
+</figure>
+<div class="fragment">
+<p>Framework PHP para buenos tipos!</p>
+</div>
+</section><section class="slide level2">
+
+<figure>
+<img src="images/postgresql.jpg" alt="PostgreSQL" /><figcaption>PostgreSQL</figcaption>
+</figure>
+</section><section class="slide level2">
+
+<figure>
+<img src="images/ubuntu.png" alt="Ubuntu" /><figcaption>Ubuntu</figcaption>
+</figure>
+<div class="fragment">
+<p>Sistema operativo &quot;<em>de verdad</em>&quot;</p>
+</div>
+</section></section>
+<section><section id="contenidos" class="titleslide slide level1"><h1>Contenidos</h1></section><section id="contenidos-1" class="slide level2">
+<h1>Contenidos</h1>
 <ul>
 <li class="fragment">Buenas (y malas) prácticas en el ramo (A.K.A Tratando de no hacer rabiar al profe)</li>
 <li class="fragment">Instalacion del entorno de desarrollo (<em>Ubuntu + DB + IDE + Git + Framework</em>)</li>
-<li class="fragment">Uso básico de linux (Línea de comandos) + git(<em>hub</em>)</li>
+<li class="fragment">Uso básico de linux (Línea de comandos + git(<em>hub</em>))</li>
 <li class="fragment">Uso de manejador de dependencias de PHP: <em>Composer</em></li>
 <li class="fragment">Introducción rápida al patrón MVC (<em>Model View Controller</em>)</li>
 <li class="fragment">Migraciones de db (<em>Generación del modelo en DB</em>)</li>
 <li class="fragment">ORM (<em>Object Relational Mapping</em>): <em>Eloquent</em></li>
 </ul>
-</section>
-<section id="que-veremos-2" class="slide level1">
-<h1>Que veremos</h1>
+</section><section id="contenidos-2" class="slide level2">
+<h1>Contenidos</h1>
 <ul>
 <li class="fragment">Rutas en el framework, verbos HTTP y controladores resourceful</li>
 <li class="fragment">Vistas: Templates <em>Blade</em></li>
@@ -72,12 +100,12 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 <li class="fragment">Rutas avanzadas (Anidación de recursos, filtros)</li>
 <li class="fragment">Integración con un servicio REST</li>
 <li class="fragment">Ejecución de tareas programadas (Mezclando CRON con laravel)</li>
-<li class="fragment">Deployment en apache2</li>
+<li class="fragment">Deployment en producción (Ubuntu + Apache 2 + PostgreSQL)</li>
 </ul>
-</section>
-<section id="convenciones" class="slide level1">
+</section></section>
+<section><section id="convenciones" class="titleslide slide level1"><h1>Convenciones</h1></section><section id="convenciones-1" class="slide level2">
 <h1>Convenciones</h1>
-<p>Hay algunas herramientas que utilizaremos a lo largo de esta travesía:</p>
+<p>Estas serán nuestras herramientas a lo largo del workshop (A.K.A Ayudantia):</p>
 <ul>
 <li class="fragment">Sistema operativo: Linux (<em>Ubuntu 14.04</em>)</li>
 <li class="fragment">Control de versiones: <em>Git</em></li>
@@ -85,26 +113,21 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 <li class="fragment">IDE: <em>Eclipse</em> (O alguno de su gusto)</li>
 <li class="fragment">Framework <strong>MVC</strong>: <em>Laravel 4.2</em></li>
 </ul>
-</section>
-<section id="buenas-y-malas-prácticas" class="slide level1">
-<h1>Buenas (y malas) prácticas</h1>
-<p>Hay que tener en cuenta que ya estamos viejitos</p>
-<div class="fragment">
-<p>Y honestamente hay varias cosas de las que no tenemos p*ta idea</p>
-</div>
-</section>
-<section id="buenas-prácticas" class="slide level1">
+</section></section>
+<section><section id="buenas-y-malas-prácticas" class="titleslide slide level1"><h1>Buenas (y malas) prácticas</h1></section><section id="buenas-prácticas" class="slide level2">
 <h1>Buenas prácticas</h1>
+<aside class="notes">
+<ul>
+<li class="fragment">Hay que tener en cuenta que ya estamos viejitos</li>
+<li class="fragment">No se ustedes, pero hay varias cosas sobre las que no tengo ni p*ta idea.</li>
+<li class="fragment">Esto más que frustrar al profe (Creanme que lo hará), los frustrará a ustedes.</li>
+<li class="fragment">Ya que les costará hacer cosas relativamente sencillas, perdiendo mucho tiempo, en el que podrían estar carreteando por ejemplo.</li>
+</ul>
+</aside>
 <figure>
-<img src="images/no_idea_dog.jpg" alt="Pasemos de esto" /><figcaption>Pasemos de esto</figcaption>
+<img src="images/no_idea_dog.jpg" />
 </figure>
-</section>
-<section id="buenas-prácticas-1" class="slide level1">
-<h1>Buenas prácticas</h1>
-<figure>
-<img src="images/badass_dog.jpg" alt="A esto" /><figcaption>A esto</figcaption>
-</figure>
-</section>
+</section></section>
     </div>
   </div>
 
