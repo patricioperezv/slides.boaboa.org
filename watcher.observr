@@ -1,1 +1,0 @@
-watch('content/(.*)\.md') { system("fab build") }

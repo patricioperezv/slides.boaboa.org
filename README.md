@@ -7,17 +7,15 @@ Para utilizarlo es necesario instalar un par de cosillas:
 
 - [Pandoc](http://johnmacfarlane.net/pandoc/) (Transforma desde markdown al framework de presentaciones [reveal.js](http://lab.hakim.se/reveal-js/#/))
 - [Fabric](http://www.fabfile.org/) (Automatiza la tarea de ejecutar pandoc, borrar directorios y otras)
-- [Observr](https://github.com/kevinburke/observr) (No es taaan necesario, pero es comodo, permite detectar cambios en los ficheros markdown y regenerar las presentaciones)
+- [Watchdog](https://pypi.python.org/pypi/watchdog) (No es taaan necesario, pero es comodo, permite detectar cambios en los ficheros markdown y regenerar las presentaciones)
 - Un editor de markdown (Sólo por comodidad, hasta un nano de perros basta, en OSX uso [MacDown](http://macdown.uranusjr.com/))
 
 
 Para instalar todas las dependencias en OSX hice lo siguiente:
 
 ```bash
-sudo pip install fabric
+sudo pip install fabric watchdog
 brew install pandoc
-gem install observr
-gem install ruby-fsevent
 ```
 
 Asumiendo que ya tenemos funcionando pip (Uso el python de Homebrew, a eso le instale pip y presto) y [Homebrew](http://brew.sh/) (No es tan cómodo como apt, pero de algo se parte...).

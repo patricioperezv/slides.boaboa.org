@@ -2,6 +2,7 @@ from fabric.api import *
 import sys
 import os
 import glob
+from datetime import datetime
 
 # Modo semi-tuja
 BASE_DIR = os.path.abspath(os.path.curdir)
@@ -19,6 +20,7 @@ def clean():
 
 # Faltaria que esta magia se pegara un cp a todos los ficheros de content/images
 def build():
+    print 'Building at', datetime.today().strftime('%c')
     clean()
     #local('cp -rf {0} {1}'.format(REVEAL_JS_SOURCE_DIR, DEST_DIR))
     local('cp -rf {0} {1}'.format(IMAGES_SOURCE_DIR, IMAGES_DEST_DIR))
@@ -31,5 +33,5 @@ def serve():
     local('cd {0} && python -m SimpleHTTPServer 9000'.format(DEST_DIR))
 
 def watch():
-    script = os.path.join(BASE_DIR, 'watcher.observr')
-    local('observr {0}'.format(script))
+    build()
+    local('watchmedo shell-command --pattern="./content/" --recursive --command="fab build" .')
