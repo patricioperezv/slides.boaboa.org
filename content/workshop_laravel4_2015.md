@@ -197,7 +197,7 @@ Recuerden, para que no tengamos atados, usaremos la versión 14.04 (Tiene soport
 
 ## Instalando el framework y la base de datos
 
-En mi blog ([http://alumnos.informatica.utem.cl/~pperez](http://alumnos.informatica.utem.cl/~pperez)) tengo un tutorial que los dejara listos para desarrollar con laravel, incluye la instalación del motor de base de datos, instalar php, composer, y la cachá de la espada. Lo haremos ahora, preparense!
+En mi blog ([http://alumnos.informatica.utem.cl/~pperez](http://alumnos.informatica.utem.cl/~pperez)) tengo un tutorial que los dejará listos para desarrollar con laravel, incluye la instalación del motor de base de datos, instalar php, composer, y la cachá de la espada. Lo haremos ahora, preparense!
 
 ## Git
 
@@ -251,7 +251,7 @@ Si se cae el servidor de github (Repositorio central en la imagen), aún pueden 
 - `git config --global user.name "Patricio Pérez"`
 - `git config --globa user.email pperez@boaboa.org`
 - `git config --global color.ui auto`
- `ssh-keygen -t rsa -C pperez@badgerbook`
+- `ssh-keygen -t rsa -C pperez@badgerbook`
 - Ver el contenido de `.ssh/id_rsa.pub` y agregarla a Github (En la web 'Settings → SSH keys → Add SSH key')
 
 ---
@@ -295,10 +295,27 @@ Su repositorio esta en `~/code/app_evaluaciones_ingsw`
 ![](images/comandos_git.png)
 
 ---
+
 <div class="notes">
 - El push requiere conexión al server (en este caso github)
 - Hay que tener cuidado con los merge y como manejarlos
 </div>
+
 ![](images/comandos_git_2.png)
+
+---
+
+Eso sería lo básico, donde encontrar más:
+
+. . .
+
+Github tiene una buena sección de recursos ([https://help.github.com/articles/good-resources-for-learning-git-and-github/](https://help.github.com/articles/good-resources-for-learning-git-and-github/))
+
+Selección personal:
+
+- Cheatsheet (Torpedo) de git en español ([https://training.github.com/kit/downloads/es/github-git-cheat-sheet.pdf](https://training.github.com/kit/downloads/es/github-git-cheat-sheet.pdf))
+- Pro Git ([http://progit.org](http://progit.org))
+- Github Guides ([https://guides.github.com/](https://guides.github.com/))
+
 
 # Fin
