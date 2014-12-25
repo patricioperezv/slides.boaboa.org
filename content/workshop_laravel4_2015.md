@@ -108,12 +108,15 @@ A lo largo de la asignatura verán un monton de conceptos (DRY, YAGNI, metodolog
 
 <div class="notes">
 - Los estándares estan hechos para que no se odien entre los mismos miembros del team
+- La planificación esta pensada para estructurarlos un poco, distribuyan bien el tiempo, y al final le digan al profe que trabajaron bien (Y que eso no sea una falazzììa)
 </div>
 
-El resumen corto de todo eso (En mi opinión bien vaga) es que sus proyectos deben cumplir:
+El resumen corto de todo eso (En mi opinión bien vaga) es que mientras esten construyendo el proyecto tengan esto en cuenta:
 
 - Planificación (No hagan todo a última hora)
 - Estándares (Quizas no los de industrias, ISO, IEEE, sino estándares fijados por ustedes)
+- No usen las herramientas porque se las esten imponiendo, no se resistan ლ(´ڡ`ლ) realmente intenten entenderlas y usarlas a futuro!
+- Traten de ir mostrando constantemente su trabajo, ya que el cliente puede ser algo especial (A.K.A Los puede mandar a la punta del cerro si hay cosas que no le agraden)
 
 
 ## Indentación
@@ -153,3 +156,4 @@ Así que haganse el tiempo, o ...
 ## Log de commits
 
 ![Commit log](images/commit_tree.png)
+
