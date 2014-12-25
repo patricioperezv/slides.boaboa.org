@@ -208,7 +208,34 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 </section></section>
 <section><section id="instalando-el-entorno-de-desarrollo" class="titleslide slide level1"><h1>Instalando el entorno de desarrollo</h1></section><section id="ubuntu" class="slide level2">
 <h1>Ubuntu</h1>
-<p>Me imagino que ya sabrán como instalar Ubuntu, pero si tienen dudas podemos organizar una pequeña jornada de instalación en la sala de info ツ Recuerden, para que no tengamos atados, usaremos la versión 14.04 (Tiene soporte para 5 años más, creo que estamos cubiertos!)</p>
+<aside class="notes">
+<blockquote>
+<p>Yo mismo: <strong>Mismo, recuerda!!</strong> Hay que ver que día nos juntamos en la sala de info a ver comandos linux por lo bajo</p>
+</blockquote>
+</aside>
+<p>Me imagino que ya sabrán como instalar Ubuntu, pero si tienen dudas podemos organizar una pequeña jornada de instalación en la sala de info ツ (De hecho, hagamóslo igual, y veremos los comandos básicos para la línea de comandos de Linux) Recuerden, para que no tengamos atados, usaremos la versión 14.04 (Tiene soporte para 5 años más, creo que estamos cubiertos!)</p>
+</section><section id="torpedo-básico-de-comandos-unix" class="slide level2">
+<h1>Torpedo básico de comandos UNIX</h1>
+<ul>
+<li class="fragment">Usar TAB para completar comandos, nombres de ficheros, siempre que se pueda!</li>
+<li class="fragment"><code>cd directorio</code> Ingresa a un directorio</li>
+<li class="fragment"><code>cat fichero.txt</code> Muestra en pantalla el contenido de un fichero</li>
+<li class="fragment">Cuando se trabajan directorios <code>.</code> se refiere al directorio actual, <code>..</code> se refiere al padre del directorio actual, de hecho <code>../..</code> entraria al padre del padre del directorio actual (abuelo??)</li>
+<li class="fragment">Nuestro home (Donde se guardan todas nuestras leseras) es por defecto <code>/home/usuario</code></li>
+</ul>
+</section><section class="slide level2">
+
+<ul>
+<li class="fragment">Usar apt para manejar paquetes es super sencillo:
+<ul>
+<li class="fragment"><code>apt-get install paquete otropaquete</code> Instalar</li>
+<li class="fragment"><code>apt-get remove paquete otropaquete</code> Desinstalar</li>
+<li class="fragment"><code>apt-cache search palabra buscar php</code> Buscar paquetes, en descripción etc, pueden ser muchas palabras</li>
+<li class="fragment"><code>apt-get update</code> Actualiza la base de datos de paquetes</li>
+<li class="fragment"><code>apt-get dist-upgrade</code> Actualiza todos los paquetes del sistema</li>
+</ul></li>
+<li class="fragment">Usar <code>sudo</code> antes de cualquier comando que necesite permisos de administrador (ej: instalar paquetes con apt, modificar ficheros en <code>/etc</code>, etc)</li>
+</ul>
 </section><section id="instalando-el-framework-y-la-base-de-datos" class="slide level2">
 <h1>Instalando el framework y la base de datos</h1>
 <p>En mi blog (<a href="http://alumnos.informatica.utem.cl/~pperez" class="uri">http://alumnos.informatica.utem.cl/~pperez</a>) tengo un tutorial que los dejara listos para desarrollar con laravel, incluye la instalación del motor de base de datos, instalar php, composer, y la cachá de la espada. Lo haremos ahora, preparense!</p>
@@ -221,15 +248,16 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 <img src="images/git_scm.png" alt="Git" /><figcaption>Git</figcaption>
 </figure>
 <p>Git es un sistema de control de versiones (Conocido como SCM), sus características son:</p>
-</section><section id="controla-las-versiones-de-nuestros-ficheros" class="slide level2">
-<h1>Controla las versiones de nuestros ficheros</h1>
+</section><section class="slide level2">
+
+<h3 id="controlar-las-versiones-de-nuestros-ficheros">Controlar las versiones de nuestros ficheros</h3>
 <p>Cuantas veces les ha ocurrido esto?</p>
 <figure>
 <img src="images/versiones_artesa.png" alt="Por favor no me hagan esto!" /><figcaption>Por favor no me hagan esto!</figcaption>
 </figure>
 </section><section class="slide level2">
 
-<p>Git (O cualquier SCM que se respete) les permite ver revisiones de sus ficheros, en la mayoria estas revisiones son representadas por &quot;commits&quot;</p>
+<p><a href="http://git-scm.com/">Git</a> (O cualquier SCM que se respete) les permite ver revisiones de sus ficheros, en la mayoria estas revisiones son representadas por &quot;commits&quot;</p>
 </section><section class="slide level2">
 
 <figure>
@@ -242,13 +270,58 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 </figure>
 </section><section id="es-distribuido" class="slide level2">
 <h1>Es distribuido</h1>
+<aside class="notes">
+<ul>
+<li class="fragment">CVCS: &quot;Centralized Version Control System&quot; (ej: SVN, CVS)</li>
+<li class="fragment">DVCS: &quot;Distributed Version Control System&quot; (ej: Git, Mercual, Bazaar)</li>
+</ul>
+</aside>
 <figure>
 <img src="images/cvcs_vs_dvcs.png" alt="CVCS vs DVCS" /><figcaption>CVCS vs DVCS</figcaption>
 </figure>
 <p>Si se cae el servidor de github (Repositorio central en la imagen), aún pueden trabajar, hacer commits, consultar el log, crear branches, y otras operaciones locales.</p>
 </section><section class="slide level2">
 
-<p>(Ojo! Github no es el único proveedor de git, esta bitbucket y otros, incluso pueden alojarlo en un servidor propio)</p>
+<p>(Ojo! <a href="http://github.com">Github</a> no es el único proveedor de git, esta <a href="http://bitbucket.org">bitbucket</a> y otros, incluso pueden alojarlo en un servidor propio)</p>
+</section><section id="y-bueno-demosle" class="slide level2">
+<h1>Y bueno, demosle!</h1>
+<ul>
+<li class="fragment">El primer paso sería entrar a <a href="http://github.com">github</a> y crearnos una cuenta</li>
+<li class="fragment">Ahora debemos crear una llave ssh (Abran sus terminales y tipeen): <code>ssh-keygen -t rsa -C pperez@badgerbook</code></li>
+<li class="fragment">Ver el contenido de <code>.ssh/id_rsa.pub</code> y agregarla a Github (En la web 'Settings → SSH keys → Add SSH key')</li>
+</ul>
+</section><section class="slide level2">
+
+<figure>
+<img src="images/github_add_ssh_key.png" alt="Agregar llave SSH" /><figcaption>Agregar llave SSH</figcaption>
+</figure>
+</section><section class="slide level2">
+
+<ul>
+<li class="fragment">Crear el repositorio ('Create new... → New repository')</li>
+</ul>
+<div class="fragment">
+<figure>
+<img src="images/github_new_repository.png" alt="Agregar repositorio" /><figcaption>Agregar repositorio</figcaption>
+</figure>
+<ul>
+<li class="fragment">Puntos extras si saben como licenciar su proyecto!</li>
+</ul>
+</div>
+</section><section class="slide level2">
+
+<p>Ahora a clonar el repositorio! Vamos a la pagina del repositorio y copiamos la URL de clonado SSH (Parte inferior derecha), luego en la terminal:</p>
+<ul>
+<li class="fragment"><code>cd ~</code></li>
+<li class="fragment"><code>mkdir code</code></li>
+<li class="fragment"><code>git clone git@github.com:pperez/app_evaluaciones_ingsw.git</code></li>
+</ul>
+</section><section id="ta-dah" class="slide level2">
+<h1>Ta-Dah!</h1>
+<figure>
+<img src="images/repo_clonado.png" />
+</figure>
+<p>Su repositorio esta en <code>~/code/app_evaluaciones_ingsw</code></p>
 </section></section>
     </div>
   </div>

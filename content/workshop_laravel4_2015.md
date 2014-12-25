@@ -169,8 +169,31 @@ Así que haganse el tiempo, o ...
 
 ## Ubuntu
 
-Me imagino que ya sabrán como instalar Ubuntu, pero si tienen dudas podemos organizar una pequeña jornada de instalación en la sala de info ツ
+<div class="notes">
+> Yo mismo: **Mismo, recuerda!!**
+> Hay que ver que día nos juntamos en la sala de info a ver comandos linux por lo bajo
+</div>
+
+Me imagino que ya sabrán como instalar Ubuntu, pero si tienen dudas podemos organizar una pequeña jornada de instalación en la sala de info ツ (De hecho, hagamóslo igual, y veremos los comandos básicos para la línea de comandos de Linux)
 Recuerden, para que no tengamos atados, usaremos la versión 14.04 (Tiene soporte para 5 años más, creo que estamos cubiertos!)
+
+## Torpedo básico de comandos UNIX
+
+- Usar TAB para completar comandos, nombres de ficheros, siempre que se pueda!
+- `cd directorio` Ingresa a un directorio
+- `cat fichero.txt` Muestra en pantalla el contenido de un fichero
+- Cuando se trabajan directorios `.` se refiere al directorio actual, `..` se refiere al padre del directorio actual, de hecho `../..` entraria al padre del padre del directorio actual (abuelo??)
+- Nuestro home (Donde se guardan todas nuestras leseras) es por defecto `/home/usuario`
+
+----
+
+- Usar apt para manejar paquetes es super sencillo:
+    * `apt-get install paquete otropaquete` Instalar
+    * `apt-get remove paquete otropaquete` Desinstalar
+    * `apt-cache search palabra buscar php` Buscar paquetes, en descripción etc, pueden ser muchas palabras
+    * `apt-get update` Actualiza la base de datos de paquetes
+    * `apt-get dist-upgrade` Actualiza todos los paquetes del sistema
+- Usar `sudo` antes de cualquier comando que necesite permisos de administrador (ej: instalar paquetes con apt, modificar ficheros en `/etc`, etc)
 
 ## Instalando el framework y la base de datos
 
@@ -186,7 +209,9 @@ Aquí ya empiezo a explicars
 
 Git es un sistema de control de versiones (Conocido como SCM), sus características son:
 
-## Controla las versiones de nuestros ficheros
+----
+
+### Controlar las versiones de nuestros ficheros
 
 Cuantas veces les ha ocurrido esto?
 
@@ -194,7 +219,7 @@ Cuantas veces les ha ocurrido esto?
 
 ----
 
-Git (O cualquier SCM que se respete) les permite ver revisiones de sus ficheros, en la mayoria estas revisiones son representadas por "commits"
+[Git](http://git-scm.com/) (O cualquier SCM que se respete) les permite ver revisiones de sus ficheros, en la mayoria estas revisiones son representadas por "commits"
 
 ----
 
@@ -206,10 +231,51 @@ Git (O cualquier SCM que se respete) les permite ver revisiones de sus ficheros,
 
 ## Es distribuido
 
+<div class="notes">
+- CVCS: "Centralized Version Control System" (ej: SVN, CVS)
+- DVCS: "Distributed Version Control System" (ej: Git, Mercual, Bazaar)
+</div>
+
 ![CVCS vs DVCS](images/cvcs_vs_dvcs.png)
 
 Si se cae el servidor de github (Repositorio central en la imagen), aún pueden trabajar, hacer commits, consultar el log, crear branches, y otras operaciones locales.
 
 ----
 
-(Ojo! Github no es el único proveedor de git, esta bitbucket y otros, incluso pueden alojarlo en un servidor propio)
+(Ojo! [Github](http://github.com) no es el único proveedor de git, esta [bitbucket](http://bitbucket.org) y otros, incluso pueden alojarlo en un servidor propio)
+
+## Y bueno, demosle!
+
+- El primer paso sería entrar a [github](http://github.com) y crearnos una cuenta
+- Ahora debemos crear una llave ssh (Abran sus terminales y tipeen):
+ `ssh-keygen -t rsa -C pperez@badgerbook`
+- Ver el contenido de `.ssh/id_rsa.pub` y agregarla a Github (En la web 'Settings → SSH keys → Add SSH key')
+
+---
+
+![Agregar llave SSH](images/github_add_ssh_key.png)
+
+---
+
+- Crear el repositorio ('Create new... → New repository')
+
+. . .
+
+![Agregar repositorio](images/github_new_repository.png)
+
+- Puntos extras si saben como licenciar su proyecto!
+
+----
+
+Ahora a clonar el repositorio!
+Vamos a la pagina del repositorio y copiamos la URL de clonado SSH (Parte inferior derecha), luego en la terminal:
+
+- `cd ~`
+- `mkdir code`
+- `git clone git@github.com:pperez/app_evaluaciones_ingsw.git`
+
+## Ta-Dah!
+
+![](images/repo_clonado.png)
+
+Su repositorio esta en `~/code/app_evaluaciones_ingsw`
