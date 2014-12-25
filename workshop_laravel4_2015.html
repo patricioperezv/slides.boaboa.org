@@ -287,7 +287,10 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 <h1>Y bueno, demosle!</h1>
 <ul>
 <li class="fragment">El primer paso sería entrar a <a href="http://github.com">github</a> y crearnos una cuenta</li>
-<li class="fragment">Ahora debemos crear una llave ssh (Abran sus terminales y tipeen): <code>ssh-keygen -t rsa -C pperez@badgerbook</code></li>
+<li class="fragment">Ahora debemos crear una llave ssh (Abran sus terminales y tipeen):</li>
+<li class="fragment"><code>git config --global user.name &quot;Patricio Pérez&quot;</code></li>
+<li class="fragment"><code>git config --globa user.email pperez@boaboa.org</code></li>
+<li class="fragment"><code>git config --global color.ui auto</code> <code>ssh-keygen -t rsa -C pperez@badgerbook</code></li>
 <li class="fragment">Ver el contenido de <code>.ssh/id_rsa.pub</code> y agregarla a Github (En la web 'Settings → SSH keys → Add SSH key')</li>
 </ul>
 </section><section class="slide level2">
@@ -322,7 +325,32 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 <img src="images/repo_clonado.png" />
 </figure>
 <p>Su repositorio esta en <code>~/code/app_evaluaciones_ingsw</code></p>
+</section><section id="comandos-git" class="slide level2">
+<h1>Comandos git</h1>
+<aside class="notes">
+<ul>
+<li class="fragment"><code>git checkout -b nueva_rama</code> (Hace una nueva rama basada en la actual)</li>
+<li class="fragment"><code>git commit -m &quot;mensaje&quot;</code> (Hace un commit con el mensaje especificado en el -m)</li>
+<li class="fragment"><code>git checkout master</code> cambia a la branch que queramos</li>
+<li class="fragment"><code>git merge otrarama</code> hace un merge de la otra rama, cuidado con los problemas de merge!</li>
+</ul>
+</aside>
+<figure>
+<img src="images/comandos_git.png" />
+</figure>
+</section><section class="slide level2">
+
+<aside class="notes">
+<ul>
+<li class="fragment">El push requiere conexión al server (en este caso github)</li>
+<li class="fragment">Hay que tener cuidado con los merge y como manejarlos</li>
+</ul>
+</aside>
+<figure>
+<img src="images/comandos_git_2.png" />
+</figure>
 </section></section>
+<section><section id="fin" class="titleslide slide level1"><h1>Fin</h1></section></section>
     </div>
   </div>
 

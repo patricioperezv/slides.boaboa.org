@@ -248,6 +248,9 @@ Si se cae el servidor de github (Repositorio central en la imagen), aún pueden 
 
 - El primer paso sería entrar a [github](http://github.com) y crearnos una cuenta
 - Ahora debemos crear una llave ssh (Abran sus terminales y tipeen):
+- `git config --global user.name "Patricio Pérez"`
+- `git config --globa user.email pperez@boaboa.org`
+- `git config --global color.ui auto`
  `ssh-keygen -t rsa -C pperez@badgerbook`
 - Ver el contenido de `.ssh/id_rsa.pub` y agregarla a Github (En la web 'Settings → SSH keys → Add SSH key')
 
@@ -279,3 +282,23 @@ Vamos a la pagina del repositorio y copiamos la URL de clonado SSH (Parte inferi
 ![](images/repo_clonado.png)
 
 Su repositorio esta en `~/code/app_evaluaciones_ingsw`
+
+## Comandos git
+
+<div class="notes">
+- `git checkout -b nueva_rama` (Hace una nueva rama basada en la actual)
+- `git commit -m "mensaje"` (Hace un commit con el mensaje especificado en el -m)
+- `git checkout master` cambia a la branch que queramos
+- `git merge otrarama` hace un merge de la otra rama, cuidado con los problemas de merge!
+</div>
+
+![](images/comandos_git.png)
+
+---
+<div class="notes">
+- El push requiere conexión al server (en este caso github)
+- Hay que tener cuidado con los merge y como manejarlos
+</div>
+![](images/comandos_git_2.png)
+
+# Fin
