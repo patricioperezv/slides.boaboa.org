@@ -113,11 +113,19 @@ A lo largo de la asignatura verán un monton de conceptos (DRY, YAGNI, metodolog
 
 El resumen corto de todo eso (En mi opinión bien vaga) es que mientras esten construyendo el proyecto tengan esto en cuenta:
 
+- Traten de ir mostrando constantemente su trabajo, ya que el cliente puede ser algo especial (A.K.A Los puede mandar a la punta del cerro si hay cosas que no le agraden)
 - Planificación (No hagan todo a última hora)
 - Estándares (Quizas no los de industrias, ISO, IEEE, sino estándares fijados por ustedes)
 - No usen las herramientas porque se las esten imponiendo, no se resistan ლ(´ڡ`ლ) realmente intenten entenderlas y usarlas a futuro!
-- Traten de ir mostrando constantemente su trabajo, ya que el cliente puede ser algo especial (A.K.A Los puede mandar a la punta del cerro si hay cosas que no le agraden)
+- Ya dije que deberian preguntar mucho? El feedback es fundamental en el desarrollo de un proyecto, solo traten de que sus preguntas no sean tan ...
 
+## DRY
+
+. . .
+
+- Si están realizando dos secciones de código (Por ejemplo dos partes de un html) y estan difieren muuuuy poco o nada, estan haciendo código de más.
+- Este es complicado de mantener (Si cambio uno TENGO que cambiar el otro) y es una pesadilla a medida que crece el proyecto.
+- Aprovechen de que el framework les entrega herramientas para combatir esto (Para las vistas html tienen herencia y composición por ejemplo)
 
 ## Indentación
 
@@ -157,3 +165,51 @@ Así que haganse el tiempo, o ...
 
 ![Commit log](images/commit_tree.png)
 
+# Instalando el entorno de desarrollo
+
+## Ubuntu
+
+Me imagino que ya sabrán como instalar Ubuntu, pero si tienen dudas podemos organizar una pequeña jornada de instalación en la sala de info ツ
+Recuerden, para que no tengamos atados, usaremos la versión 14.04 (Tiene soporte para 5 años más, creo que estamos cubiertos!)
+
+## Instalando el framework y la base de datos
+
+En mi blog ([http://alumnos.informatica.utem.cl/~pperez](http://alumnos.informatica.utem.cl/~pperez)) tengo un tutorial que los dejara listos para desarrollar con laravel, incluye la instalación del motor de base de datos, instalar php, composer, y la cachá de la espada. Lo haremos ahora, preparense!
+
+## Git
+
+Aquí ya empiezo a explicars
+
+## Que es git
+
+![Git](images/git_scm.png)
+
+Git es un sistema de control de versiones (Conocido como SCM), sus características son:
+
+## Controla las versiones de nuestros ficheros
+
+Cuantas veces les ha ocurrido esto?
+
+![Por favor no me hagan esto!](images/versiones_artesa.png)
+
+----
+
+Git (O cualquier SCM que se respete) les permite ver revisiones de sus ficheros, en la mayoria estas revisiones son representadas por "commits"
+
+----
+
+![Commits](images/commit_tree.png)
+
+----
+
+![Mirar un diff](images/git_diff.png)
+
+## Es distribuido
+
+![CVCS vs DVCS](images/cvcs_vs_dvcs.png)
+
+Si se cae el servidor de github (Repositorio central en la imagen), aún pueden trabajar, hacer commits, consultar el log, crear branches, y otras operaciones locales.
+
+----
+
+(Ojo! Github no es el único proveedor de git, esta bitbucket y otros, incluso pueden alojarlo en un servidor propio)

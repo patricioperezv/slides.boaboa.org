@@ -126,10 +126,10 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 <h1>Buenas prácticas</h1>
 <aside class="notes">
 <ul>
-<li>Hay que tener en cuenta que ya estamos viejitos</li>
-<li>No se ustedes, pero hay varias cosas sobre las que no tengo ni p*ta idea.</li>
-<li>Esto más que frustrar al profe (Creanme que lo hará), los frustrará a ustedes.</li>
-<li>Ya que les costará hacer cosas relativamente sencillas, perdiendo mucho tiempo, tiempo en el que podrían estar carreteando por ejemplo.</li>
+<li class="fragment">Hay que tener en cuenta que ya estamos viejitos</li>
+<li class="fragment">No se ustedes, pero hay varias cosas sobre las que no tengo ni p*ta idea.</li>
+<li class="fragment">Esto más que frustrar al profe (Creanme que lo hará), los frustrará a ustedes.</li>
+<li class="fragment">Ya que les costará hacer cosas relativamente sencillas, perdiendo mucho tiempo, tiempo en el que podrían estar carreteando por ejemplo.</li>
 </ul>
 </aside>
 <figure>
@@ -142,17 +142,27 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 
 <aside class="notes">
 <ul>
-<li>Los estándares estan hechos para que no se odien entre los mismos miembros del team</li>
-<li>La planificación esta pensada para estructurarlos un poco, distribuyan bien el tiempo, y al final le digan al profe que trabajaron bien (Y que eso no sea una falazzììa)</li>
+<li class="fragment">Los estándares estan hechos para que no se odien entre los mismos miembros del team</li>
+<li class="fragment">La planificación esta pensada para estructurarlos un poco, distribuyan bien el tiempo, y al final le digan al profe que trabajaron bien (Y que eso no sea una falazzììa)</li>
 </ul>
 </aside>
 <p>El resumen corto de todo eso (En mi opinión bien vaga) es que mientras esten construyendo el proyecto tengan esto en cuenta:</p>
 <ul>
+<li class="fragment">Traten de ir mostrando constantemente su trabajo, ya que el cliente puede ser algo especial (A.K.A Los puede mandar a la punta del cerro si hay cosas que no le agraden)</li>
 <li class="fragment">Planificación (No hagan todo a última hora)</li>
 <li class="fragment">Estándares (Quizas no los de industrias, ISO, IEEE, sino estándares fijados por ustedes)</li>
 <li class="fragment">No usen las herramientas porque se las esten imponiendo, no se resistan ლ(´ڡ`ლ) realmente intenten entenderlas y usarlas a futuro!</li>
-<li class="fragment">Traten de ir mostrando constantemente su trabajo, ya que el cliente puede ser algo especial (A.K.A Los puede mandar a la punta del cerro si hay cosas que no le agraden)</li>
+<li class="fragment">Ya dije que deberian preguntar mucho? El feedback es fundamental en el desarrollo de un proyecto, solo traten de que sus preguntas no sean tan ...</li>
 </ul>
+</section><section id="dry" class="slide level2">
+<h1>DRY</h1>
+<div class="fragment">
+<ul>
+<li class="fragment">Si están realizando dos secciones de código (Por ejemplo dos partes de un html) y estan difieren muuuuy poco o nada, estan haciendo código de más.</li>
+<li class="fragment">Este es complicado de mantener (Si cambio uno TENGO que cambiar el otro) y es una pesadilla a medida que crece el proyecto.</li>
+<li class="fragment">Aprovechen de que el framework les entrega herramientas para combatir esto (Para las vistas html tienen herencia y composición por ejemplo)</li>
+</ul>
+</div>
 </section><section id="indentación" class="slide level2">
 <h1>Indentación</h1>
 <p>A lo largo de la asignatura, probablemente esten mostrando mucho código al profe, al ayudante, o a sus mismos compañeros, nada se agradece más que un buen indentado del código.</p>
@@ -168,9 +178,9 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 <h1>Uso de git</h1>
 <aside class="notes">
 <ul>
-<li>Salazar sapea el git</li>
-<li>Implica que puede ver desempeño de cada miembro del equipo</li>
-<li>O todas las tonteras que escriben en el log de commits</li>
+<li class="fragment">Salazar sapea el git</li>
+<li class="fragment">Implica que puede ver desempeño de cada miembro del equipo</li>
+<li class="fragment">O todas las tonteras que escriben en el log de commits</li>
 </ul>
 </aside>
 <ul>
@@ -195,6 +205,50 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 <figure>
 <img src="images/commit_tree.png" alt="Commit log" /><figcaption>Commit log</figcaption>
 </figure>
+</section></section>
+<section><section id="instalando-el-entorno-de-desarrollo" class="titleslide slide level1"><h1>Instalando el entorno de desarrollo</h1></section><section id="ubuntu" class="slide level2">
+<h1>Ubuntu</h1>
+<p>Me imagino que ya sabrán como instalar Ubuntu, pero si tienen dudas podemos organizar una pequeña jornada de instalación en la sala de info ツ Recuerden, para que no tengamos atados, usaremos la versión 14.04 (Tiene soporte para 5 años más, creo que estamos cubiertos!)</p>
+</section><section id="instalando-el-framework-y-la-base-de-datos" class="slide level2">
+<h1>Instalando el framework y la base de datos</h1>
+<p>En mi blog (<a href="http://alumnos.informatica.utem.cl/~pperez" class="uri">http://alumnos.informatica.utem.cl/~pperez</a>) tengo un tutorial que los dejara listos para desarrollar con laravel, incluye la instalación del motor de base de datos, instalar php, composer, y la cachá de la espada. Lo haremos ahora, preparense!</p>
+</section><section id="git" class="slide level2">
+<h1>Git</h1>
+<p>Aquí ya empiezo a explicars</p>
+</section><section id="que-es-git" class="slide level2">
+<h1>Que es git</h1>
+<figure>
+<img src="images/git_scm.png" alt="Git" /><figcaption>Git</figcaption>
+</figure>
+<p>Git es un sistema de control de versiones (Conocido como SCM), sus características son:</p>
+</section><section id="controla-las-versiones-de-nuestros-ficheros" class="slide level2">
+<h1>Controla las versiones de nuestros ficheros</h1>
+<p>Cuantas veces les ha ocurrido esto?</p>
+<figure>
+<img src="images/versiones_artesa.png" alt="Por favor no me hagan esto!" /><figcaption>Por favor no me hagan esto!</figcaption>
+</figure>
+</section><section class="slide level2">
+
+<p>Git (O cualquier SCM que se respete) les permite ver revisiones de sus ficheros, en la mayoria estas revisiones son representadas por &quot;commits&quot;</p>
+</section><section class="slide level2">
+
+<figure>
+<img src="images/commit_tree.png" alt="Commits" /><figcaption>Commits</figcaption>
+</figure>
+</section><section class="slide level2">
+
+<figure>
+<img src="images/git_diff.png" alt="Mirar un diff" /><figcaption>Mirar un diff</figcaption>
+</figure>
+</section><section id="es-distribuido" class="slide level2">
+<h1>Es distribuido</h1>
+<figure>
+<img src="images/cvcs_vs_dvcs.png" alt="CVCS vs DVCS" /><figcaption>CVCS vs DVCS</figcaption>
+</figure>
+<p>Si se cae el servidor de github (Repositorio central en la imagen), aún pueden trabajar, hacer commits, consultar el log, crear branches, y otras operaciones locales.</p>
+</section><section class="slide level2">
+
+<p>(Ojo! Github no es el único proveedor de git, esta bitbucket y otros, incluso pueden alojarlo en un servidor propio)</p>
 </section></section>
     </div>
   </div>
