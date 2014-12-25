@@ -142,7 +142,7 @@ Así que haganse el tiempo, o ...
 - Trabajen en sus cuentas individualmente, no todos en un solo usuario
 - Llenen correctamente sus perfiles en github (Si ponen fotito mejor)
 - Configuren correctamente su correo y nombre en la instalación de git local (Así se pueden distinguir en la rama de commits)
-- Que sus commits indiquen (o traten) que cambio realizaron en el código
+- Que sus commits indiquen (o traten de indicar) que cambio realizaron en el código
 - Idealmente usen branches (ramas) al desarrollar, cuando la funcionalidad que agregaron este "lista" hacen merge a su branch principal (e.g: master)
 
 ## Perfil
