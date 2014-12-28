@@ -98,19 +98,28 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 <li class="fragment">Uso de manejador de dependencias de PHP: <em>Composer</em></li>
 </ul></li>
 <li class="fragment">Introducción rápida al patrón MVC (<em>Model View Controller</em>)</li>
+<li class="fragment">Laravel
+<ul>
 <li class="fragment">Migraciones de db (<em>Generación del modelo en DB</em>)</li>
 <li class="fragment">ORM (<em>Object Relational Mapping</em>): <em>Eloquent</em></li>
+</ul></li>
 </ul>
 </section><section id="contenidos-2" class="slide level2">
 <h1>Contenidos</h1>
 <ul>
-<li class="fragment">Rutas en el framework, verbos HTTP y controladores resourceful</li>
+<li class="fragment">Laravel
+<ul>
+<li class="fragment">Rutas en el framework y controladores <em>resourceful</em></li>
 <li class="fragment">Vistas: Templates <em>Blade</em></li>
 <li class="fragment">Probando código en la terminal: <em>Tinker</em></li>
 <li class="fragment">Rutas avanzadas (Anidación de recursos, filtros)</li>
+</ul></li>
+<li class="fragment">Tópicos avanzados
+<ul>
 <li class="fragment">Integración con un servicio REST</li>
 <li class="fragment">Ejecución de tareas programadas (Mezclando CRON con laravel)</li>
 <li class="fragment">Deployment en producción (Ubuntu + Apache 2 + PostgreSQL)</li>
+</ul></li>
 </ul>
 </section></section>
 <section><section id="convenciones" class="titleslide slide level1"><h1>Convenciones</h1></section><section id="convenciones-1" class="slide level2">
@@ -191,6 +200,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 <li class="fragment">Configuren correctamente su correo y nombre en la instalación de git local (Así se pueden distinguir en la rama de commits)</li>
 <li class="fragment">Que sus commits indiquen (o traten de indicar) que cambio realizaron en el código</li>
 <li class="fragment">Idealmente usen branches (ramas) al desarrollar, cuando la funcionalidad que agregaron este &quot;lista&quot; hacen merge a su branch principal (e.g: master)</li>
+<li class="fragment">No agreguen binarios al proyecto en git, tampoco las librerías del proyecto.</li>
 </ul>
 </section><section id="perfil" class="slide level2">
 <h1>Perfil</h1>
@@ -359,8 +369,8 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 <figure>
 <img src="images/comandos_git_2.png" />
 </figure>
-</section><section class="slide level2">
-
+</section><section id="terminando-con-git" class="slide level2">
+<h1>Terminando con git</h1>
 <p>Eso sería lo básico, donde encontrar más:</p>
 <div class="fragment">
 <p>Github tiene una buena sección de recursos (<a href="https://help.github.com/articles/good-resources-for-learning-git-and-github/" class="uri">https://help.github.com/articles/good-resources-for-learning-git-and-github/</a>)</p>
@@ -394,9 +404,67 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 </section><section id="configurar-el-ide-contra-el-directorio-del-proyecto" class="slide level2">
 <h1>Configurar el IDE contra el directorio del proyecto</h1>
 <p>Placeholder ;)</p>
+</section><section id="usando-composer" class="slide level2">
+<h1>Usando Composer</h1>
+<figure>
+<img src="images/composer_logo.png" alt="Música maestro!" /><figcaption>Música maestro!</figcaption>
+</figure>
+</section><section id="que-es-composer" class="slide level2">
+<h1>Que es Composer</h1>
+<p><em>Composer</em> es un manejador de dependencias para <em>PHP</em>.</p>
+<div class="fragment">
+<p>Es decir, especificar de que librerías depende nuestro proyecto.</p>
+</div>
+<div class="fragment">
+<p>Se puede ver el listado de paquetes disponibles en composer en <a href="https://packagist.org/">Packagist</a></p>
+</div>
+</section><section id="como-se-usa" class="slide level2">
+<h1>Como se usa</h1>
+<p>Tiene dos modos, <em>local</em> y <em>global</em>.</p>
+</section><section id="composer-global" class="slide level2">
+<h1>Composer global</h1>
+<p>Este instala los paquetes de composer en el <em>home</em> del usuario.</p>
+<div class="fragment">
+<p><code>composer global require &quot;laravel/installer=~1.1&quot;</code></p>
+</div>
+<div class="fragment">
+<figure>
+<img src="images/composer_tree.png" alt="Composer global tree" /><figcaption>Composer global tree</figcaption>
+</figure>
+</div>
+</section><section id="composer-local" class="slide level2">
+<h1>Composer local</h1>
+<p>Este instala los paquetes en el directorio <code>vendor</code> del proyecto, las dependencias se definen en el fichero <code>composer.json</code> en la raiz del proyecto</p>
+<div class="fragment">
+<p><code>composer require resty/resty:@stable</code></p>
+</div>
+<div class="fragment">
+<figure>
+<img src="images/composer_local_require.png" alt="composer local" /><figcaption>composer local</figcaption>
+</figure>
+</div>
+</section><section class="slide level2">
+
+<figure>
+<img src="images/composer_json_example.png" alt="composer.json" /><figcaption>composer.json</figcaption>
+</figure>
+</section><section id="composer-y-git" class="slide level2">
+<h1>Composer y git</h1>
+<p>Cuando generan un proyecto con el instalador de laravel, se incluye un fichero <code>.gitignore</code>, este hace que git ignore ciertos ficheros, entre ellos se incluye todo el directorio <code>vendor</code>, ya que al hacer el <code>composer update</code> se instalan las librerías, haciendo innecesario tenerlo en git.</p>
+</section><section id="resumen-composer" class="slide level2">
+<h1>Resumen Composer</h1>
+<ol type="1">
+<li class="fragment">Instalar composer</li>
+<li class="fragment">Añadir librerias usando <code>composer require</code> o modificando <code>composer.json</code></li>
+<li class="fragment">Ejecutar <code>composer update</code> en la raiz del proyecto para instalar las librerías</li>
+<li class="fragment">Profit</li>
+</ol>
 </section></section>
 <section><section id="introducción-al-patrón-mvc" class="titleslide slide level1"><h1>Introducción al patrón MVC</h1></section><section id="que-es-un-patrón-de-diseño-arquitectónico" class="slide level2">
 <h1>Que es un patrón de diseño arquitectónico</h1>
+<p>Es una solución reconocida (connotada) a un problema recurrente de diseño (Como estructuramos nuestra aplicación).</p>
+</section><section id="mvc" class="slide level2">
+<h1>MVC</h1>
 <aside class="notes">
 <ul>
 <li class="fragment">Modelo: Objetos del mundo real, del dominio del problema, maneja datos, lógica y reglas de la app (ej: Usuario, Estudiante)</li>
@@ -404,9 +472,6 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 <li class="fragment">Controlador: Lógica de interacción con el usuario, recibe, convierte datos e interactua con modelos y vistas</li>
 </ul>
 </aside>
-<p>Es una solución reconocida (connotada) a un problema recurrente de diseño (Como estructuramos nuestra aplicación).</p>
-</section><section id="mvc" class="slide level2">
-<h1>MVC</h1>
 <p>El patrón que utilizaremos será <em>MVC</em> o <em>M</em>odel <em>V</em>iew <em>C</em>ontroller, este separa la aplicación en 3 capas:</p>
 <ul>
 <li class="fragment">Modelos</li>
@@ -429,11 +494,39 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 <div class="fragment">
 <p>En fin, si quiere más información, lo veremos prontamente, por este mismo horario, mismo canal.</p>
 </div>
-</section><section id="uris-requests-verbos-http-paréntesis" class="slide level2">
-<h1>URIs, requests, verbos HTTP (Paréntesis)</h1>
-<p>Un <em>URI</em> es un identificador único de un recurso (<code>http://tequila.com/perros/5</code>). Un request es una petición realizada a un recurso mediante su <em>URI</em>, la petición debe indicar un verbo http, el que dice si estamos pidiendo, actualizando o enviando información (Aquí enviamos información al servidor). Un request debe tener una respuesta, la que es entregada al usuario, esta puede tener un código de respuesta (i.e: 500, 200, el infame error 404, etc),</p>
-</section><section id="uris-requests-verbos-http" class="slide level2">
-<h1>URIs, requests, verbos HTTP</h1>
+</section><section id="pequeño-parentesis" class="slide level2">
+<h1>Pequeño parentesis</h1>
+<p>Veremos un poquito de la arquitectura HTTP, para ello ojearemos a groso modo:</p>
+<ul>
+<li class="fragment">URIs</li>
+<li class="fragment">Requests</li>
+<li class="fragment">Códigos de estado</li>
+<li class="fragment">Verbos HTTP</li>
+</ul>
+</section><section id="uris" class="slide level2">
+<h1>URIs</h1>
+<p>Un <em>URI</em> es un identificador único de un recurso, ejs:</p>
+<ul>
+<li class="fragment"><code>http://animales.com/perros/5</code></li>
+<li class="fragment"><code>http://animales.com/anguilas</code></li>
+<li class="fragment"><code>http://animales.com/anguilas/4/albinas</code></li>
+</ul>
+</section><section id="requests" class="slide level2">
+<h1>Requests</h1>
+<p>Un request es una <em>petición</em> realizada a un recurso mediante su <em>URI</em>, la petición debe indicar un <strong>verbo http</strong>, el que dice si estamos pidiendo, actualizando o enviando información (Aquí enviamos información al servidor). Un request debe tener una respuesta, la que es entregada al usuario, esta puede tener un código de respuesta (i.e: 500, 200, el infame error 404, etc).</p>
+</section><section class="slide level2">
+
+<figure>
+<img src="images/http_request_diagram.png" alt="HTTP request" /><figcaption>HTTP request</figcaption>
+</figure>
+</section><section id="códigos-de-estado" class="slide level2">
+<h1>Códigos de estado</h1>
+</section><section class="slide level2">
+
+<iframe src="http://showterm.io/12fd52747a8d4d4029c90#slow" width="800" height="500">
+</iframe>
+</section><section id="verbos-http" class="slide level2">
+<h1>Verbos HTTP</h1>
 <p>Los verbos HTTP más utilizados son:</p>
 <ul>
 <li class="fragment"><code>GET</code></li>
@@ -446,19 +539,77 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 </section><section id="get" class="slide level2">
 <h1>GET</h1>
 <p>Pide la representación de un recurso específico, el fin es obtener información, no debe haber otro efecto adverso.</p>
+</section><section class="slide level2">
+
+<figure>
+<img src="images/http_get_request.png" alt="GET request" /><figcaption>GET request</figcaption>
+</figure>
 </section><section id="head" class="slide level2">
 <h1>Head</h1>
-<p>Pide una respuesta</p>
+<p>Pide una respuesta, del mismo estilo que <code>GET</code>, pero sin el cuerpo de la respuesta. Útil para mostrar información en headers, notificar si hay cambios en el contenido (Es decir, ratear un poco de bandwidth al no transferir el body)</p>
+</section><section class="slide level2">
+
+<figure>
+<img src="images/http_head_request.png" alt="HEAD request" /><figcaption>HEAD request</figcaption>
+</figure>
+</section><section id="post" class="slide level2">
+<h1>POST</h1>
+<p>Envia información y realiza cambios en recursos, pueden crearse nuevos recursos, realizar cambios sobre recursos existentes. Esta es la acción que hacemos al pinchar '<code>Enviar</code>' en un formulario.</p>
+</section><section class="slide level2">
+
+<figure>
+<img src="images/http_post_request.png" alt="POST request" /><figcaption>POST request</figcaption>
+</figure>
+</section><section id="put" class="slide level2">
+<h1>PUT</h1>
+<p>Tambien se envia información, sin embargo es más flexible, ya que se puede interpretar como la creación de un nuevo recurso, o la modificación de uno ya existente.</p>
+</section><section class="slide level2">
+
+<figure>
+<img src="images/http_request_put.png" alt="PUT request" /><figcaption>PUT request</figcaption>
+</figure>
+</section><section id="delete" class="slide level2">
+<h1>DELETE</h1>
+<p>Creo que ya se imaginan que hace.</p>
+</section><section id="patch" class="slide level2">
+<h1>PATCH</h1>
+<p>Realiza modificaciones parciales a un recurso existente, hay que tener ojo, la especificación recomienda que los cambios enviados sean un tipo de diferencia, esta es parseada por el servidor y realiza los cambios pertinentes, al contrario de la creencia común, de enviar una <code>campo:valor</code> y esperar que se modifique solo tal campo en el recurso.</p>
+</section><section class="slide level2">
+
+<figure>
+<img src="images/http_patch_request.png" alt="PATCH request" /><figcaption>PATCH request</figcaption>
+</figure>
 </section><section id="controladores" class="slide level2">
 <h1>Controladores</h1>
-<p>Los controladores son la forma en las que interactuamos con la aplicación, en el caso particular de los frameworks web que implementan MVC las acciones se realizan a través de una URI y de verbos HTPP:</p>
+<p>Los controladores son la forma en las que interactuamos con la aplicación, en el caso particular de los frameworks web que implementan MVC las acciones se realizan a través de una URI y de verbos HTPP, ejemplos:</p>
 <ul>
 <li class="fragment"><code>GET /perros</code></li>
 <li class="fragment"><code>POST /perros</code></li>
 <li class="fragment"><code>GET /perros/5</code></li>
 <li class="fragment"><code>DELETE /perros/10</code></li>
 </ul>
+</section><section id="controladores-1" class="slide level2">
+<h1>Controladores</h1>
+<p>Cada ruta de la aplicación (URI) y un verbo http correspondiente deben mapear a un método de un controlador, los métodos de un controlador pueden no recibir parámetros (ej: un index) o recibirlos (ej: mostrar el recurso 5).</p>
+<div class="fragment">
+<p>El encargado de mapear una URI + verbo a un método es el framework de <code>Routing</code> (El que veremos en detalle más)</p>
+</div>
+</section><section id="vistas" class="slide level2">
+<h1>Vistas</h1>
+<p>Es la representación de un recurso, presentada al usuario. Estás pueden tener distintos formatos, entre ellos:</p>
+<ul>
+<li class="fragment">XML</li>
+<li class="fragment">JSON</li>
+<li class="fragment">HTML</li>
+<li class="fragment">PDF</li>
+</ul>
+</section><section id="mvc-1" class="slide level2">
+<h1>MVC</h1>
+<figure>
+<img src="images/ash-mvc-architecture.gif" alt="Arquitectura MVC" /><figcaption>Arquitectura MVC</figcaption>
+</figure>
 </section></section>
+<section><section id="laravel" class="titleslide slide level1"><h1>Laravel</h1></section></section>
 <section><section id="fin" class="titleslide slide level1"><h1>Fin</h1></section></section>
     </div>
   </div>

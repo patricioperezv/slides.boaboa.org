@@ -60,20 +60,23 @@ Hay herramientas que se me quedaron en el tintero, pero creo que serían bien ú
     - Uso básico de linux (Línea de comandos + git(*hub*))
     - Uso de manejador de dependencias de PHP: *Composer*
 - Introducción rápida al patrón MVC (*Model View Controller*)
-- Migraciones de db (*Generación del modelo en DB*)
-- ORM (*Object Relational Mapping*): *Eloquent*
+- Laravel
+    - Migraciones de db (*Generación del modelo en DB*)
+    - ORM (*Object Relational Mapping*): *Eloquent*
 
 ---
 
 ## Contenidos
 
-- Rutas en el framework, verbos HTTP y controladores resourceful
-- Vistas: Templates *Blade*
-- Probando código en la terminal: *Tinker*
-- Rutas avanzadas (Anidación de recursos, filtros)
-- Integración con un servicio REST
-- Ejecución de tareas programadas (Mezclando CRON con laravel)
-- Deployment en producción (Ubuntu + Apache 2 + PostgreSQL)
+- Laravel
+    - Rutas en el framework y controladores *resourceful*
+    - Vistas: Templates *Blade*
+    - Probando código en la terminal: *Tinker*
+    - Rutas avanzadas (Anidación de recursos, filtros)
+- Tópicos avanzados
+    - Integración con un servicio REST
+    - Ejecución de tareas programadas (Mezclando CRON con laravel)
+    - Deployment en producción (Ubuntu + Apache 2 + PostgreSQL)
 
 # Convenciones
 
@@ -152,6 +155,7 @@ Así que haganse el tiempo, o ...
 - Configuren correctamente su correo y nombre en la instalación de git local (Así se pueden distinguir en la rama de commits)
 - Que sus commits indiquen (o traten de indicar) que cambio realizaron en el código
 - Idealmente usen branches (ramas) al desarrollar, cuando la funcionalidad que agregaron este "lista" hacen merge a su branch principal (e.g: master)
+- No agreguen binarios al proyecto en git, tampoco las librerías del proyecto.
 
 ## Perfil
 
@@ -311,7 +315,7 @@ Su repositorio esta en `~/code/app_evaluaciones_ingsw`
 
 ![](images/comandos_git_2.png)
 
----
+## Terminando con git
 
 Eso sería lo básico, donde encontrar más:
 
@@ -348,19 +352,78 @@ Como mencioné anteriormente, usaremos [Eclipse](http://eclipse.org) con *PDT* (
 
 Placeholder ;)
 
+## Usando Composer
+
+![Música maestro!](images/composer_logo.png)
+
+## Que es Composer
+
+*Composer* es un manejador de dependencias para *PHP*.
+
+. . .
+
+Es decir, especificar de que librerías depende nuestro proyecto.
+
+. . .
+
+Se puede ver el listado de paquetes disponibles en composer en [Packagist](https://packagist.org/)
+
+## Como se usa
+
+Tiene dos modos, *local* y *global*.
+
+## Composer global
+
+Este instala los paquetes de composer en el *home* del usuario.
+
+. . .
+
+`composer global require "laravel/installer=~1.1"`
+
+. . .
+
+![Composer global tree](images/composer_tree.png)
+
+## Composer local
+
+Este instala los paquetes en el directorio `vendor` del proyecto, las dependencias se definen en el fichero `composer.json` en la raiz del proyecto
+
+. . .
+
+`composer require resty/resty:@stable`
+
+. . .
+
+![composer local](images/composer_local_require.png)
+
+---
+
+![composer.json](images/composer_json_example.png)
+
+## Composer y git
+
+Cuando generan un proyecto con el instalador de laravel, se incluye un fichero `.gitignore`, este hace que git ignore ciertos ficheros, entre ellos se incluye todo el directorio `vendor`, ya que al hacer el `composer update` se instalan las librerías, haciendo innecesario tenerlo en git.
+
+## Resumen Composer
+
+1. Instalar composer
+2. Añadir librerias usando `composer require` o modificando `composer.json`
+3. Ejecutar `composer update` en la raiz del proyecto para instalar las librerías
+4. Profit
+
 # Introducción al patrón MVC
 
 ## Que es un patrón de diseño arquitectónico
+
+Es una solución reconocida (connotada) a un problema recurrente de diseño (Como estructuramos nuestra aplicación).
+
+## MVC
 
 <div class="notes">
 - Modelo: Objetos del mundo real, del dominio del problema, maneja datos, lógica y reglas de la app (ej: Usuario, Estudiante)
 - Vista: Representación de salida al usuario (ej: HTML, JSON, XML, etc)
 - Controlador: Lógica de interacción con el usuario, recibe, convierte datos e interactua con modelos y vistas
 </div>
-
-Es una solución reconocida (connotada) a un problema recurrente de diseño (Como estructuramos nuestra aplicación).
-
-## MVC
 
 El patrón que utilizaremos será *MVC* o *M*odel *V*iew *C*ontroller, este separa la aplicación en 3 capas:
 
@@ -392,13 +455,39 @@ El ORM permite trabajar los objetos, por ejemplo, `Modelo::all()` nos entregará
 
 En fin, si quiere más información, lo veremos prontamente, por este mismo horario, mismo canal.
 
-## URIs, requests, verbos HTTP (Paréntesis)
+## Pequeño parentesis
 
-Un *URI* es un identificador único de un recurso (`http://tequila.com/perros/5`).
-Un request es una petición realizada a un recurso mediante su *URI*, la petición debe indicar un verbo http, el que dice si estamos pidiendo, actualizando o enviando información (Aquí enviamos información al servidor).
-Un request debe tener una respuesta, la que es entregada al usuario, esta puede tener un código de respuesta (i.e: 500, 200, el infame error 404, etc), 
+Veremos un poquito de la arquitectura HTTP, para ello ojearemos a groso modo:
 
-## URIs, requests, verbos HTTP
+- URIs
+- Requests
+- Códigos de estado
+- Verbos HTTP
+
+## URIs
+
+Un *URI* es un identificador único de un recurso, ejs:
+
+- `http://animales.com/perros/5`
+- `http://animales.com/anguilas`
+- `http://animales.com/anguilas/4/albinas`
+
+## Requests
+
+Un request es una *petición* realizada a un recurso mediante su *URI*, la petición debe indicar un **verbo http**, el que dice si estamos pidiendo, actualizando o enviando información (Aquí enviamos información al servidor).
+Un request debe tener una respuesta, la que es entregada al usuario, esta puede tener un código de respuesta (i.e: 500, 200, el infame error 404, etc).
+
+---
+
+![HTTP request](images/http_request_diagram.png)
+
+## Códigos de estado
+
+---
+
+<iframe src="http://showterm.io/12fd52747a8d4d4029c90#slow" width="800" height="500"></iframe>
+
+## Verbos HTTP
 
 Los verbos HTTP más utilizados son:
 
@@ -413,19 +502,78 @@ Los verbos HTTP más utilizados son:
 
 Pide la representación de un recurso específico, el fin es obtener información, no debe haber otro efecto adverso.
 
+---
+
+![GET request](images/http_get_request.png)
+
 ## Head
 
-Pide una respuesta
+Pide una respuesta, del mismo estilo que `GET`, pero sin el cuerpo de la respuesta. Útil para mostrar información en headers, notificar si hay cambios en el contenido (Es decir, ratear un poco de bandwidth al no transferir el body)
+
+---
+
+![HEAD request](images/http_head_request.png)
+
+## POST
+
+Envia información y realiza cambios en recursos, pueden crearse nuevos recursos, realizar cambios sobre recursos existentes. Esta es la acción que hacemos al pinchar '`Enviar`' en un formulario.
+
+---
+
+![POST request](images/http_post_request.png)
+
+## PUT
+
+Tambien se envia información, sin embargo es más flexible, ya que se puede interpretar como la creación de un nuevo recurso, o la modificación de uno ya existente.
+
+---
+
+![PUT request](images/http_request_put.png)
+
+## DELETE
+
+Creo que ya se imaginan que hace.
+
+## PATCH
+
+Realiza modificaciones parciales a un recurso existente, hay que tener ojo, la especificación recomienda que los cambios enviados sean un tipo de diferencia, esta es parseada por el servidor y realiza los cambios pertinentes, al contrario de la creencia común, de enviar una `campo:valor` y esperar que se modifique solo tal campo en el recurso.
+
+---
+
+![PATCH request](images/http_patch_request.png)
 
 ## Controladores
 
-Los controladores son la forma en las que interactuamos con la aplicación, en el caso particular de los frameworks web que implementan MVC las acciones se realizan a través de una URI y de verbos HTPP:
+Los controladores son la forma en las que interactuamos con la aplicación, en el caso particular de los frameworks web que implementan MVC las acciones se realizan a través de una URI y de verbos HTPP, ejemplos:
 
 - `GET /perros`
 - `POST /perros`
 - `GET /perros/5`
 - `DELETE /perros/10`
 
+## Controladores
 
+Cada ruta de la aplicación (URI) y un verbo http correspondiente deben mapear a un método de un controlador, los métodos de un controlador pueden no recibir parámetros (ej: un index) o recibirlos (ej: mostrar el recurso 5).
+
+. . .
+
+El encargado de mapear una URI + verbo a un método es el framework de `Routing` (El que veremos en detalle más)
+
+## Vistas
+
+Es la representación de un recurso, presentada al usuario. Estás pueden tener distintos formatos, entre ellos:
+
+- XML
+- JSON
+- HTML
+- PDF
+
+## MVC
+
+![Arquitectura MVC](images/ash-mvc-architecture.gif)
+
+# Laravel
+
+![Laravel](images/laravel.png)
 
 # Fin
