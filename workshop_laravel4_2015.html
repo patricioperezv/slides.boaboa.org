@@ -92,9 +92,11 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 <h1>Contenidos</h1>
 <ul>
 <li class="fragment">Buenas (y malas) prácticas en el ramo (A.K.A Tratando de no hacer rabiar al profe)</li>
-<li class="fragment">Instalacion del entorno de desarrollo (<em>Ubuntu + DB + IDE + Git + Framework</em>)</li>
+<li class="fragment">Instalacion del entorno de desarrollo (<em>Ubuntu + DB + IDE + Git + Framework</em>)
+<ul>
 <li class="fragment">Uso básico de linux (Línea de comandos + git(<em>hub</em>))</li>
 <li class="fragment">Uso de manejador de dependencias de PHP: <em>Composer</em></li>
+</ul></li>
 <li class="fragment">Introducción rápida al patrón MVC (<em>Model View Controller</em>)</li>
 <li class="fragment">Migraciones de db (<em>Generación del modelo en DB</em>)</li>
 <li class="fragment">ORM (<em>Object Relational Mapping</em>): <em>Eloquent</em></li>
@@ -213,15 +215,18 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 <p>Yo mismo: <strong>Mismo, recuerda!!</strong> Hay que ver que día nos juntamos en la sala de info a ver comandos linux por lo bajo</p>
 </blockquote>
 </aside>
-<p>Me imagino que ya sabrán como instalar Ubuntu, pero si tienen dudas podemos organizar una pequeña jornada de instalación en la sala de info ツ (De hecho, hagamóslo igual, y veremos los comandos básicos para la línea de comandos de Linux) Recuerden, para que no tengamos atados, usaremos la versión 14.04 (Tiene soporte para 5 años más, creo que estamos cubiertos!)</p>
+<p>Me imagino que ya sabrán como instalar Ubuntu, pero si tienen dudas podemos organizar una pequeña jornada de instalación en la sala de info ツ Recuerden, para que no tengamos atados, usaremos la versión 14.04 (Tiene soporte para 5 años más, creo que estamos cubiertos!)</p>
+</section><section class="slide level2">
+
+<p>De hecho, juntemonos en la sala igual, lleven sus notebooks, y veremos los comandos básicos para la línea de comandos de Linux</p>
 </section><section id="torpedo-básico-de-comandos-unix" class="slide level2">
 <h1>Torpedo básico de comandos UNIX</h1>
 <ul>
-<li class="fragment">Usar TAB para completar comandos, nombres de ficheros, siempre que se pueda!</li>
+<li class="fragment">Usar <strong>TAB</strong> para completar comandos, nombres de ficheros, siempre que se pueda!</li>
 <li class="fragment"><code>cd directorio</code> Ingresa a un directorio</li>
 <li class="fragment"><code>cat fichero.txt</code> Muestra en pantalla el contenido de un fichero</li>
 <li class="fragment">Cuando se trabajan directorios <code>.</code> se refiere al directorio actual, <code>..</code> se refiere al padre del directorio actual, de hecho <code>../..</code> entraria al padre del padre del directorio actual (abuelo??)</li>
-<li class="fragment">Nuestro home (Donde se guardan todas nuestras leseras) es por defecto <code>/home/usuario</code></li>
+<li class="fragment">Nuestro home (Donde se guardan todas nuestras leseras) es por defecto <code>/home/usuario</code>, un atajo es <code>~</code> (ej: ´~/Descargas´ equivale a ´/home/usuario/Descargas´)</li>
 </ul>
 </section><section class="slide level2">
 
@@ -283,8 +288,8 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 </section><section class="slide level2">
 
 <p>(Ojo! <a href="http://github.com">Github</a> no es el único proveedor de git, esta <a href="http://bitbucket.org">bitbucket</a> y otros, incluso pueden alojarlo en un servidor propio)</p>
-</section><section id="y-bueno-demosle" class="slide level2">
-<h1>Y bueno, demosle!</h1>
+</section><section id="y-bueno-al-ataque" class="slide level2">
+<h1>Y bueno, al ataque</h1>
 <ul>
 <li class="fragment">El primer paso sería entrar a <a href="http://github.com">github</a> y crearnos una cuenta</li>
 <li class="fragment">Ahora debemos crear una llave ssh (Abran sus terminales y tipeen):</li>
@@ -294,6 +299,10 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 <li class="fragment"><code>ssh-keygen -t rsa -C pperez@badgerbook</code></li>
 <li class="fragment">Ver el contenido de <code>.ssh/id_rsa.pub</code> y agregarla a Github (En la web 'Settings → SSH keys → Add SSH key')</li>
 </ul>
+</section><section class="slide level2">
+
+<iframe src="http://showterm.io/3eb31771d1635f586f6c4#slow" width="800" height="520">
+</iframe>
 </section><section class="slide level2">
 
 <figure>
@@ -362,6 +371,93 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 <li class="fragment">Github Guides (<a href="https://guides.github.com/" class="uri">https://guides.github.com/</a>)</li>
 </ul>
 </div>
+</section><section id="instalar-el-ide" class="slide level2">
+<h1>Instalar el IDE</h1>
+<p>Como mencioné anteriormente, usaremos <a href="http://eclipse.org">Eclipse</a> con <em>PDT</em> (PHP Development Tools), los pasos:</p>
+<ul>
+<li class="fragment"><code>sudo apt-get install axel</code></li>
+<li class="fragment"><code>axel -n50 http://carroll.aset.psu.edu/pub/eclipse/technology/epp/downloads/release/luna/SR1/eclipse-php-luna-SR1-linux-gtk-x86_64.tar.gz</code></li>
+<li class="fragment"><code>sudo tar xzvf eclipse-php-luna-SR1-linux-gtk-x86_64.tar.gz -C /opt</code></li>
+<li class="fragment"><code>sudo ln -s /opt/eclipse/eclipse /usr/local/bin</code></li>
+<li class="fragment"><code>sudo wget http://git.io/VhjClg -O /usr/share/applications/eclipse.desktop</code></li>
+<li class="fragment"><code>rm eclipse-php-luna-SR1-linux-gtk-x86_64.tar.gz</code></li>
+</ul>
+</section><section class="slide level2">
+
+<iframe src="http://showterm.io/a8fa8b6ec4d10ef0b342f#slow" width="800" height="520">
+</iframe>
+</section><section class="slide level2">
+
+<figure>
+<img src="images/eclipse_icon.png" alt="Eclipse" /><figcaption>Eclipse</figcaption>
+</figure>
+</section><section id="configurar-el-ide-contra-el-directorio-del-proyecto" class="slide level2">
+<h1>Configurar el IDE contra el directorio del proyecto</h1>
+<p>Placeholder ;)</p>
+</section></section>
+<section><section id="introducción-al-patrón-mvc" class="titleslide slide level1"><h1>Introducción al patrón MVC</h1></section><section id="que-es-un-patrón-de-diseño-arquitectónico" class="slide level2">
+<h1>Que es un patrón de diseño arquitectónico</h1>
+<aside class="notes">
+<ul>
+<li class="fragment">Modelo: Objetos del mundo real, del dominio del problema, maneja datos, lógica y reglas de la app (ej: Usuario, Estudiante)</li>
+<li class="fragment">Vista: Representación de salida al usuario (ej: HTML, JSON, XML, etc)</li>
+<li class="fragment">Controlador: Lógica de interacción con el usuario, recibe, convierte datos e interactua con modelos y vistas</li>
+</ul>
+</aside>
+<p>Es una solución reconocida (connotada) a un problema recurrente de diseño (Como estructuramos nuestra aplicación).</p>
+</section><section id="mvc" class="slide level2">
+<h1>MVC</h1>
+<p>El patrón que utilizaremos será <em>MVC</em> o <em>M</em>odel <em>V</em>iew <em>C</em>ontroller, este separa la aplicación en 3 capas:</p>
+<ul>
+<li class="fragment">Modelos</li>
+<li class="fragment">Vistas</li>
+<li class="fragment">Controladores</li>
+</ul>
+</section><section id="modelos" class="slide level2">
+<h1>Modelos</h1>
+<aside class="notes">
+<p>Blog: (Modelos: Entradas, Usuarios, Comentarios) Controladores: EntradasController, UsersController, ComentariosController</p>
+<p>/entradas/{id}/comentarios /usuarios/</p>
+</aside>
+<p>Los modelos se refiere al conjunto de clases que representa nuestro dominio del problema (Relación con el paradigma orientado a objetos).</p>
+</section><section id="modelos-1" class="slide level2">
+<h1>Modelos</h1>
+<p><em>Laravel</em> nos da una herramienta llamada <em>Eloquent</em> para manejar los modelos, estos tienen relación directa con nuestra base de datos (<em>Eloquent</em> es un ORM, este mapea objetos a filas de base de datos), el ORM automáticamente construira consultas para la base de datos.</p>
+</section><section id="modelos-2" class="slide level2">
+<h1>Modelos</h1>
+<p>El ORM permite trabajar los objetos, por ejemplo, <code>Modelo::all()</code> nos entregará una lista con todos los objetos de esa clase, <code>Modelo::find(5)</code> entregará el objeto cuya llave primaria sea igual a 5. Se pueden pedir otras cosas al ORM, como condiciones <code>where</code> o consultar relaciones <code>1/n</code>.</p>
+<div class="fragment">
+<p>En fin, si quiere más información, lo veremos prontamente, por este mismo horario, mismo canal.</p>
+</div>
+</section><section id="uris-requests-verbos-http-paréntesis" class="slide level2">
+<h1>URIs, requests, verbos HTTP (Paréntesis)</h1>
+<p>Un <em>URI</em> es un identificador único de un recurso (<code>http://tequila.com/perros/5</code>). Un request es una petición realizada a un recurso mediante su <em>URI</em>, la petición debe indicar un verbo http, el que dice si estamos pidiendo, actualizando o enviando información (Aquí enviamos información al servidor). Un request debe tener una respuesta, la que es entregada al usuario, esta puede tener un código de respuesta (i.e: 500, 200, el infame error 404, etc),</p>
+</section><section id="uris-requests-verbos-http" class="slide level2">
+<h1>URIs, requests, verbos HTTP</h1>
+<p>Los verbos HTTP más utilizados son:</p>
+<ul>
+<li class="fragment"><code>GET</code></li>
+<li class="fragment"><code>HEAD</code></li>
+<li class="fragment"><code>POST</code></li>
+<li class="fragment"><code>PUT</code></li>
+<li class="fragment"><code>DELETE</code></li>
+<li class="fragment"><code>PATCH</code></li>
+</ul>
+</section><section id="get" class="slide level2">
+<h1>GET</h1>
+<p>Pide la representación de un recurso específico, el fin es obtener información, no debe haber otro efecto adverso.</p>
+</section><section id="head" class="slide level2">
+<h1>Head</h1>
+<p>Pide una respuesta</p>
+</section><section id="controladores" class="slide level2">
+<h1>Controladores</h1>
+<p>Los controladores son la forma en las que interactuamos con la aplicación, en el caso particular de los frameworks web que implementan MVC las acciones se realizan a través de una URI y de verbos HTPP:</p>
+<ul>
+<li class="fragment"><code>GET /perros</code></li>
+<li class="fragment"><code>POST /perros</code></li>
+<li class="fragment"><code>GET /perros/5</code></li>
+<li class="fragment"><code>DELETE /perros/10</code></li>
+</ul>
 </section></section>
 <section><section id="fin" class="titleslide slide level1"><h1>Fin</h1></section></section>
     </div>

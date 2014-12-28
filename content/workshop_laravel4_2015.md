@@ -57,8 +57,8 @@ Hay herramientas que se me quedaron en el tintero, pero creo que serían bien ú
 
 - Buenas (y malas) prácticas en el ramo (A.K.A Tratando de no hacer rabiar al profe)
 - Instalacion del entorno de desarrollo (*Ubuntu + DB + IDE + Git + Framework*)
-- Uso básico de linux (Línea de comandos + git(*hub*))
-- Uso de manejador de dependencias de PHP: *Composer*
+    - Uso básico de linux (Línea de comandos + git(*hub*))
+    - Uso de manejador de dependencias de PHP: *Composer*
 - Introducción rápida al patrón MVC (*Model View Controller*)
 - Migraciones de db (*Generación del modelo en DB*)
 - ORM (*Object Relational Mapping*): *Eloquent*
@@ -174,16 +174,20 @@ Así que haganse el tiempo, o ...
 > Hay que ver que día nos juntamos en la sala de info a ver comandos linux por lo bajo
 </div>
 
-Me imagino que ya sabrán como instalar Ubuntu, pero si tienen dudas podemos organizar una pequeña jornada de instalación en la sala de info ツ (De hecho, hagamóslo igual, y veremos los comandos básicos para la línea de comandos de Linux)
+Me imagino que ya sabrán como instalar Ubuntu, pero si tienen dudas podemos organizar una pequeña jornada de instalación en la sala de info ツ
 Recuerden, para que no tengamos atados, usaremos la versión 14.04 (Tiene soporte para 5 años más, creo que estamos cubiertos!)
+
+---
+
+De hecho, juntemonos en la sala igual, lleven sus notebooks, y veremos los comandos básicos para la línea de comandos de Linux
 
 ## Torpedo básico de comandos UNIX
 
-- Usar TAB para completar comandos, nombres de ficheros, siempre que se pueda!
+- Usar **TAB** para completar comandos, nombres de ficheros, siempre que se pueda!
 - `cd directorio` Ingresa a un directorio
 - `cat fichero.txt` Muestra en pantalla el contenido de un fichero
 - Cuando se trabajan directorios `.` se refiere al directorio actual, `..` se refiere al padre del directorio actual, de hecho `../..` entraria al padre del padre del directorio actual (abuelo??)
-- Nuestro home (Donde se guardan todas nuestras leseras) es por defecto `/home/usuario`
+- Nuestro home (Donde se guardan todas nuestras leseras) es por defecto `/home/usuario`, un atajo es `~` (ej: ´~/Descargas´ equivale a ´/home/usuario/Descargas´)
 
 ----
 
@@ -244,7 +248,7 @@ Si se cae el servidor de github (Repositorio central en la imagen), aún pueden 
 
 (Ojo! [Github](http://github.com) no es el único proveedor de git, esta [bitbucket](http://bitbucket.org) y otros, incluso pueden alojarlo en un servidor propio)
 
-## Y bueno, demosle!
+## Y bueno, al ataque
 
 - El primer paso sería entrar a [github](http://github.com) y crearnos una cuenta
 - Ahora debemos crear una llave ssh (Abran sus terminales y tipeen):
@@ -253,6 +257,10 @@ Si se cae el servidor de github (Repositorio central en la imagen), aún pueden 
 - `git config --global color.ui auto`
 - `ssh-keygen -t rsa -C pperez@badgerbook`
 - Ver el contenido de `.ssh/id_rsa.pub` y agregarla a Github (En la web 'Settings → SSH keys → Add SSH key')
+
+---
+
+<iframe src="http://showterm.io/3eb31771d1635f586f6c4#slow" width="800" height="520"></iframe>
 
 ---
 
@@ -316,6 +324,108 @@ Selección personal:
 - Cheatsheet (Torpedo) de git en español ([https://training.github.com/kit/downloads/es/github-git-cheat-sheet.pdf](https://training.github.com/kit/downloads/es/github-git-cheat-sheet.pdf))
 - Pro Git ([http://progit.org](http://progit.org))
 - Github Guides ([https://guides.github.com/](https://guides.github.com/))
+
+## Instalar el IDE
+
+Como mencioné anteriormente, usaremos [Eclipse](http://eclipse.org) con *PDT* (PHP Development Tools), los pasos:
+
+-  `sudo apt-get install axel`
+-  `axel -n50 http://carroll.aset.psu.edu/pub/eclipse/technology/epp/downloads/release/luna/SR1/eclipse-php-luna-SR1-linux-gtk-x86_64.tar.gz`
+-  `sudo tar xzvf eclipse-php-luna-SR1-linux-gtk-x86_64.tar.gz -C /opt`
+-  `sudo ln -s /opt/eclipse/eclipse /usr/local/bin`
+-  `sudo wget http://git.io/VhjClg -O /usr/share/applications/eclipse.desktop`
+-  `rm eclipse-php-luna-SR1-linux-gtk-x86_64.tar.gz`
+
+---
+
+<iframe src="http://showterm.io/a8fa8b6ec4d10ef0b342f#slow" width="800" height="520"></iframe>
+
+---
+
+![Eclipse](images/eclipse_icon.png)
+
+## Configurar el IDE contra el directorio del proyecto
+
+Placeholder ;)
+
+# Introducción al patrón MVC
+
+## Que es un patrón de diseño arquitectónico
+
+<div class="notes">
+- Modelo: Objetos del mundo real, del dominio del problema, maneja datos, lógica y reglas de la app (ej: Usuario, Estudiante)
+- Vista: Representación de salida al usuario (ej: HTML, JSON, XML, etc)
+- Controlador: Lógica de interacción con el usuario, recibe, convierte datos e interactua con modelos y vistas
+</div>
+
+Es una solución reconocida (connotada) a un problema recurrente de diseño (Como estructuramos nuestra aplicación).
+
+## MVC
+
+El patrón que utilizaremos será *MVC* o *M*odel *V*iew *C*ontroller, este separa la aplicación en 3 capas:
+
+- Modelos
+- Vistas
+- Controladores
+
+## Modelos
+
+<div class="notes">
+Blog: (Modelos: Entradas, Usuarios, Comentarios)
+Controladores: EntradasController, UsersController, ComentariosController
+
+/entradas/\{id\}/comentarios
+/usuarios/
+</div>
+
+Los modelos se refiere al conjunto de clases que representa nuestro dominio del problema (Relación con el paradigma orientado a objetos).
+
+## Modelos
+
+*Laravel* nos da una herramienta llamada *Eloquent* para manejar los modelos, estos tienen relación directa con nuestra base de datos (*Eloquent* es un ORM, este mapea objetos a filas de base de datos), el ORM automáticamente construira consultas para la base de datos.
+
+## Modelos
+
+El ORM permite trabajar los objetos, por ejemplo, `Modelo::all()` nos entregará una lista con todos los objetos de esa clase, `Modelo::find(5)` entregará el objeto cuya llave primaria sea igual a 5. Se pueden pedir otras cosas al ORM, como condiciones `where` o consultar relaciones `1/n`.
+
+. . .
+
+En fin, si quiere más información, lo veremos prontamente, por este mismo horario, mismo canal.
+
+## URIs, requests, verbos HTTP (Paréntesis)
+
+Un *URI* es un identificador único de un recurso (`http://tequila.com/perros/5`).
+Un request es una petición realizada a un recurso mediante su *URI*, la petición debe indicar un verbo http, el que dice si estamos pidiendo, actualizando o enviando información (Aquí enviamos información al servidor).
+Un request debe tener una respuesta, la que es entregada al usuario, esta puede tener un código de respuesta (i.e: 500, 200, el infame error 404, etc), 
+
+## URIs, requests, verbos HTTP
+
+Los verbos HTTP más utilizados son:
+
+- `GET`
+- `HEAD`
+- `POST`
+- `PUT`
+- `DELETE`
+- `PATCH`
+
+## GET
+
+Pide la representación de un recurso específico, el fin es obtener información, no debe haber otro efecto adverso.
+
+## Head
+
+Pide una respuesta
+
+## Controladores
+
+Los controladores son la forma en las que interactuamos con la aplicación, en el caso particular de los frameworks web que implementan MVC las acciones se realizan a través de una URI y de verbos HTPP:
+
+- `GET /perros`
+- `POST /perros`
+- `GET /perros/5`
+- `DELETE /perros/10`
+
 
 
 # Fin
