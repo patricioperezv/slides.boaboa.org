@@ -10,6 +10,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <link rel="stylesheet" href="reveal.js/css/reveal.min.css"/>
     <style type="text/css">code{white-space: pre;}</style>
+    <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+    </style>
     <link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">
     <!-- If the query includes 'print-pdf', include the PDF print sheet -->
     <script>
@@ -113,6 +132,8 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 <li class="fragment">Vistas: Templates <em>Blade</em></li>
 <li class="fragment">Probando código en la terminal: <em>Tinker</em></li>
 <li class="fragment">Rutas avanzadas (Anidación de recursos, filtros)</li>
+<li class="fragment">Autenticación (DB, WS, Custom)</li>
+<li class="fragment">Helpers (Paths, Custom)</li>
 </ul></li>
 <li class="fragment">Tópicos avanzados
 <ul>
@@ -302,12 +323,12 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 <h1>Y bueno, al ataque</h1>
 <ul>
 <li class="fragment">El primer paso sería entrar a <a href="http://github.com">github</a> y crearnos una cuenta</li>
-<li class="fragment">Ahora debemos crear una llave ssh (Abran sus terminales y tipeen):</li>
-<li class="fragment"><code>git config --global user.name &quot;Patricio Pérez&quot;</code></li>
-<li class="fragment"><code>git config --globa user.email pperez@boaboa.org</code></li>
-<li class="fragment"><code>git config --global color.ui auto</code></li>
-<li class="fragment"><code>ssh-keygen -t rsa -C pperez@badgerbook</code></li>
-<li class="fragment">Ver el contenido de <code>.ssh/id_rsa.pub</code> y agregarla a Github (En la web 'Settings → SSH keys → Add SSH key')</li>
+<li class="fragment"><p>Ahora debemos crear una llave ssh (Abran sus terminales y tipeen):</p></li>
+<li class="fragment"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">git</span> config --global user.name <span class="st">&quot;Patricio Pérez&quot;</span>
+<span class="kw">git</span> config --globa user.email pperez@boaboa.org
+<span class="kw">git</span> config --global color.ui auto
+<span class="kw">ssh-keygen</span> -t rsa -C pperez@badgerbook</code></pre></li>
+<li class="fragment"><p>Ver el contenido de <code>.ssh/id_rsa.pub</code> y agregarla a Github (En la web 'Settings → SSH keys → Add SSH key')</p></li>
 </ul>
 </section><section class="slide level2">
 
@@ -334,11 +355,9 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 </section><section class="slide level2">
 
 <p>Ahora a clonar el repositorio! Vamos a la pagina del repositorio y copiamos la URL de clonado SSH (Parte inferior derecha), luego en la terminal:</p>
-<ul>
-<li class="fragment"><code>cd ~</code></li>
-<li class="fragment"><code>mkdir code</code></li>
-<li class="fragment"><code>git clone git@github.com:pperez/app_evaluaciones_ingsw.git</code></li>
-</ul>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">cd</span> ~
+<span class="kw">mkdir</span> code
+<span class="kw">git</span> clone git@github.com:pperez/app_evaluaciones_ingsw.git</code></pre>
 </section><section id="ta-dah" class="slide level2">
 <h1>Ta-Dah!</h1>
 <figure>
@@ -384,14 +403,12 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 </section><section id="instalar-el-ide" class="slide level2">
 <h1>Instalar el IDE</h1>
 <p>Como mencioné anteriormente, usaremos <a href="http://eclipse.org">Eclipse</a> con <em>PDT</em> (PHP Development Tools), los pasos:</p>
-<ul>
-<li class="fragment"><code>sudo apt-get install axel</code></li>
-<li class="fragment"><code>axel -n50 http://carroll.aset.psu.edu/pub/eclipse/technology/epp/downloads/release/luna/SR1/eclipse-php-luna-SR1-linux-gtk-x86_64.tar.gz</code></li>
-<li class="fragment"><code>sudo tar xzvf eclipse-php-luna-SR1-linux-gtk-x86_64.tar.gz -C /opt</code></li>
-<li class="fragment"><code>sudo ln -s /opt/eclipse/eclipse /usr/local/bin</code></li>
-<li class="fragment"><code>sudo wget http://git.io/VhjClg -O /usr/share/applications/eclipse.desktop</code></li>
-<li class="fragment"><code>rm eclipse-php-luna-SR1-linux-gtk-x86_64.tar.gz</code></li>
-</ul>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> apt-get install axel
+<span class="kw">axel</span> -n50 http://carroll.aset.psu.edu/pub/eclipse/technology/epp/downloads/release/luna/SR1/eclipse-php-luna-SR1-linux-gtk-x86_64.tar.gz
+<span class="kw">sudo</span> tar xzvf eclipse-php-luna-SR1-linux-gtk-x86_64.tar.gz -C /opt
+<span class="kw">sudo</span> ln -s /opt/eclipse/eclipse /usr/local/bin
+<span class="kw">sudo</span> wget http://git.io/VhjClg -O /usr/share/applications/eclipse.desktop
+<span class="kw">rm</span> eclipse-php-luna-SR1-linux-gtk-x86_64.tar.gz</code></pre>
 </section><section class="slide level2">
 
 <iframe src="http://showterm.io/a8fa8b6ec4d10ef0b342f#slow" width="800" height="520">
@@ -425,7 +442,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 <h1>Composer global</h1>
 <p>Este instala los paquetes de composer en el <em>home</em> del usuario.</p>
 <div class="fragment">
-<p><code>composer global require &quot;laravel/installer=~1.1&quot;</code></p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">composer</span> global require <span class="st">&quot;laravel/installer=~1.1&quot;</span></code></pre>
 </div>
 <div class="fragment">
 <figure>
@@ -436,7 +453,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 <h1>Composer local</h1>
 <p>Este instala los paquetes en el directorio <code>vendor</code> del proyecto, las dependencias se definen en el fichero <code>composer.json</code> en la raiz del proyecto</p>
 <div class="fragment">
-<p><code>composer require resty/resty:@stable</code></p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">composer</span> require resty/resty:@stable</code></pre>
 </div>
 <div class="fragment">
 <figure>
@@ -457,7 +474,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 <li class="fragment">Instalar composer</li>
 <li class="fragment">Añadir librerias usando <code>composer require</code> o modificando <code>composer.json</code></li>
 <li class="fragment">Ejecutar <code>composer update</code> en la raiz del proyecto para instalar las librerías</li>
-<li class="fragment">Profit</li>
+<li class="fragment">Profit!!</li>
 </ol>
 </section></section>
 <section><section id="introducción-al-patrón-mvc" class="titleslide slide level1"><h1>Introducción al patrón MVC</h1></section><section id="que-es-un-patrón-de-diseño-arquitectónico" class="slide level2">
@@ -609,7 +626,132 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 <img src="images/ash-mvc-architecture.gif" alt="Arquitectura MVC" /><figcaption>Arquitectura MVC</figcaption>
 </figure>
 </section></section>
-<section><section id="laravel" class="titleslide slide level1"><h1>Laravel</h1></section></section>
+<section><section id="laravel" class="titleslide slide level1"><h1>Laravel</h1></section><section class="slide level2">
+
+<figure>
+<img src="images/laravel.png" />
+</figure>
+</section><section id="laravel-1" class="slide level2">
+<h1>Laravel</h1>
+<p>Laravel es un framework para PHP que implementa el patrón MVC.</p>
+<div class="fragment">
+<p>Ya vimos como instalarlo, así que el que no tenga su proyecto listo para trabajar lease todas las diapos anteriores/blogs/etc.</p>
+</div>
+</section><section id="laravel-2" class="slide level2">
+<h1>Laravel</h1>
+<p>Características agradables que tiene:</p>
+<ul>
+<li class="fragment">Framework de ruteo</li>
+<li class="fragment">Schema Builder + Migraciones</li>
+<li class="fragment">ORM <em>Eloquent</em></li>
+<li class="fragment">Vistas con <em>Blade</em> Templating</li>
+<li class="fragment">Manejo de cache</li>
+<li class="fragment">Manejo de colas (<em>Queues</em>: Redis, Amazon SQS, otras)</li>
+</ul>
+</section><section id="artisan" class="slide level2">
+<h1>Artisan</h1>
+<p><em>Artisan</em> es la interfaz de línea de comando de <em>Laravel</em>. Incluye un montón de funciones útiles a la hora de desarrollar:</p>
+<ul>
+<li class="fragment">Servidor integrado de php (<code>php artisan serve</code>)</li>
+<li class="fragment">Manejo de migraciones (<code>php artisan migrate</code>)</li>
+<li class="fragment">Manejo de estado de la app (<code>php artisan down | php artisan up</code>)</li>
+</ul>
+</section><section id="migraciones-de-db" class="slide level2">
+<h1>Migraciones de DB</h1>
+<p>Las <em>migraciones</em> son un tipo de control de versiones para la base de datos, permitiendo a un equipo de trabajo modificar la estructura de la DB sin tantos problemas.</p>
+</section><section id="creando-una-migración" class="slide level2">
+<h1>Creando una migración</h1>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">php</span> artisan migrate:make crear_tabla_salas</code></pre>
+<div class="fragment">
+<figure>
+<img src="images/tree_database_directory.png" alt="Arbol directorio databases" /><figcaption>Arbol directorio databases</figcaption>
+</figure>
+</div>
+</section><section class="slide level2">
+
+<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">cat</span> app/database/migrations/2014_12_29_131855_crear_tabla_salas.php</code></pre>
+<pre class="sourceCode php"><code class="sourceCode php"><span class="kw">&lt;?php</span>
+
+<span class="kw">use</span> Illuminate\Database\Schema\Blueprint<span class="ot">;</span>
+<span class="kw">use</span> Illuminate\Database\Migrations\Migration<span class="ot">;</span>
+
+<span class="kw">class</span> CrearTablaSalas <span class="kw">extends</span> Migration {
+
+    <span class="co">/**</span>
+<span class="co">     * Run the migrations.</span>
+<span class="co">     *</span>
+<span class="co">     * </span><span class="kw">@return</span><span class="co"> void</span>
+<span class="co">     */</span>
+    <span class="kw">public</span> <span class="kw">function</span> up<span class="ot">()</span>
+    {
+        <span class="co">//</span>
+    }
+
+    <span class="co">/**</span>
+<span class="co">     * Reverse the migrations.</span>
+<span class="co">     *</span>
+<span class="co">     * </span><span class="kw">@return</span><span class="co"> void</span>
+<span class="co">     */</span>
+    <span class="kw">public</span> <span class="kw">function</span> down<span class="ot">()</span>
+    {
+        <span class="co">//</span>
+    }
+
+}</code></pre>
+</section><section class="slide level2">
+
+<p>No hay tanta magia en el fichero, el método up() se ejecuta cuando la migración se aplica, mientras que el método down() cuando la migración se revierte.</p>
+</section><section id="añadiendo-el-schema-builder" class="slide level2">
+<h1>Añadiendo el Schema Builder</h1>
+<p>El <a href="http://laravel.com/docs/4.2/schema">Schema Builder</a> de laravel permite hacer cambios sobre la estructura de la DB:</p>
+<ul>
+<li class="fragment">Añadir y quitar tablas</li>
+<li class="fragment">Añadir, renombrar, quitar columnas</li>
+<li class="fragment">Renombrar columnas</li>
+<li class="fragment">Agregar/Remover llaves foráneas</li>
+<li class="fragment">Otros</li>
+</ul>
+</section><section id="ejemplo" class="slide level2">
+<h1>Ejemplo</h1>
+<pre class="sourceCode php"><code class="sourceCode php"><span class="kw">&lt;?php</span>
+
+<span class="kw">use</span> Illuminate\Database\Migrations\Migration<span class="ot">;</span>
+<span class="kw">use</span> Illuminate\Database\Schema\Blueprint<span class="ot">;</span>
+
+<span class="kw">class</span> CreateUsuariosTable <span class="kw">extends</span> Migration {
+
+    <span class="co">/**</span>
+<span class="co">     * Run the migrations.</span>
+<span class="co">     *</span>
+<span class="co">     * </span><span class="kw">@return</span><span class="co"> void</span>
+<span class="co">     */</span>
+    <span class="kw">public</span> <span class="kw">function</span> up<span class="ot">()</span>
+    {
+        Schema::create<span class="ot">(</span><span class="st">&#39;usuarios&#39;</span><span class="ot">,</span> <span class="kw">function</span><span class="ot">(</span>Blueprint <span class="kw">$table</span><span class="ot">)</span>
+        {
+            <span class="kw">$table</span>-&gt;integer<span class="ot">(</span><span class="st">&#39;rut&#39;</span><span class="ot">);</span>
+                        <span class="kw">$table</span>-&gt;string<span class="ot">(</span><span class="st">&#39;nombres&#39;</span><span class="ot">);</span>
+                        <span class="kw">$table</span>-&gt;string<span class="ot">(</span><span class="st">&#39;apellidos&#39;</span><span class="ot">);</span>
+                        <span class="kw">$table</span>-&gt;string<span class="ot">(</span><span class="st">&#39;email&#39;</span><span class="ot">)</span>-&gt;unique<span class="ot">();</span>
+                        <span class="kw">$table</span>-&gt;integer<span class="ot">(</span><span class="st">&#39;telefono&#39;</span><span class="ot">)</span>-&gt;nullable<span class="ot">();</span>
+                        <span class="kw">$table</span>-&gt;primary<span class="ot">(</span><span class="st">&#39;rut&#39;</span><span class="ot">);</span>
+            <span class="kw">$table</span>-&gt;timestamps<span class="ot">();</span>
+        }<span class="ot">);</span>
+    }
+
+
+    <span class="co">/**</span>
+<span class="co">     * Reverse the migrations.</span>
+<span class="co">     *</span>
+<span class="co">     * </span><span class="kw">@return</span><span class="co"> void</span>
+<span class="co">     */</span>
+    <span class="kw">public</span> <span class="kw">function</span> down<span class="ot">()</span>
+    {
+        Schema::drop<span class="ot">(</span><span class="st">&#39;usuarios&#39;</span><span class="ot">);</span>
+    }
+
+}</code></pre>
+</section></section>
 <section><section id="fin" class="titleslide slide level1"><h1>Fin</h1></section></section>
     </div>
   </div>

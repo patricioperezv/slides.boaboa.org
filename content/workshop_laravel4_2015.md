@@ -73,6 +73,8 @@ Hay herramientas que se me quedaron en el tintero, pero creo que serían bien ú
     - Vistas: Templates *Blade*
     - Probando código en la terminal: *Tinker*
     - Rutas avanzadas (Anidación de recursos, filtros)
+    - Autenticación (DB, WS, Custom)
+    - Helpers (Paths, Custom)
 - Tópicos avanzados
     - Integración con un servicio REST
     - Ejecución de tareas programadas (Mezclando CRON con laravel)
@@ -256,10 +258,14 @@ Si se cae el servidor de github (Repositorio central en la imagen), aún pueden 
 
 - El primer paso sería entrar a [github](http://github.com) y crearnos una cuenta
 - Ahora debemos crear una llave ssh (Abran sus terminales y tipeen):
-- `git config --global user.name "Patricio Pérez"`
-- `git config --globa user.email pperez@boaboa.org`
-- `git config --global color.ui auto`
-- `ssh-keygen -t rsa -C pperez@badgerbook`
+
+- ```bash
+git config --global user.name "Patricio Pérez"
+git config --globa user.email pperez@boaboa.org
+git config --global color.ui auto
+ssh-keygen -t rsa -C pperez@badgerbook
+```
+
 - Ver el contenido de `.ssh/id_rsa.pub` y agregarla a Github (En la web 'Settings → SSH keys → Add SSH key')
 
 ---
@@ -285,9 +291,11 @@ Si se cae el servidor de github (Repositorio central en la imagen), aún pueden 
 Ahora a clonar el repositorio!
 Vamos a la pagina del repositorio y copiamos la URL de clonado SSH (Parte inferior derecha), luego en la terminal:
 
-- `cd ~`
-- `mkdir code`
-- `git clone git@github.com:pperez/app_evaluaciones_ingsw.git`
+```bash
+cd ~
+mkdir code
+git clone git@github.com:pperez/app_evaluaciones_ingsw.git
+```
 
 ## Ta-Dah!
 
@@ -333,12 +341,14 @@ Selección personal:
 
 Como mencioné anteriormente, usaremos [Eclipse](http://eclipse.org) con *PDT* (PHP Development Tools), los pasos:
 
--  `sudo apt-get install axel`
--  `axel -n50 http://carroll.aset.psu.edu/pub/eclipse/technology/epp/downloads/release/luna/SR1/eclipse-php-luna-SR1-linux-gtk-x86_64.tar.gz`
--  `sudo tar xzvf eclipse-php-luna-SR1-linux-gtk-x86_64.tar.gz -C /opt`
--  `sudo ln -s /opt/eclipse/eclipse /usr/local/bin`
--  `sudo wget http://git.io/VhjClg -O /usr/share/applications/eclipse.desktop`
--  `rm eclipse-php-luna-SR1-linux-gtk-x86_64.tar.gz`
+```bash
+sudo apt-get install axel
+axel -n50 http://carroll.aset.psu.edu/pub/eclipse/technology/epp/downloads/release/luna/SR1/eclipse-php-luna-SR1-linux-gtk-x86_64.tar.gz
+sudo tar xzvf eclipse-php-luna-SR1-linux-gtk-x86_64.tar.gz -C /opt
+sudo ln -s /opt/eclipse/eclipse /usr/local/bin
+sudo wget http://git.io/VhjClg -O /usr/share/applications/eclipse.desktop
+rm eclipse-php-luna-SR1-linux-gtk-x86_64.tar.gz
+```
 
 ---
 
@@ -378,7 +388,9 @@ Este instala los paquetes de composer en el *home* del usuario.
 
 . . .
 
-`composer global require "laravel/installer=~1.1"`
+```bash
+composer global require "laravel/installer=~1.1"
+```
 
 . . .
 
@@ -390,7 +402,9 @@ Este instala los paquetes en el directorio `vendor` del proyecto, las dependenci
 
 . . .
 
-`composer require resty/resty:@stable`
+```bash
+composer require resty/resty:@stable
+```
 
 . . .
 
@@ -409,7 +423,7 @@ Cuando generan un proyecto con el instalador de laravel, se incluye un fichero `
 1. Instalar composer
 2. Añadir librerias usando `composer require` o modificando `composer.json`
 3. Ejecutar `composer update` en la raiz del proyecto para instalar las librerías
-4. Profit
+4. Profit!!
 
 # Introducción al patrón MVC
 
@@ -574,6 +588,146 @@ Es la representación de un recurso, presentada al usuario. Estás pueden tener 
 
 # Laravel
 
-![Laravel](images/laravel.png)
+---
+
+![](images/laravel.png)
+
+---
+
+## Laravel
+
+Laravel es un framework para PHP que implementa el patrón MVC.
+
+. . .
+
+Ya vimos como instalarlo, así que el que no tenga su proyecto listo para trabajar lease todas las diapos anteriores/blogs/etc.
+
+## Laravel
+
+Características agradables que tiene:
+
+- Framework de ruteo
+- Schema Builder + Migraciones
+- ORM *Eloquent*
+- Vistas con *Blade* Templating
+- Manejo de cache
+- Manejo de colas (*Queues*: Redis, Amazon SQS, otras)
+
+## Artisan
+
+*Artisan* es la interfaz de línea de comando de *Laravel*.
+Incluye un montón de funciones útiles a la hora de desarrollar:
+
+- Servidor integrado de php (`php artisan serve`)
+- Manejo de migraciones (`php artisan migrate`)
+- Manejo de estado de la app (`php artisan down | php artisan up`)
+
+## Migraciones de DB
+
+Las *migraciones* son un tipo de control de versiones para la base de datos, permitiendo a un equipo de trabajo modificar la estructura de la DB sin tantos problemas.
+
+## Creando una migración
+
+```bash
+php artisan migrate:make crear_tabla_salas
+```
+
+. . .
+
+![Arbol directorio databases](images/tree_database_directory.png)
+
+---
+
+```bash
+$ cat app/database/migrations/2014_12_29_131855_crear_tabla_salas.php
+```
+
+```php
+<?php
+
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CrearTablaSalas extends Migration {
+
+	/**
+	 * Run the migrations.
+	 *
+	 * @return void
+	 */
+	public function up()
+	{
+		//
+	}
+
+	/**
+	 * Reverse the migrations.
+	 *
+	 * @return void
+	 */
+	public function down()
+	{
+		//
+	}
+
+}
+```
+
+---
+
+No hay tanta magia en el fichero, el método up() se ejecuta cuando la migración se aplica, mientras que el método down() cuando la migración se revierte.
+
+## Añadiendo el Schema Builder
+
+El [Schema Builder](http://laravel.com/docs/4.2/schema) de laravel permite hacer cambios sobre la estructura de la DB:
+
+- Añadir y quitar tablas
+- Añadir, renombrar, quitar columnas
+- Renombrar columnas
+- Agregar/Remover llaves foráneas
+- Otros
+
+## Ejemplo
+
+```php
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+
+class CreateUsuariosTable extends Migration {
+
+	/**
+	 * Run the migrations.
+	 *
+	 * @return void
+	 */
+	public function up()
+	{
+		Schema::create('usuarios', function(Blueprint $table)
+		{
+			$table->integer('rut');
+                        $table->string('nombres');
+                        $table->string('apellidos');
+                        $table->string('email')->unique();
+                        $table->integer('telefono')->nullable();
+                        $table->primary('rut');
+			$table->timestamps();
+		});
+	}
+
+
+	/**
+	 * Reverse the migrations.
+	 *
+	 * @return void
+	 */
+	public function down()
+	{
+		Schema::drop('usuarios');
+	}
+
+}
+```
 
 # Fin
