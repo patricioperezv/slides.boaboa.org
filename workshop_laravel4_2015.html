@@ -656,15 +656,13 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 <li class="fragment">Manejo de migraciones (<code>php artisan migrate</code>)</li>
 <li class="fragment">Manejo de estado de la app (<code>php artisan down | php artisan up</code>)</li>
 </ul>
-</section><section id="migraciones-de-db" class="slide level2">
-<h1>Migraciones de DB</h1>
-<p>Las <em>migraciones</em> son un tipo de control de versiones para la base de datos, permitiendo a un equipo de trabajo modificar la estructura de la DB sin tantos problemas.</p>
-</section><section id="creando-una-migración" class="slide level2">
+</section></section>
+<section><section id="migraciones-de-db" class="titleslide slide level1"><h1>Migraciones de DB</h1></section><section id="creando-una-migración" class="slide level2">
 <h1>Creando una migración</h1>
 <pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">php</span> artisan migrate:make crear_tabla_salas</code></pre>
 <div class="fragment">
 <figure>
-<img src="images/tree_database_directory.png" alt="Arbol directorio databases" /><figcaption>Arbol directorio databases</figcaption>
+<img src="images/tree_database_directory.png" alt="Arbol directorio app/database" /><figcaption>Arbol directorio app/database</figcaption>
 </figure>
 </div>
 </section><section class="slide level2">
@@ -700,7 +698,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 }</code></pre>
 </section><section class="slide level2">
 
-<p>No hay tanta magia en el fichero, el método up() se ejecuta cuando la migración se aplica, mientras que el método down() cuando la migración se revierte.</p>
+<p>No hay tanta magia en el fichero, el método up() se ejecuta cuando la migración se aplica, mientras que el método down() cuando la migración se revierte (rollback).</p>
 </section><section id="añadiendo-el-schema-builder" class="slide level2">
 <h1>Añadiendo el Schema Builder</h1>
 <p>El <a href="http://laravel.com/docs/4.2/schema">Schema Builder</a> de laravel permite hacer cambios sobre la estructura de la DB:</p>
@@ -737,9 +735,10 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
                         <span class="kw">$table</span>-&gt;primary<span class="ot">(</span><span class="st">&#39;rut&#39;</span><span class="ot">);</span>
             <span class="kw">$table</span>-&gt;timestamps<span class="ot">();</span>
         }<span class="ot">);</span>
-    }
+    }</code></pre>
+</section><section class="slide level2">
 
-
+<pre class="sourceCode php"><code class="sourceCode php">
     <span class="co">/**</span>
 <span class="co">     * Reverse the migrations.</span>
 <span class="co">     *</span>
@@ -751,6 +750,93 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
     }
 
 }</code></pre>
+</section><section id="agregando-llaves-foráneas" class="slide level2">
+<h1>Agregando llaves foráneas</h1>
+<pre class="sourceCode php"><code class="sourceCode php"><span class="kw">&lt;?php</span>
+
+<span class="kw">use</span> Illuminate\Database\Migrations\Migration<span class="ot">;</span>
+<span class="kw">use</span> Illuminate\Database\Schema\Blueprint<span class="ot">;</span>
+
+<span class="kw">class</span> AddForeignKeysAsignacionesSalasTable <span class="kw">extends</span> Migration {
+
+    <span class="co">/**</span>
+<span class="co">     * Run the migrations.</span>
+<span class="co">     *</span>
+<span class="co">     * </span><span class="kw">@return</span><span class="co"> void</span>
+<span class="co">     */</span>
+    <span class="kw">public</span> <span class="kw">function</span> up<span class="ot">()</span>
+    {
+        Schema::table<span class="ot">(</span><span class="st">&#39;asignaciones_salas&#39;</span><span class="ot">,</span> <span class="kw">function</span><span class="ot">(</span>Blueprint <span class="kw">$table</span><span class="ot">)</span>
+        {
+            <span class="kw">$table</span>-&gt;foreign<span class="ot">(</span><span class="st">&#39;sala_id&#39;</span><span class="ot">)</span>-&gt;references<span class="ot">(</span><span class="st">&#39;id&#39;</span><span class="ot">)</span>-&gt;on<span class="ot">(</span><span class="st">&#39;salas&#39;</span><span class="ot">);</span>
+            <span class="kw">$table</span>-&gt;foreign<span class="ot">(</span><span class="st">&#39;curso_id&#39;</span><span class="ot">)</span>-&gt;references<span class="ot">(</span><span class="st">&#39;id&#39;</span><span class="ot">)</span>-&gt;on<span class="ot">(</span><span class="st">&#39;cursos&#39;</span><span class="ot">);</span>
+        }<span class="ot">);</span>
+    }</code></pre>
+</section><section class="slide level2">
+
+<pre class="sourceCode php"><code class="sourceCode php">
+    <span class="co">/**</span>
+<span class="co">     * Reverse the migrations.</span>
+<span class="co">     *</span>
+<span class="co">     * </span><span class="kw">@return</span><span class="co"> void</span>
+<span class="co">     */</span>
+    <span class="kw">public</span> <span class="kw">function</span> down<span class="ot">()</span>
+    {
+        Schema::table<span class="ot">(</span><span class="st">&#39;asignaciones_salas&#39;</span><span class="ot">,</span> <span class="kw">function</span><span class="ot">(</span>Blueprint <span class="kw">$table</span><span class="ot">)</span>
+        {
+            <span class="kw">$table</span>-&gt;dropForeign<span class="ot">(</span><span class="st">&#39;asignaciones_salas_sala_id_foreign&#39;</span><span class="ot">);</span>
+            <span class="kw">$table</span>-&gt;dropForeign<span class="ot">(</span><span class="st">&#39;asignaciones_salas_curso_id_foreign&#39;</span><span class="ot">);</span>
+        }<span class="ot">);</span>
+    }
+
+}</code></pre>
+</section><section id="ejecutando-la-migración" class="slide level2">
+<h1>Ejecutando la migración</h1>
+<figure>
+<img src="images/migrate_exec.png" alt="php artisan migrate" /><figcaption>php artisan migrate</figcaption>
+</figure>
+</section><section id="ahora-rollback" class="slide level2">
+<h1>Ahora Rollback</h1>
+<figure>
+<img src="images/rollback_exec.png" alt="php artisan migrate:rollback" /><figcaption>php artisan migrate:rollback</figcaption>
+</figure>
+</section><section id="añadiendo-seeds" class="slide level2">
+<h1>Añadiendo seeds</h1>
+<p>Los <em>seeds</em> (o semillas) sirven para poblar la base de datos, pueden usarse para dejar la base de datos en su estado inicial (ej: añadir las facultades iniciales de la universidad, agregar docente por defecto para las asignaturas, etc).</p>
+</section><section class="slide level2">
+
+<p>Es posible generar un seed así:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">PLACEHOLDER</span></code></pre>
+<div class="fragment">
+<p>Y ejecutarlo así:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">PLACEHOLDER</span></code></pre>
+</div>
+</section><section id="ejecutando-seeds-automáticamente" class="slide level2">
+<h1>Ejecutando seeds automáticamente</h1>
+<p>Es posible ejecutar una serie de seeds secuencialmente con un comando <em>artisan</em>:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">php</span> artisan db:seed</code></pre>
+<p>Para esto basta que agreguemos lo siguiente en el fichero <code>app/databases/seeds/DatabaseSeeder.php</code>:</p>
+<pre class="sourceCode php"><code class="sourceCode php"><span class="kw">PLACEHOLDER</span></code></pre>
+</section></section>
+<section><section id="generando-modelos" class="titleslide slide level1"><h1>Generando modelos</h1></section><section id="modelos-3" class="slide level2">
+<h1>Modelos</h1>
+<p>Los modelos representan la lógica y reglas de nuestra aplicación. En el framework se utilizan modelos <em>Eloquent</em> (Un ORM), para utilizarlos basta con herederar desde la clase <code>Eloquent</code>.</p>
+</section><section id="estructura-de-un-modélo" class="slide level2">
+<h1>Estructura de un modélo</h1>
+<p>Laravel tiene un montón de convenciones, esto no es distinto para los modelos Eloquent. Las convenciones son las siguientes:</p>
+<ul>
+<li class="fragment">Deben heredar de la clase <code>Eloquent</code></li>
+<li class="fragment">El nombre de la tabla es el plural (en ingles) del nombre de la clase, en minúsculas.</li>
+<li class="fragment">La llave primaria es <code>id</code></li>
+<li class="fragment">Al declarar relaciones de db, la llave foránea es <code>clase_id</code> e <code>id</code>.</li>
+</ul>
+</section><section id="saltando-las-convenciones" class="slide level2">
+<h1>Saltando las convenciones</h1>
+<p>Es posible saltarse las convenciones, modificando datos en la clase:</p>
+<ul>
+<li class="fragment"><code>private $table = 'salas'</code></li>
+<li class="fragment"><code>private $pk = 'pk'</code></li>
+</ul>
 </section></section>
 <section><section id="fin" class="titleslide slide level1"><h1>Fin</h1></section></section>
     </div>

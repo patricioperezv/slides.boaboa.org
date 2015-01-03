@@ -622,7 +622,7 @@ Incluye un montón de funciones útiles a la hora de desarrollar:
 - Manejo de migraciones (`php artisan migrate`)
 - Manejo de estado de la app (`php artisan down | php artisan up`)
 
-## Migraciones de DB
+# Migraciones de DB
 
 Las *migraciones* son un tipo de control de versiones para la base de datos, permitiendo a un equipo de trabajo modificar la estructura de la DB sin tantos problemas.
 
@@ -634,7 +634,7 @@ php artisan migrate:make crear_tabla_salas
 
 . . .
 
-![Arbol directorio databases](images/tree_database_directory.png)
+![Arbol directorio app/database](images/tree_database_directory.png)
 
 ---
 
@@ -675,7 +675,7 @@ class CrearTablaSalas extends Migration {
 
 ---
 
-No hay tanta magia en el fichero, el método up() se ejecuta cuando la migración se aplica, mientras que el método down() cuando la migración se revierte.
+No hay tanta magia en el fichero, el método up() se ejecuta cuando la migración se aplica, mientras que el método down() cuando la migración se revierte (rollback).
 
 ## Añadiendo el Schema Builder
 
@@ -715,7 +715,11 @@ class CreateUsuariosTable extends Migration {
 			$table->timestamps();
 		});
 	}
+```
 
+---
+
+```php
 
 	/**
 	 * Reverse the migrations.
@@ -729,5 +733,120 @@ class CreateUsuariosTable extends Migration {
 
 }
 ```
+
+## Agregando llaves foráneas
+
+```php
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+
+class AddForeignKeysAsignacionesSalasTable extends Migration {
+
+	/**
+	 * Run the migrations.
+	 *
+	 * @return void
+	 */
+	public function up()
+	{
+		Schema::table('asignaciones_salas', function(Blueprint $table)
+		{
+			$table->foreign('sala_id')->references('id')->on('salas');
+			$table->foreign('curso_id')->references('id')->on('cursos');
+		});
+	}
+```
+
+---
+
+```php
+
+	/**
+	 * Reverse the migrations.
+	 *
+	 * @return void
+	 */
+	public function down()
+	{
+		Schema::table('asignaciones_salas', function(Blueprint $table)
+		{
+			$table->dropForeign('asignaciones_salas_sala_id_foreign');
+			$table->dropForeign('asignaciones_salas_curso_id_foreign');
+		});
+	}
+
+}
+
+```
+
+## Ejecutando la migración
+
+![php artisan migrate](images/migrate_exec.png)
+
+## Ahora Rollback
+
+![php artisan migrate:rollback](images/rollback_exec.png)
+
+## Añadiendo seeds
+
+Los *seeds* (o semillas) sirven para poblar la base de datos, pueden usarse para dejar la base de datos en su estado inicial (ej: añadir las facultades iniciales de la universidad, agregar docente por defecto para las asignaturas, etc).
+
+---
+
+Es posible generar un seed así:
+
+```bash
+PLACEHOLDER
+```
+
+. . .
+
+Y ejecutarlo así:
+
+```bash
+PLACEHOLDER
+```
+
+## Ejecutando seeds automáticamente
+
+Es posible ejecutar una serie de seeds secuencialmente con un comando *artisan*:
+
+```bash
+php artisan db:seed
+```
+
+Para esto basta que agreguemos lo siguiente en el fichero `app/databases/seeds/DatabaseSeeder.php`:
+
+```php
+PLACEHOLDER
+```
+
+# Generando modelos
+
+## Modelos
+
+Los modelos representan la lógica y reglas de nuestra aplicación.
+En el framework se utilizan modelos *Eloquent* (Un ORM), para utilizarlos basta con herederar desde la clase `Eloquent`.
+
+## Estructura de un modélo
+
+Laravel tiene un montón de convenciones, esto no es distinto para los modelos Eloquent.
+Las convenciones son las siguientes:
+
+- Deben heredar de la clase `Eloquent`
+- El nombre de la tabla es el plural (en ingles) del nombre de la clase, en minúsculas.
+- La llave primaria es `id`
+- Al declarar relaciones de db, la llave foránea es `clase_id` e `id`.
+
+## Saltando las convenciones
+
+Es posible saltarse las convenciones, modificando datos en la clase:
+
+- `private $table = 'salas'`
+- `private $pk = 'pk'`
+
+
 
 # Fin
