@@ -1108,7 +1108,7 @@ Route::get('/', function()
 });
 ```
 
-## Gracias del framework de routing
+## "Gracias" del framework de routing
 
 El framework de routeo de laravel incluye ciertas gracias:
 
@@ -1117,7 +1117,70 @@ El framework de routeo de laravel incluye ciertas gracias:
 - Filtros (Pre y Post Request).
 - Agrupar rutas (Se pueden agregar prefijos o filtros).
 - Forzar uso de SSL.
+
+---
+
 - Recibir parámetros.
-- Mapear a un modelo (*Model Binding*)
+- Mapear a un modelo (*Model Binding*).
+- Routear por subdominios.
+- Ser referenciados por nombre (Por favor usen esto!)
+
+## Pequeña demo de routing
+
+<div class="notes">
+Route::post('/login', function()
+{
+     return Input::all();
+});
+php artisan routes
+php artisan serve
+
+http localhost:8000/login hola=hola nombre="Patricio Pérez"
+</div>
+
+## Controladores "Resourceful"
+
+Ya lo hemos mencionado, son los controladores quienes se encargan de interactuar con el usuario, es decir, obtener datos de el y presentarle otros datos.
+Para nuesro framework, un controlador _es_ una clase, esta cuenta con métodos obviamente, y estos aceptan datos enviados por el usuario.
+
+---
+
+<div class="notes">
+- index (Mostrar todos los recursos)
+- create (Muestra el formulario de creación de un recurso)
+- store (Almacena un nuevo recurso en base a los datos recibidos)
+- show (Muestra un recurso específico)
+- edit (Muestra el formulario de edición de un recurso)
+- update (Actualiza la información de un recurso en base a los datos recibidos)
+- destroy (Elimina un recurso específico)
+</div>
+
+Un controlador resourceful no es más que un controlador que cuenta con acciones específicas:
+
+- index
+- create
+- store
+- show
+- edit
+- update
+- destroy
+
+---
+
+Para crear uno basta con hacer esto:
+
+```bash
+php artisan controller:make RecursoController
+```
+
+Luego, basta agregar lo siguiente al fichero `app/routes.php`:
+
+```php
+Route::resource('recurso', 'RecursoController');
+```
+
+---
+
+![Recurso usuarios](images/usuarios_resource.png)
 
 # Fin

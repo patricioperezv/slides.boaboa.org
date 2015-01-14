@@ -1044,7 +1044,7 @@ Route::get<span class="ot">(</span><span class="st">&#39;/&#39;</span><span clas
     <span class="kw">return</span> View::make<span class="ot">(</span><span class="st">&#39;hello&#39;</span><span class="ot">);</span>
 }<span class="ot">);</span></code></pre>
 </section><section id="gracias-del-framework-de-routing" class="slide level2">
-<h1>Gracias del framework de routing</h1>
+<h1>&quot;Gracias&quot; del framework de routing</h1>
 <p>El framework de routeo de laravel incluye ciertas gracias:</p>
 <ul>
 <li class="fragment">Mapear en función del verbo http usado.</li>
@@ -1052,9 +1052,58 @@ Route::get<span class="ot">(</span><span class="st">&#39;/&#39;</span><span clas
 <li class="fragment">Filtros (Pre y Post Request).</li>
 <li class="fragment">Agrupar rutas (Se pueden agregar prefijos o filtros).</li>
 <li class="fragment">Forzar uso de SSL.</li>
-<li class="fragment">Recibir parámetros.</li>
-<li class="fragment">Mapear a un modelo (<em>Model Binding</em>)</li>
 </ul>
+</section><section class="slide level2">
+
+<ul>
+<li class="fragment">Recibir parámetros.</li>
+<li class="fragment">Mapear a un modelo (<em>Model Binding</em>).</li>
+<li class="fragment">Routear por subdominios.</li>
+<li class="fragment">Ser referenciados por nombre (Por favor usen esto!)</li>
+</ul>
+</section><section id="pequeña-demo-de-routing" class="slide level2">
+<h1>Pequeña demo de routing</h1>
+<aside class="notes">
+<p>Route::post('/login', function() { return Input::all(); }); php artisan routes php artisan serve</p>
+<p>http localhost:8000/login hola=hola nombre=&quot;Patricio Pérez&quot;</p>
+</aside>
+</section><section id="controladores-resourceful" class="slide level2">
+<h1>Controladores &quot;Resourceful&quot;</h1>
+<p>Ya lo hemos mencionado, son los controladores quienes se encargan de interactuar con el usuario, es decir, obtener datos de el y presentarle otros datos. Para nuesro framework, un controlador <em>es</em> una clase, esta cuenta con métodos obviamente, y estos aceptan datos enviados por el usuario.</p>
+</section><section class="slide level2">
+
+<aside class="notes">
+<ul>
+<li class="fragment">index (Mostrar todos los recursos)</li>
+<li class="fragment">create (Muestra el formulario de creación de un recurso)</li>
+<li class="fragment">store (Almacena un nuevo recurso en base a los datos recibidos)</li>
+<li class="fragment">show (Muestra un recurso específico)</li>
+<li class="fragment">edit (Muestra el formulario de edición de un recurso)</li>
+<li class="fragment">update (Actualiza la información de un recurso en base a los datos recibidos)</li>
+<li class="fragment">destroy (Elimina un recurso específico)</li>
+</ul>
+</aside>
+<p>Un controlador resourceful no es más que un controlador que cuenta con acciones específicas:</p>
+<ul>
+<li class="fragment">index</li>
+<li class="fragment">create</li>
+<li class="fragment">store</li>
+<li class="fragment">show</li>
+<li class="fragment">edit</li>
+<li class="fragment">update</li>
+<li class="fragment">destroy</li>
+</ul>
+</section><section class="slide level2">
+
+<p>Para crear uno basta con hacer esto:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">php</span> artisan controller:make RecursoController</code></pre>
+<p>Luego, basta agregar lo siguiente al fichero <code>app/routes.php</code>:</p>
+<pre class="sourceCode php"><code class="sourceCode php">Route::resource<span class="ot">(</span><span class="st">&#39;recurso&#39;</span><span class="ot">,</span> <span class="st">&#39;RecursoController&#39;</span><span class="ot">);</span></code></pre>
+</section><section class="slide level2">
+
+<figure>
+<img src="images/usuarios_resource.png" alt="Recurso usuarios" /><figcaption>Recurso usuarios</figcaption>
+</figure>
 </section></section>
 <section><section id="fin" class="titleslide slide level1"><h1>Fin</h1></section></section>
     </div>
