@@ -530,7 +530,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 </ul>
 </section><section id="requests" class="slide level2">
 <h1>Requests</h1>
-<p>Un request es una <em>petición</em> realizada a un recurso mediante su <em>URI</em>, la petición debe indicar un <strong>verbo http</strong>, el que dice si estamos pidiendo, actualizando o enviando información (Aquí enviamos información al servidor). Un request debe tener una respuesta, la que es entregada al usuario, esta puede tener un código de respuesta (i.e: 500, 200, el infame error 404, etc).</p>
+<p>Un request es una <em>petición</em> realizada a un recurso mediante su <em>URI</em>, la petición debe indicar un <strong>verbo http</strong>, el que dice si estamos pidiendo, actualizando o enviando información (Aquí enviamos información al servidor). Un request debe tener una respuesta, la que es entregada al usuario, esta puede tener un código (i.e: 500, 200, el infame error 404, etc).</p>
 </section><section class="slide level2">
 
 <figure>
@@ -598,7 +598,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 </figure>
 </section><section id="controladores" class="slide level2">
 <h1>Controladores</h1>
-<p>Los controladores son la forma en las que interactuamos con la aplicación, en el caso particular de los frameworks web que implementan MVC las acciones se realizan a través de una URI y de verbos HTPP, ejemplos:</p>
+<p>Los controladores son la forma en las que interactuamos con la aplicación, en el caso particular de los frameworks web que implementan MVC las acciones se realizan a través de una URI y de verbos HTTP, ejemplos:</p>
 <ul>
 <li class="fragment"><code>GET /perros</code></li>
 <li class="fragment"><code>POST /perros</code></li>
@@ -728,11 +728,11 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
         Schema::create<span class="ot">(</span><span class="st">&#39;usuarios&#39;</span><span class="ot">,</span> <span class="kw">function</span><span class="ot">(</span>Blueprint <span class="kw">$table</span><span class="ot">)</span>
         {
             <span class="kw">$table</span>-&gt;integer<span class="ot">(</span><span class="st">&#39;rut&#39;</span><span class="ot">);</span>
-                        <span class="kw">$table</span>-&gt;string<span class="ot">(</span><span class="st">&#39;nombres&#39;</span><span class="ot">);</span>
-                        <span class="kw">$table</span>-&gt;string<span class="ot">(</span><span class="st">&#39;apellidos&#39;</span><span class="ot">);</span>
-                        <span class="kw">$table</span>-&gt;string<span class="ot">(</span><span class="st">&#39;email&#39;</span><span class="ot">)</span>-&gt;unique<span class="ot">();</span>
-                        <span class="kw">$table</span>-&gt;integer<span class="ot">(</span><span class="st">&#39;telefono&#39;</span><span class="ot">)</span>-&gt;nullable<span class="ot">();</span>
-                        <span class="kw">$table</span>-&gt;primary<span class="ot">(</span><span class="st">&#39;rut&#39;</span><span class="ot">);</span>
+          <span class="kw">$table</span>-&gt;string<span class="ot">(</span><span class="st">&#39;nombres&#39;</span><span class="ot">);</span>
+          <span class="kw">$table</span>-&gt;string<span class="ot">(</span><span class="st">&#39;apellidos&#39;</span><span class="ot">);</span>
+          <span class="kw">$table</span>-&gt;string<span class="ot">(</span><span class="st">&#39;email&#39;</span><span class="ot">)</span>-&gt;unique<span class="ot">();</span>
+          <span class="kw">$table</span>-&gt;integer<span class="ot">(</span><span class="st">&#39;telefono&#39;</span><span class="ot">)</span>-&gt;nullable<span class="ot">();</span>
+          <span class="kw">$table</span>-&gt;primary<span class="ot">(</span><span class="st">&#39;rut&#39;</span><span class="ot">);</span>
             <span class="kw">$table</span>-&gt;timestamps<span class="ot">();</span>
         }<span class="ot">);</span>
     }</code></pre>
@@ -805,24 +805,72 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 <p>Los <em>seeds</em> (o semillas) sirven para poblar la base de datos, pueden usarse para dejar la base de datos en su estado inicial (ej: añadir las facultades iniciales de la universidad, agregar docente por defecto para las asignaturas, etc).</p>
 </section><section class="slide level2">
 
-<p>Es posible generar un seed así:</p>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">PLACEHOLDER</span></code></pre>
-<div class="fragment">
+<p>Para generar un seed, hay que crear un fichero en <code>app/databases/seeds</code>, ej: <code>CampusTableSeeder.php</code>:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">cat</span> app/databases/seeds/CampusTableSeeder.php</code></pre>
+<pre class="sourceCode php"><code class="sourceCode php"><span class="kw">&lt;?php</span>
+
+<span class="kw">class</span> CampusTableSeeder <span class="kw">extends</span> Seeder {
+
+    <span class="kw">public</span> <span class="kw">function</span> run<span class="ot">()</span>
+    {
+        <span class="co">//DB::table(&#39;campus&#39;)-&gt;delete();</span>
+        <span class="kw">$nombres</span> = <span class="ot">[</span><span class="st">&#39;Macul&#39;</span><span class="ot">,</span> <span class="st">&#39;FAE&#39;</span><span class="ot">,</span> <span class="st">&#39;Centro&#39;</span><span class="ot">];</span>
+        
+        <span class="kw">foreach</span><span class="ot">(</span><span class="kw">$nombres</span> <span class="kw">as</span> <span class="kw">$nombre</span><span class="ot">)</span>
+        {
+            <span class="kw">$campus</span> = Campus::create<span class="ot">([</span><span class="st">&#39;nombre&#39;</span> =&gt; <span class="kw">$nombre</span><span class="ot">]);</span>
+        }
+    }
+
+}</code></pre>
+</section><section class="slide level2">
+
 <p>Y ejecutarlo así:</p>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">PLACEHOLDER</span></code></pre>
-</div>
-</section><section id="ejecutando-seeds-automáticamente" class="slide level2">
-<h1>Ejecutando seeds automáticamente</h1>
+<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">php</span> artisan db:seed --class=CampusTableSeeder</code></pre>
+<figure>
+<img src="images/seed_individual.png" alt="Seedeado" /><figcaption>Seedeado</figcaption>
+</figure>
+</section><section id="ejecutando-muchos-seeds" class="slide level2">
+<h1>Ejecutando muchos seeds</h1>
 <p>Es posible ejecutar una serie de seeds secuencialmente con un comando <em>artisan</em>:</p>
 <pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">php</span> artisan db:seed</code></pre>
-<p>Para esto basta que agreguemos lo siguiente en el fichero <code>app/databases/seeds/DatabaseSeeder.php</code>:</p>
-<pre class="sourceCode php"><code class="sourceCode php"><span class="kw">PLACEHOLDER</span></code></pre>
+</section><section class="slide level2">
+
+<p>Para esto basta que agreguemos una llamada al fichero <code>app/databases/seeds/DatabaseSeeder.php</code>:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">cat</span> app/database/seeds/DatabaseSeeder.php</code></pre>
+<pre class="sourceCode php"><code class="sourceCode php"><span class="kw">&lt;?php</span>
+
+<span class="kw">class</span> DatabaseSeeder <span class="kw">extends</span> Seeder {
+
+    <span class="co">/**</span>
+<span class="co">     * Run the database seeds.</span>
+<span class="co">     *</span>
+<span class="co">     * </span><span class="kw">@return</span><span class="co"> void</span>
+<span class="co">     */</span>
+    <span class="kw">public</span> <span class="kw">function</span> run<span class="ot">()</span>
+    {
+        Eloquent::unguard<span class="ot">();</span>
+
+        <span class="kw">$this</span>-&gt;call<span class="ot">(</span><span class="st">&#39;CampusTableSeeder&#39;</span><span class="ot">);</span> <span class="co">// Aquí!</span>
+    }
+
+}</code></pre>
+</section><section class="slide level2">
+
+<figure>
+<img src="images/seeded.png" alt="Seeded" /><figcaption>Seeded</figcaption>
+</figure>
+</section><section class="slide level2">
+
+<figure>
+<img src="images/seed_ok.png" alt="En DB" /><figcaption>En DB</figcaption>
+</figure>
 </section></section>
 <section><section id="generando-modelos" class="titleslide slide level1"><h1>Generando modelos</h1></section><section id="modelos-3" class="slide level2">
 <h1>Modelos</h1>
 <p>Los modelos representan la lógica y reglas de nuestra aplicación. En el framework se utilizan modelos <em>Eloquent</em> (Un ORM), para utilizarlos basta con herederar desde la clase <code>Eloquent</code>.</p>
-</section><section id="estructura-de-un-modélo" class="slide level2">
-<h1>Estructura de un modélo</h1>
+</section><section id="estructura-de-un-modelo" class="slide level2">
+<h1>Estructura de un modelo</h1>
 <p>Laravel tiene un montón de convenciones, esto no es distinto para los modelos Eloquent. Las convenciones son las siguientes:</p>
 <ul>
 <li class="fragment">Deben heredar de la clase <code>Eloquent</code></li>
@@ -830,12 +878,182 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 <li class="fragment">La llave primaria es <code>id</code></li>
 <li class="fragment">Al declarar relaciones de db, la llave foránea es <code>clase_id</code> e <code>id</code>.</li>
 </ul>
+</section><section class="slide level2">
+
+<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">cat</span> app/models/Carrera.php</code></pre>
+<pre class="sourceCode php"><code class="sourceCode php"><span class="kw">&lt;?php</span>
+
+<span class="kw">class</span> Carrera <span class="kw">extends</span> \Eloquent
+{
+    <span class="co">// TODO: Agregar metodo jefe de carrera</span>
+    <span class="kw">protected</span> <span class="kw">$fillable</span> = <span class="ot">[</span><span class="st">&#39;nombre&#39;</span><span class="ot">,</span> <span class="st">&#39;codigo&#39;</span><span class="ot">];</span>
+}</code></pre>
 </section><section id="saltando-las-convenciones" class="slide level2">
 <h1>Saltando las convenciones</h1>
 <p>Es posible saltarse las convenciones, modificando datos en la clase:</p>
 <ul>
 <li class="fragment"><code>private $table = 'salas'</code></li>
-<li class="fragment"><code>private $pk = 'pk'</code></li>
+<li class="fragment"><code>private $primaryKey = 'pk'</code></li>
+</ul>
+</section><section id="añadiendo-relaciones-entre-modelos" class="slide level2">
+<h1>Añadiendo relaciones entre modelos</h1>
+<p>Como mencioné anteriormente, es posible hacer las típicas relaciones de entidades:</p>
+<ul>
+<li class="fragment">1:n</li>
+<li class="fragment">1:1</li>
+<li class="fragment">n:m</li>
+</ul>
+</section><section id="relación-1n" class="slide level2">
+<h1>Relación 1:n</h1>
+<p>Modelaremos la siguiente relación:</p>
+<figure>
+<img src="images/relacion_campus_facultades.png" alt="Relación campus-facultades" /><figcaption>Relación campus-facultades</figcaption>
+</figure>
+</section><section class="slide level2">
+
+<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">cat</span> app/models/Facultad.php</code></pre>
+<pre class="sourceCode php"><code class="sourceCode php"><span class="kw">&lt;?php</span>
+
+<span class="kw">class</span> Facultad <span class="kw">extends</span> \Eloquent
+{
+    <span class="kw">protected</span> <span class="kw">$table</span> = <span class="st">&#39;facultades&#39;</span><span class="ot">;</span>
+    <span class="kw">protected</span> <span class="kw">$fillable</span> = <span class="ot">[</span><span class="st">&#39;nombre&#39;</span><span class="ot">];</span>
+
+    <span class="kw">public</span> <span class="kw">function</span> campus<span class="ot">()</span>
+    {
+        <span class="kw">return</span> <span class="kw">$this</span>-&gt;belongsTo<span class="ot">(</span><span class="st">&#39;Campus&#39;</span><span class="ot">);</span>
+    }
+}</code></pre>
+</section><section class="slide level2">
+
+<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">cat</span> app/models/Campus.php</code></pre>
+<pre class="sourceCode php"><code class="sourceCode php"><span class="kw">&lt;?php</span>
+
+<span class="kw">class</span> Campus <span class="kw">extends</span> \Eloquent
+{
+    <span class="kw">protected</span> <span class="kw">$table</span> = <span class="st">&#39;campus&#39;</span><span class="ot">;</span> <span class="co">// O sino laravel busca la tabla &#39;campuss&#39;</span>
+    <span class="kw">protected</span> <span class="kw">$fillable</span> = <span class="ot">[</span><span class="st">&#39;nombre&#39;</span><span class="ot">,</span> <span class="st">&#39;direccion&#39;</span><span class="ot">];</span>
+
+    <span class="kw">public</span> <span class="kw">function</span> facultades<span class="ot">()</span>
+    {
+        <span class="kw">return</span> <span class="kw">$this</span>-&gt;hasMany<span class="ot">(</span><span class="st">&#39;Facultad&#39;</span><span class="ot">);</span>
+    }
+}</code></pre>
+</section><section class="slide level2">
+
+<p>Listo, la relación y su inverso!</p>
+</section><section id="probando-..." class="slide level2">
+<h1>Probando ...</h1>
+<p>Es típico que queremos hacer pruebas (?), ver si la vaina esta andando o si metimos la pata.</p>
+<div class="fragment">
+<p><em>Laravel</em> trae una herramienta bien útil, llamada <strong>tinker</strong>, esta nos provee una consola interactiva (o <em>REPL</em>) para ir probando código.</p>
+</div>
+</section><section class="slide level2">
+
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">php</span> artisan tinker</code></pre>
+</section><section class="slide level2">
+
+<iframe src="http://showterm.io/d8dc1bf185feb52cbb097#slow" width="800" height="520">
+</iframe>
+</section><section class="slide level2">
+
+<pre class="sourceCode php"><code class="sourceCode php"><span class="kw">$facultad</span> = Facultad::first<span class="ot">();</span> <span class="co">// Obtiene el primer registro del modelo Facultad</span>
+<span class="kw">$facultad</span>-&gt;nombre<span class="ot">;</span> <span class="co">// Podemos acceder a las columnas en el registro</span>
+<span class="kw">$carrera</span> = <span class="kw">new</span> Carrera<span class="ot">;</span> <span class="co">// Instanciar una nueva carrera</span>
+<span class="kw">$carrera</span>-&gt;nombre = <span class="st">&#39;Ingenieria en comercio interestelar galactico&#39;</span><span class="ot">;</span> <span class="co">// Rellenar un campo</span>
+<span class="kw">$carrera</span>-&gt;codigo = <span class="dv">21099</span><span class="ot">;</span>
+<span class="kw">$facultad</span>-&gt;carreras<span class="ot">()</span>-&gt;save<span class="ot">(</span><span class="kw">$carrera</span><span class="ot">);</span> <span class="co">// Guardar usando la relación que creamos anteriormente</span></code></pre>
+</section><section id="relacion-nm" class="slide level2">
+<h1>Relacion n:m</h1>
+<p>Esta reación es algo más complicada (?), necesitan una tabla pivote (Recuerdan normalizar una db con tía sarita hace un año atrás aprox?)</p>
+</section><section class="slide level2">
+
+<figure>
+<img src="images/diagram_roles_usuarios.png" alt="Relacion n:m" /><figcaption>Relacion n:m</figcaption>
+</figure>
+</section><section class="slide level2">
+
+<p>Tendremos dos modelos (<em>Rol</em> y <em>Usuario</em>):</p>
+<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">cat</span> app/models/Rol.php</code></pre>
+<pre class="sourceCode php"><code class="sourceCode php"><span class="kw">&lt;?php</span>
+
+<span class="kw">class</span> Rol <span class="kw">extends</span> \Eloquent
+{
+    <span class="kw">protected</span> <span class="kw">$table</span> = <span class="st">&#39;roles&#39;</span><span class="ot">;</span>
+    <span class="kw">protected</span> <span class="kw">$guarded</span> = <span class="ot">[</span><span class="st">&#39;id&#39;</span><span class="ot">,</span> <span class="st">&#39;nombre&#39;</span><span class="ot">];</span>
+
+    <span class="kw">public</span> <span class="kw">function</span> usuarios<span class="ot">()</span>
+    {
+        <span class="kw">return</span> <span class="kw">$this</span>-&gt;belongsToMany<span class="ot">(</span><span class="st">&#39;Usuario&#39;</span><span class="ot">,</span> <span class="st">&#39;usuario_tiene_roles&#39;</span><span class="ot">,</span> <span class="st">&#39;rol_id&#39;</span><span class="ot">,</span> <span class="st">&#39;usuario_rut&#39;</span><span class="ot">)</span>-&gt;withTimestamps<span class="ot">();</span>
+    }
+}</code></pre>
+</section><section class="slide level2">
+
+<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">cat</span> app/models/Usuario.php</code></pre>
+<pre class="sourceCode php"><code class="sourceCode php"><span class="kw">&lt;?php</span>
+
+<span class="kw">class</span> Usuario <span class="kw">extends</span> \Eloquent
+{
+    <span class="kw">protected</span> <span class="kw">$primaryKey</span> = <span class="st">&#39;rut&#39;</span><span class="ot">;</span>
+    <span class="kw">protected</span> <span class="kw">$incrementing</span> = <span class="kw">false</span><span class="ot">;</span> <span class="co">// El rut no es autoincrementable .. dah</span>
+    <span class="kw">protected</span> <span class="kw">$fillable</span> = <span class="ot">[</span><span class="st">&#39;rut&#39;</span><span class="ot">,</span> <span class="st">&#39;nombres&#39;</span><span class="ot">,</span> <span class="st">&#39;apellidos&#39;</span><span class="ot">];</span>
+
+    <span class="kw">public</span> <span class="kw">function</span> roles<span class="ot">()</span>
+    {
+        <span class="kw">return</span> <span class="kw">$this</span>-&gt;belongsToMany<span class="ot">(</span><span class="st">&#39;Rol&#39;</span><span class="ot">,</span> <span class="st">&#39;usuario_tiene_roles&#39;</span><span class="ot">,</span> <span class="st">&#39;usuario_rut&#39;</span><span class="ot">,</span> <span class="st">&#39;rol_id&#39;</span><span class="ot">)</span>-&gt;withTimestamps<span class="ot">();</span>
+    }
+}</code></pre>
+</section><section id="experimentando" class="slide level2">
+<h1>Experimentando</h1>
+<p>Con lo visto ya deberian poder armar el modelo de datos completo en el framework y quedaria experimentar:</p>
+</section><section class="slide level2">
+
+<pre class="sourceCode php"><code class="sourceCode php"><span class="kw">$usuario</span> = Usuario::find<span class="ot">(</span><span class="dv">12345</span><span class="ot">);</span> <span class="co">// Si no lo consigue, esto es NULL</span>
+<span class="kw">$roles</span> = <span class="kw">$usuario</span>-&gt;roles<span class="ot">;</span>
+<span class="kw">foreach</span><span class="ot">(</span><span class="kw">$roles</span> <span class="kw">as</span> <span class="kw">$rol</span><span class="ot">)</span>
+{
+    <span class="fu">echo</span> <span class="kw">$rol</span>-&gt;nombre . <span class="st">&quot;</span><span class="kw">\n</span><span class="st">&quot;</span><span class="ot">;</span>
+}
+<span class="kw">$asignatura</span> = Asignatura::create<span class="ot">([</span>
+    <span class="st">&#39;codigo&#39;</span> =&gt; <span class="st">&#39;INF-614&#39;</span><span class="ot">,</span>
+    <span class="st">&#39;nombre&#39;</span> =&gt; <span class="st">&#39;Comunicación de Datos&#39;</span>
+<span class="ot">])</span>
+<span class="fu">echo</span> <span class="kw">$asignatura</span>-&gt;id<span class="ot">;</span></code></pre>
+</section></section>
+<section><section id="rutas-y-controladores" class="titleslide slide level1"><h1>Rutas y controladores</h1></section><section id="rutas" class="slide level2">
+<h1>Rutas</h1>
+<p>Es necesario definir como interactua el usuario final con nuestra aplicación, para esto se utiliza el framework de <em>Routing</em>, este mapea una <em>URI + verbo HTTP</em> a un método existente en algún controlador*.</p>
+</section><section class="slide level2">
+
+<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">cat</span> app/routes.php</code></pre>
+<pre class="sourceCode php"><code class="sourceCode php"><span class="kw">&lt;?php</span>
+
+<span class="co">/*</span>
+<span class="co">|--------------------------------------------------------------------------</span>
+<span class="co">| Application Routes</span>
+<span class="co">|--------------------------------------------------------------------------</span>
+<span class="co">|</span>
+<span class="co">| Here is where you can register all of the routes for an application.</span>
+<span class="co">| It&#39;s a breeze. Simply tell Laravel the URIs it should respond to</span>
+<span class="co">| and give it the Closure to execute when that URI is requested.</span>
+<span class="co">|</span>
+<span class="co">*/</span>
+
+Route::get<span class="ot">(</span><span class="st">&#39;/&#39;</span><span class="ot">,</span> <span class="kw">function</span><span class="ot">()</span>
+{
+    <span class="kw">return</span> View::make<span class="ot">(</span><span class="st">&#39;hello&#39;</span><span class="ot">);</span>
+}<span class="ot">);</span></code></pre>
+</section><section id="gracias-del-framework-de-routing" class="slide level2">
+<h1>Gracias del framework de routing</h1>
+<p>El framework de routeo de laravel incluye ciertas gracias:</p>
+<ul>
+<li class="fragment">Mapear en función del verbo http usado.</li>
+<li class="fragment">Mapear a más de un verbo http.</li>
+<li class="fragment">Filtros (Pre y Post Request).</li>
+<li class="fragment">Agrupar rutas (Se pueden agregar prefijos o filtros).</li>
+<li class="fragment">Forzar uso de SSL.</li>
+<li class="fragment">Recibir parámetros.</li>
+<li class="fragment">Mapear a un modelo (<em>Model Binding</em>)</li>
 </ul>
 </section></section>
 <section><section id="fin" class="titleslide slide level1"><h1>Fin</h1></section></section>

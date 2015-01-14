@@ -489,7 +489,7 @@ Un *URI* es un identificador único de un recurso, ejs:
 ## Requests
 
 Un request es una *petición* realizada a un recurso mediante su *URI*, la petición debe indicar un **verbo http**, el que dice si estamos pidiendo, actualizando o enviando información (Aquí enviamos información al servidor).
-Un request debe tener una respuesta, la que es entregada al usuario, esta puede tener un código de respuesta (i.e: 500, 200, el infame error 404, etc).
+Un request debe tener una respuesta, la que es entregada al usuario, esta puede tener un código (i.e: 500, 200, el infame error 404, etc).
 
 ---
 
@@ -558,7 +558,7 @@ Realiza modificaciones parciales a un recurso existente, hay que tener ojo, la e
 
 ## Controladores
 
-Los controladores son la forma en las que interactuamos con la aplicación, en el caso particular de los frameworks web que implementan MVC las acciones se realizan a través de una URI y de verbos HTPP, ejemplos:
+Los controladores son la forma en las que interactuamos con la aplicación, en el caso particular de los frameworks web que implementan MVC las acciones se realizan a través de una URI y de verbos HTTP, ejemplos:
 
 - `GET /perros`
 - `POST /perros`
@@ -707,11 +707,11 @@ class CreateUsuariosTable extends Migration {
 		Schema::create('usuarios', function(Blueprint $table)
 		{
 			$table->integer('rut');
-                        $table->string('nombres');
-                        $table->string('apellidos');
-                        $table->string('email')->unique();
-                        $table->integer('telefono')->nullable();
-                        $table->primary('rut');
+          $table->string('nombres');
+          $table->string('apellidos');
+          $table->string('email')->unique();
+          $table->integer('telefono')->nullable();
+          $table->primary('rut');
 			$table->timestamps();
 		});
 	}
@@ -795,21 +795,42 @@ Los *seeds* (o semillas) sirven para poblar la base de datos, pueden usarse para
 
 ---
 
-Es posible generar un seed así:
+Para generar un seed, hay que crear un fichero en `app/databases/seeds`, ej: `CampusTableSeeder.php`:
 
 ```bash
-PLACEHOLDER
+$ cat app/databases/seeds/CampusTableSeeder.php
 ```
 
-. . .
+```php
+<?php
+
+class CampusTableSeeder extends Seeder {
+
+	public function run()
+	{
+		//DB::table('campus')->delete();
+		$nombres = ['Macul', 'FAE', 'Centro'];
+		
+		foreach($nombres as $nombre)
+		{
+			$campus = Campus::create(['nombre' => $nombre]);
+		}
+	}
+
+}
+```
+
+---
 
 Y ejecutarlo así:
 
 ```bash
-PLACEHOLDER
+$ php artisan db:seed --class=CampusTableSeeder
 ```
 
-## Ejecutando seeds automáticamente
+![Seedeado](images/seed_individual.png)
+
+## Ejecutando muchos seeds
 
 Es posible ejecutar una serie de seeds secuencialmente con un comando *artisan*:
 
@@ -817,11 +838,41 @@ Es posible ejecutar una serie de seeds secuencialmente con un comando *artisan*:
 php artisan db:seed
 ```
 
-Para esto basta que agreguemos lo siguiente en el fichero `app/databases/seeds/DatabaseSeeder.php`:
+---
+
+Para esto basta que agreguemos una llamada al fichero `app/databases/seeds/DatabaseSeeder.php`:
+
+```bash
+$ cat app/database/seeds/DatabaseSeeder.php
+```
 
 ```php
-PLACEHOLDER
+<?php
+
+class DatabaseSeeder extends Seeder {
+
+	/**
+	 * Run the database seeds.
+	 *
+	 * @return void
+	 */
+	public function run()
+	{
+		Eloquent::unguard();
+
+		$this->call('CampusTableSeeder'); // Aquí!
+	}
+
+}
 ```
+
+---
+
+![Seeded](images/seeded.png)
+
+---
+
+![En DB](images/seed_ok.png)
 
 # Generando modelos
 
@@ -830,7 +881,7 @@ PLACEHOLDER
 Los modelos representan la lógica y reglas de nuestra aplicación.
 En el framework se utilizan modelos *Eloquent* (Un ORM), para utilizarlos basta con herederar desde la clase `Eloquent`.
 
-## Estructura de un modélo
+## Estructura de un modelo
 
 Laravel tiene un montón de convenciones, esto no es distinto para los modelos Eloquent.
 Las convenciones son las siguientes:
@@ -840,13 +891,233 @@ Las convenciones son las siguientes:
 - La llave primaria es `id`
 - Al declarar relaciones de db, la llave foránea es `clase_id` e `id`.
 
+---
+
+```bash
+$ cat app/models/Carrera.php
+```
+
+```php
+<?php
+
+class Carrera extends \Eloquent
+{
+    // TODO: Agregar metodo jefe de carrera
+    protected $fillable = ['nombre', 'codigo'];
+}
+```
+
 ## Saltando las convenciones
 
 Es posible saltarse las convenciones, modificando datos en la clase:
 
 - `private $table = 'salas'`
-- `private $pk = 'pk'`
+- `private $primaryKey = 'pk'`
 
+## Añadiendo relaciones entre modelos
 
+Como mencioné anteriormente, es posible hacer las típicas relaciones de entidades:
+
+- 1:n
+- 1:1
+- n:m
+
+## Relación 1:n
+
+Modelaremos la siguiente relación:
+
+![Relación campus-facultades](images/relacion_campus_facultades.png)
+
+---
+
+```bash
+$ cat app/models/Facultad.php
+```
+
+```php
+<?php
+
+class Facultad extends \Eloquent
+{
+    protected $table = 'facultades';
+    protected $fillable = ['nombre'];
+
+    public function campus()
+    {
+        return $this->belongsTo('Campus');
+    }
+}
+```
+
+---
+
+```bash
+$ cat app/models/Campus.php
+```
+
+```php
+<?php
+
+class Campus extends \Eloquent
+{
+    protected $table = 'campus'; // O sino laravel busca la tabla 'campuss'
+    protected $fillable = ['nombre', 'direccion'];
+
+    public function facultades()
+    {
+        return $this->hasMany('Facultad');
+    }
+}
+```
+
+---
+
+Listo, la relación y su inverso!
+
+## Probando ...
+
+Es típico que queremos hacer pruebas (?), ver si la vaina esta andando o si metimos la pata.
+
+. . .
+
+*Laravel* trae una herramienta bien útil, llamada **tinker**, esta nos provee una consola interactiva (o *REPL*) para ir probando código.
+
+---
+
+```bash
+php artisan tinker
+```
+
+---
+
+<iframe src="http://showterm.io/d8dc1bf185feb52cbb097#slow" width="800" height="520"></iframe>
+
+---
+
+```php
+$facultad = Facultad::first(); // Obtiene el primer registro del modelo Facultad
+$facultad->nombre; // Podemos acceder a las columnas en el registro
+$carrera = new Carrera; // Instanciar una nueva carrera
+$carrera->nombre = 'Ingenieria en comercio interestelar galactico'; // Rellenar un campo
+$carrera->codigo = 21099;
+$facultad->carreras()->save($carrera); // Guardar usando la relación que creamos anteriormente
+```
+
+## Relacion n:m
+
+Esta reación es algo más complicada (?), necesitan una tabla pivote (Recuerdan normalizar una db con tía sarita hace un año atrás aprox?)
+
+---
+
+![Relacion n:m](images/diagram_roles_usuarios.png)
+
+---
+
+Tendremos dos modelos (*Rol* y *Usuario*):
+
+```bash
+$ cat app/models/Rol.php
+```
+
+```php
+<?php
+
+class Rol extends \Eloquent
+{
+    protected $table = 'roles';
+    protected $guarded = ['id', 'nombre'];
+
+    public function usuarios()
+    {
+        return $this->belongsToMany('Usuario', 'usuario_tiene_roles', 'rol_id', 'usuario_rut')->withTimestamps();
+    }
+}
+```
+
+---
+
+```bash
+$ cat app/models/Usuario.php
+```
+
+```php
+<?php
+
+class Usuario extends \Eloquent
+{
+    protected $primaryKey = 'rut';
+    protected $incrementing = false; // El rut no es autoincrementable .. dah
+    protected $fillable = ['rut', 'nombres', 'apellidos'];
+
+    public function roles()
+    {
+        return $this->belongsToMany('Rol', 'usuario_tiene_roles', 'usuario_rut', 'rol_id')->withTimestamps();
+    }
+}
+```
+
+## Experimentando
+
+Con lo visto ya deberian poder armar el modelo de datos completo en el framework y quedaria experimentar:
+
+---
+
+```php
+$usuario = Usuario::find(12345); // Si no lo consigue, esto es NULL
+$roles = $usuario->roles;
+foreach($roles as $rol)
+{
+    echo $rol->nombre . "\n";
+}
+$asignatura = Asignatura::create([
+    'codigo' => 'INF-614',
+    'nombre' => 'Comunicación de Datos'
+])
+echo $asignatura->id;
+```
+
+# Rutas y controladores
+
+## Rutas
+
+Es necesario definir como interactua el usuario final con nuestra aplicación, para esto se utiliza el framework de *Routing*, este mapea una *URI + verbo HTTP* a un método existente en algún controlador*.
+
+---
+
+```bash
+$ cat app/routes.php
+```
+
+```php
+<?php
+
+/*
+|--------------------------------------------------------------------------
+| Application Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register all of the routes for an application.
+| It's a breeze. Simply tell Laravel the URIs it should respond to
+| and give it the Closure to execute when that URI is requested.
+|
+*/
+
+Route::get('/', function()
+{
+	return View::make('hello');
+});
+```
+
+## Gracias del framework de routing
+
+El framework de routeo de laravel incluye ciertas gracias:
+
+- Mapear en función del verbo http usado.
+- Mapear a más de un verbo http.
+- Filtros (Pre y Post Request).
+- Agrupar rutas (Se pueden agregar prefijos o filtros).
+- Forzar uso de SSL.
+- Recibir parámetros.
+- Mapear a un modelo (*Model Binding*)
 
 # Fin
