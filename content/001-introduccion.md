@@ -1,4 +1,4 @@
-% Workshop Laravel 4
+% Ayudantia Sofguare
 % Patricio Pérez <patricio.perez@ceinf.cl>
 % Primer semestre 2015
 
@@ -44,9 +44,9 @@ Sistema operativo "_de verdad_"
 
 # Que quedó fuera de este workshop
 
-## Contenidos que no veremos (aún?)
+## Contenidos que no veremos (aún??)
 
-Hay herramientas que se me quedaron en el tintero, pero creo que serían bien útiles para cualquier developer que se respete:
+Hay herramientas que se me quedaron en el tintero, pero creo que serían bien útiles para cualquier *developer* que se respete:
 
 - Pruebas unitarias
 - Integración continua (Tambien conocido como CI o Continuous Integration)
@@ -90,7 +90,7 @@ Estas serán nuestras herramientas a lo largo del workshop (A.K.A Ayudantia):
 - Control de versiones: *Git*
 - Motor de base de datos: *PostgreSQL*
 - IDE: *Eclipse* (O alguno de su gusto)
-- Framework **MVC**: *Laravel 4.2*
+- Framework **MVC**: *Laravel 5.0*
 
 # Buenas (y malas) prácticas
 
