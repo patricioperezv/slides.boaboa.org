@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Patricio Pérez patricio.perez@ceinf.cl" />
+  <title>Workshop Laravel 4</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="reveal.js/css/reveal.min.css"/>
+    <style type="text/css">code{white-space: pre;}</style>
+    <link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">
+    <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+    <script>
+      if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'reveal.js/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+      }
+    </script>
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+    <h1 class="title">Workshop Laravel 4</h1>
+    <h2 class="author">Patricio Pérez <script type="text/javascript">
+<!--
+h='&#x63;&#x65;&#x69;&#110;&#102;&#46;&#x63;&#108;';a='&#64;';n='&#112;&#x61;&#116;&#114;&#x69;&#x63;&#x69;&#x6f;&#46;&#112;&#x65;&#114;&#x65;&#122;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#112;&#x61;&#116;&#114;&#x69;&#x63;&#x69;&#x6f;&#46;&#112;&#x65;&#114;&#x65;&#122;&#32;&#x61;&#116;&#32;&#x63;&#x65;&#x69;&#110;&#102;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#108;</noscript></h2>
+    <h3 class="date">Primer semestre 2015</h3>
+</section>
+
+<section><section id="que-aprenderemos-intentaremos" class="titleslide slide level1"><h1>Que aprenderemos (Intentaremos?)</h1></section><section id="como-no-hacerlo-enojar-..." class="slide level2">
+<h1>Como no hacerlo enojar ...</h1>
+<figure>
+<img src="images/jirafales.jpg" alt="Profesor Salazar" /><figcaption>Profesor Salazar</figcaption>
+</figure>
+<div class="fragment">
+<p>Es un _poco_ cascarrabias ...</p>
+</div>
+</section><section id="para-ello-usaremos" class="slide level2">
+<h1>Para ello usaremos</h1>
+</section><section class="slide level2">
+
+<figure>
+<img src="images/github.jpg" alt="Github" /><figcaption>Github</figcaption>
+</figure>
+<div class="fragment">
+<p>Control de versiones distribuido</p>
+</div>
+</section><section class="slide level2">
+
+<figure>
+<img src="images/laravel.png" alt="Laravel" /><figcaption>Laravel</figcaption>
+</figure>
+<div class="fragment">
+<p>Framework PHP para buenos tipos!</p>
+</div>
+</section><section class="slide level2">
+
+<figure>
+<img src="images/postgresql.jpg" alt="PostgreSQL" /><figcaption>PostgreSQL</figcaption>
+</figure>
+</section><section class="slide level2">
+
+<figure>
+<img src="images/ubuntu.png" alt="Ubuntu" /><figcaption>Ubuntu</figcaption>
+</figure>
+<div class="fragment">
+<p>Sistema operativo &quot;<em>de verdad</em>&quot;</p>
+</div>
+</section></section>
+<section><section id="que-quedó-fuera-de-este-workshop" class="titleslide slide level1"><h1>Que quedó fuera de este workshop</h1></section><section id="contenidos-que-no-veremos-aún" class="slide level2">
+<h1>Contenidos que no veremos (aún?)</h1>
+<p>Hay herramientas que se me quedaron en el tintero, pero creo que serían bien útiles para cualquier developer que se respete:</p>
+<ul>
+<li class="fragment">Pruebas unitarias</li>
+<li class="fragment">Integración continua (Tambien conocido como CI o Continuous Integration)</li>
+</ul>
+</section></section>
+<section><section id="contenidos" class="titleslide slide level1"><h1>Contenidos</h1></section><section id="contenidos-1" class="slide level2">
+<h1>Contenidos</h1>
+<ul>
+<li class="fragment">Buenas (y malas) prácticas en el ramo (A.K.A Tratando de no hacer rabiar al profe)</li>
+<li class="fragment">Instalacion del entorno de desarrollo (<em>Ubuntu + DB + IDE + Git + Framework</em>)
+<ul>
+<li class="fragment">Uso básico de linux (Línea de comandos + git(<em>hub</em>))</li>
+<li class="fragment">Uso de manejador de dependencias de PHP: <em>Composer</em></li>
+</ul></li>
+<li class="fragment">Introducción rápida al patrón MVC (<em>Model View Controller</em>)</li>
+<li class="fragment">Laravel
+<ul>
+<li class="fragment">Migraciones de db (<em>Generación del modelo en DB</em>)</li>
+<li class="fragment">ORM (<em>Object Relational Mapping</em>): <em>Eloquent</em></li>
+</ul></li>
+</ul>
+</section><section id="contenidos-2" class="slide level2">
+<h1>Contenidos</h1>
+<ul>
+<li class="fragment">Laravel
+<ul>
+<li class="fragment">Rutas en el framework y controladores <em>resourceful</em></li>
+<li class="fragment">Vistas: Templates <em>Blade</em></li>
+<li class="fragment">Probando código en la terminal: <em>Tinker</em></li>
+<li class="fragment">Rutas avanzadas (Anidación de recursos, filtros)</li>
+<li class="fragment">Autenticación (DB, WS, Custom)</li>
+<li class="fragment">Helpers (Paths, Custom)</li>
+</ul></li>
+<li class="fragment">Tópicos avanzados
+<ul>
+<li class="fragment">Integración con un servicio REST</li>
+<li class="fragment">Ejecución de tareas programadas (Mezclando CRON con laravel)</li>
+<li class="fragment">Deployment en producción (Ubuntu + Apache 2 + PostgreSQL)</li>
+</ul></li>
+</ul>
+</section></section>
+<section><section id="convenciones" class="titleslide slide level1"><h1>Convenciones</h1></section><section id="convenciones-1" class="slide level2">
+<h1>Convenciones</h1>
+<p>Estas serán nuestras herramientas a lo largo del workshop (A.K.A Ayudantia):</p>
+<ul>
+<li class="fragment">Sistema operativo: Linux (<em>Ubuntu 14.04</em>)</li>
+<li class="fragment">Control de versiones: <em>Git</em></li>
+<li class="fragment">Motor de base de datos: <em>PostgreSQL</em></li>
+<li class="fragment">IDE: <em>Eclipse</em> (O alguno de su gusto)</li>
+<li class="fragment">Framework <strong>MVC</strong>: <em>Laravel 4.2</em></li>
+</ul>
+</section></section>
+<section><section id="buenas-y-malas-prácticas" class="titleslide slide level1"><h1>Buenas (y malas) prácticas</h1></section><section id="buenas-prácticas" class="slide level2">
+<h1>Buenas prácticas</h1>
+<aside class="notes">
+<ul>
+<li class="fragment">Hay que tener en cuenta que ya estamos viejitos</li>
+<li class="fragment">No se ustedes, pero hay varias cosas sobre las que no tengo ni p*ta idea.</li>
+<li class="fragment">Esto más que frustrar al profe (Creanme que lo hará), los frustrará a ustedes.</li>
+<li class="fragment">Ya que les costará hacer cosas relativamente sencillas, perdiendo mucho tiempo, tiempo en el que podrían estar carreteando por ejemplo.</li>
+</ul>
+</aside>
+<figure>
+<img src="images/no_idea_dog.jpg" />
+</figure>
+</section><section id="sobre-la-realización-del-trabajo" class="slide level2">
+<h1>Sobre la realización del trabajo</h1>
+<p>A lo largo de la asignatura verán un monton de conceptos (DRY, YAGNI, metodologías ágiles, PMBOK, etc).</p>
+</section><section class="slide level2">
+
+<aside class="notes">
+<ul>
+<li class="fragment">Los estándares estan hechos para que no se odien entre los mismos miembros del team</li>
+<li class="fragment">La planificación esta pensada para estructurarlos un poco, distribuyan bien el tiempo, y al final le digan al profe que trabajaron bien (Y que eso no sea una falazzììa)</li>
+</ul>
+</aside>
+<p>El resumen corto de todo eso (En mi opinión bien vaga) es que mientras esten construyendo el proyecto tengan esto en cuenta:</p>
+<ul>
+<li class="fragment">Traten de ir mostrando constantemente su trabajo, ya que el cliente puede ser algo especial (A.K.A Los puede mandar a la punta del cerro si hay cosas que no le agraden)</li>
+<li class="fragment">Planificación (No hagan todo a última hora)</li>
+<li class="fragment">Estándares (Quizas no los de industrias, ISO, IEEE, sino estándares fijados por ustedes)</li>
+<li class="fragment">No usen las herramientas porque se las esten imponiendo, no se resistan ლ(´ڡ`ლ) realmente intenten entenderlas y usarlas a futuro!</li>
+<li class="fragment">Ya dije que deberian preguntar mucho? El feedback es fundamental en el desarrollo de un proyecto, solo traten de que sus preguntas no sean tan ...</li>
+</ul>
+</section><section id="dry" class="slide level2">
+<h1>DRY</h1>
+<div class="fragment">
+<ul>
+<li class="fragment">Si están realizando dos secciones de código (Por ejemplo dos partes de un html) y estan difieren muuuuy poco o nada, estan haciendo código de más.</li>
+<li class="fragment">Este es complicado de mantener (Si cambio uno TENGO que cambiar el otro) y es una pesadilla a medida que crece el proyecto.</li>
+<li class="fragment">Aprovechen de que el framework les entrega herramientas para combatir esto (Para las vistas html tienen herencia y composición por ejemplo)</li>
+</ul>
+</div>
+</section><section id="indentación" class="slide level2">
+<h1>Indentación</h1>
+<p>A lo largo de la asignatura, probablemente esten mostrando mucho código al profe, al ayudante, o a sus mismos compañeros, nada se agradece más que un buen indentado del código.</p>
+<div class="fragment">
+<p>Así que haganse el tiempo, o ...</p>
+</div>
+</section><section id="dejen-que-el-ide-lo-haga" class="slide level2">
+<h1>Dejen que el IDE lo haga!</h1>
+<figure>
+<img src="images/auto_format.png" alt="IDE! Trabaja por mi pls" /><figcaption>IDE! Trabaja por mi pls</figcaption>
+</figure>
+</section><section id="uso-de-git" class="slide level2">
+<h1>Uso de git</h1>
+<aside class="notes">
+<ul>
+<li class="fragment">Salazar sapea el git</li>
+<li class="fragment">Implica que puede ver desempeño de cada miembro del equipo</li>
+<li class="fragment">O todas las tonteras que escriben en el log de commits</li>
+</ul>
+</aside>
+<ul>
+<li class="fragment">Trabajen en sus cuentas individualmente, no todos en un solo usuario</li>
+<li class="fragment">Llenen correctamente sus perfiles en github (Si ponen fotito mejor)</li>
+<li class="fragment">Configuren correctamente su correo y nombre en la instalación de git local (Así se pueden distinguir en la rama de commits)</li>
+<li class="fragment">Que sus commits indiquen (o traten de indicar) que cambio realizaron en el código</li>
+<li class="fragment">Idealmente usen branches (ramas) al desarrollar, cuando la funcionalidad que agregaron este &quot;lista&quot; hacen merge a su branch principal (e.g: master)</li>
+<li class="fragment">No agreguen binarios al proyecto en git, tampoco las librerías del proyecto.</li>
+</ul>
+</section><section id="perfil" class="slide level2">
+<h1>Perfil</h1>
+<figure>
+<img src="images/github_profile.png" alt="Mi perfil en github" /><figcaption>Mi perfil en github</figcaption>
+</figure>
+</section><section id="config-git" class="slide level2">
+<h1>Config git</h1>
+<figure>
+<img src="images/git_config.png" alt="Config git" /><figcaption>Config git</figcaption>
+</figure>
+</section><section id="log-de-commits" class="slide level2">
+<h1>Log de commits</h1>
+<figure>
+<img src="images/commit_tree.png" alt="Commit log" /><figcaption>Commit log</figcaption>
+</figure>
+</section></section>
+    </div>
+  </div>
+
+
+  <script src="reveal.js/lib/js/head.min.js"></script>
+  <script src="reveal.js/js/reveal.min.js"></script>
+
+  <script>
+
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        theme: 'night', // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+//          { src: 'reveal.js/plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; }, }
+//          { src: 'reveal.js/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+]});
+    </script>
+    </body>
+</html>
