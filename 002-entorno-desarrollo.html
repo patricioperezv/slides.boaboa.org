@@ -3,12 +3,32 @@
 <head>
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
-  <title></title>
+  <meta name="author" content="Patricio Pérez patricio.perez@ceinf.cl" />
+  <title>Entorno de desarrollo</title>
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <link rel="stylesheet" href="reveal.js/css/reveal.min.css"/>
     <style type="text/css">code{white-space: pre;}</style>
+    <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+    </style>
     <link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">
     <!-- If the query includes 'print-pdf', include the PDF print sheet -->
     <script>
@@ -28,10 +48,166 @@
   <div class="reveal">
     <div class="slides">
 
-
-<section class="slide level2">
-
+<section>
+    <h1 class="title">Entorno de desarrollo</h1>
+    <h2 class="author">Patricio Pérez <script type="text/javascript">
+<!--
+h='&#x63;&#x65;&#x69;&#110;&#102;&#46;&#x63;&#108;';a='&#64;';n='&#112;&#x61;&#116;&#114;&#x69;&#x63;&#x69;&#x6f;&#46;&#112;&#x65;&#114;&#x65;&#122;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#112;&#x61;&#116;&#114;&#x69;&#x63;&#x69;&#x6f;&#46;&#112;&#x65;&#114;&#x65;&#122;&#32;&#x61;&#116;&#32;&#x63;&#x65;&#x69;&#110;&#102;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#108;</noscript></h2>
+    <h3 class="date">Primer semestre 2015</h3>
 </section>
+
+<section><section id="entorno-de-desarrollo" class="titleslide slide level1"><h1>Entorno de desarrollo</h1></section><section id="que-viene" class="slide level2">
+<h1>Que viene?</h1>
+<ul>
+<li class="fragment">Ubuntu</li>
+<li class="fragment">Eclipse</li>
+<li class="fragment">PHP/Composer/Laravel</li>
+<li class="fragment">Git* (Lo dejaremos para el siguiente set de slides)</li>
+</ul>
+</section></section>
+<section><section id="ubuntu" class="titleslide slide level1"><h1>Ubuntu</h1></section><section id="disclaimer" class="slide level2">
+<h1>Disclaimer</h1>
+<p>Creo que la instalación es bastante sencilla, asi que obviare temas como el particionado. Sin embargo, si tienen dudas no duden en dejarmelas ;)</p>
+</section><section id="línea-de-comandos" class="slide level2">
+<h1>Línea de comandos</h1>
+<p>La querida terminal debería ser una de sus más grandes aliadas en este curso, así que tenganla a mano, la encontrarán como &quot;terminal&quot; y luce como las películas de hackers de los 80'.</p>
+</section><section id="torpedo-básico-de-comandos-unix" class="slide level2">
+<h1>Torpedo básico de comandos UNIX</h1>
+<ul>
+<li class="fragment">Usar <strong>TAB</strong> para completar comandos, nombres de ficheros, siempre que se pueda!</li>
+<li class="fragment"><code>cd directorio</code> Ingresa a un directorio</li>
+<li class="fragment"><code>cat fichero.txt</code> Muestra en pantalla el contenido de un fichero</li>
+<li class="fragment">Cuando se trabajan directorios <code>.</code> se refiere al directorio actual, <code>..</code> se refiere al padre del directorio actual, de hecho <code>../..</code> entraria al padre del padre del directorio actual (abuelo??)</li>
+<li class="fragment">Nuestro home (Donde se guardan todas nuestras leseras) es por defecto <code>/home/usuario</code>, un atajo es <code>~</code> (ej: ´~/Descargas´ equivale a ´/home/usuario/Descargas´)</li>
+</ul>
+</section><section class="slide level2">
+
+<ul>
+<li class="fragment">Usar apt para manejar paquetes es super sencillo:
+<ul>
+<li class="fragment"><code>apt-get install paquete otropaquete</code> Instalar</li>
+<li class="fragment"><code>apt-get remove paquete otropaquete</code> Desinstalar</li>
+<li class="fragment"><code>apt-cache search palabra buscar php</code> Buscar paquetes, en descripción etc, pueden ser muchas palabras</li>
+<li class="fragment"><code>apt-get update</code> Actualiza la base de datos de paquetes</li>
+<li class="fragment"><code>apt-get dist-upgrade</code> Actualiza todos los paquetes del sistema</li>
+</ul></li>
+<li class="fragment">Usar <code>sudo</code> antes de cualquier comando que necesite permisos de administrador (ej: instalar paquetes con apt, modificar ficheros en <code>/etc</code>, etc)</li>
+</ul>
+</section></section>
+<section><section id="eclipse" class="titleslide slide level1"><h1>Eclipse</h1></section><section id="instalar-java" class="slide level2">
+<h1>Instalar java</h1>
+<p>El IDE usa Java, así que hay que instalarlo, usaremos la versión 8 de Oracle:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> add-apt-repository ppa:webupd8team/java
+<span class="kw">sudo</span> apt-get update
+<span class="kw">sudo</span> apt-get install oracle-java8-installer</code></pre>
+<p>Aceptamos la licencia y listo, java java doo.</p>
+</section><section id="instalar-eclipse-pdt" class="slide level2">
+<h1>Instalar eclipse (+ PDT)</h1>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">wget</span> http://carroll.aset.psu.edu/pub/eclipse//technology/epp/downloads/release/luna/SR2/eclipse-php-luna-SR2-linux-gtk-x86_64.tar.gz
+<span class="kw">sudo</span> tar xzvf eclipse-php-luna-SR2-linux-gtk-x86_64.tar.gz -C /opt
+<span class="kw">sudo</span> ln -s /opt/eclipse/eclipse /usr/local/bin
+<span class="kw">sudo</span> wget http://git.io/VhjClg -O /usr/share/applications/eclipse.desktop
+<span class="kw">rm</span> eclipse-php-luna-SR2-linux-gtk-x86_64.tar.gz</code></pre>
+<p>Incluso tendran el icono en el lanzador de aplicaciones.</p>
+</section><section class="slide level2">
+
+<figure>
+<img src="images/eclipse_icon.png" alt="Eclipse" /><figcaption>Eclipse</figcaption>
+</figure>
+</section></section>
+<section><section id="php-composer-laravel-y-postgres" class="titleslide slide level1"><h1>PHP, Composer, Laravel y Postgres</h1></section><section id="php" class="slide level2">
+<h1>PHP</h1>
+<p>Instalaremos unas cuantas librerias de php, las mínimas para trabajar con el framework.</p>
+</section><section class="slide level2">
+
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> apt-get install php5-curl php5-mcrypt php5-cli
+<span class="kw">sudo</span> php5enmod mcrypt</code></pre>
+</section></section>
+<section><section id="composer" class="titleslide slide level1"><h1>Composer</h1></section><section id="usando-composer" class="slide level2">
+<h1>Usando Composer</h1>
+<figure>
+<img src="media/composer_logo.png" alt="Música maestro!" /><figcaption>Música maestro!</figcaption>
+</figure>
+</section><section id="que-es-composer" class="slide level2">
+<h1>Que es Composer</h1>
+<p><em>Composer</em> es un manejador de dependencias para <em>PHP</em>.</p>
+<div class="fragment">
+<p>Es decir, especificar de que librerías depende nuestro proyecto.</p>
+</div>
+<div class="fragment">
+<p>Se puede ver el listado de paquetes disponibles en composer en <a href="https://packagist.org/">Packagist</a></p>
+</div>
+</section><section id="instalar-composer" class="slide level2">
+<h1>Instalar composer</h1>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">wget</span> -O - https://getcomposer.org/installer <span class="kw">|</span> <span class="kw">php</span>
+<span class="kw">sudo</span> mv composer.phar /usr/local/bin/composer</code></pre>
+</section><section id="como-se-usa" class="slide level2">
+<h1>Como se usa</h1>
+<p>Tiene dos modos, <em>local</em> y <em>global</em>.</p>
+</section><section id="composer-global" class="slide level2">
+<h1>Composer global</h1>
+<p>Este instala los paquetes de composer en el <em>home</em> del usuario.</p>
+<div class="fragment">
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">composer</span> global require <span class="st">&quot;laravel/installer=~1.1&quot;</span></code></pre>
+</div>
+<div class="fragment">
+<figure>
+<img src="media/composer_tree.png" alt="Composer global tree" /><figcaption>Composer global tree</figcaption>
+</figure>
+</div>
+</section><section id="composer-local" class="slide level2">
+<h1>Composer local</h1>
+<p>Este instala los paquetes en el directorio <code>vendor</code> del proyecto, las dependencias se definen en el fichero <code>composer.json</code> en la raiz del proyecto</p>
+<div class="fragment">
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">composer</span> require resty/resty:@stable</code></pre>
+</div>
+<div class="fragment">
+<figure>
+<img src="media/composer_local_require.png" alt="composer local" /><figcaption>composer local</figcaption>
+</figure>
+</div>
+</section><section class="slide level2">
+
+<figure>
+<img src="media/composer_json_example.png" alt="composer.json" /><figcaption>composer.json</figcaption>
+</figure>
+</section><section id="composer-y-git" class="slide level2">
+<h1>Composer y git</h1>
+<p>Cuando generan un proyecto con el instalador de laravel, se incluye un fichero <code>.gitignore</code>, este hace que git ignore ciertos ficheros, entre ellos se incluye todo el directorio <code>vendor</code>, ya que al hacer el <code>composer update</code> se instalan las librerías, haciendo innecesario tenerlo en git.</p>
+</section><section id="resumen-composer" class="slide level2">
+<h1>Resumen Composer</h1>
+<ol type="1">
+<li class="fragment">Instalar composer</li>
+<li class="fragment">Añadir librerias usando <code>composer require</code> o modificando <code>composer.json</code></li>
+<li class="fragment">Ejecutar <code>composer update</code> en la raiz del proyecto para instalar las librerías</li>
+<li class="fragment">Profit!!</li>
+</ol>
+</section></section>
+<section><section id="volviendo-a-laravel-y-postgres" class="titleslide slide level1"><h1>Volviendo a laravel y postgres</h1></section><section id="laravel" class="slide level2">
+<h1>Laravel</h1>
+<p>Como estamos trabajando con Laravel 5, la forma más sencilla y rápida es usando el instalador de laravel. Si necesitan instalar una versión específica, deberán usar composer, mi blog tiene info de eso...</p>
+</section><section id="instalar-el-instalador" class="slide level2">
+<h1>Instalar el instalador</h1>
+<p>Suena mal, pero es la verdad, para esto debemos agregar <code>export PATH=&quot;$HOME/.composer/vendor/bin:$PATH&quot;</code> a nuestro <code>.bashrc</code> o <code>.zshrc</code>, luego recargar la terminal y ejecutar:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">composer</span> global require <span class="st">&quot;laravel/installer=~1.1&quot;</span>
+<span class="kw">laravel</span> new proyectoso</code></pre>
+<p>El proyecto estara en el directorio <code>proyectoso</code></p>
+</section><section id="postgresql" class="slide level2">
+<h1>PostgreSQL</h1>
+<p>Al profe le encanta postgres (Algunos dirían que la raya con postgres...), así que eso usaremos.</p>
+</section><section id="instalar-postgres" class="slide level2">
+<h1>Instalar Postgres</h1>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> apt-get install postgresql-9.3
+<span class="kw">sudo</span> apt-get install php5-pgsql</code></pre>
+</section><section id="crear-usuario-y-db" class="slide level2">
+<h1>Crear usuario y db</h1>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> -u postgres createuser --no-superuser --pwprompt miprimeradb
+<span class="kw">sudo</span> -u postgres createdb miprimeradb</code></pre>
+<p>Nota: si el nombre de usuario coincide con el de la db tendrá todos los permisos listos.</p>
+</section></section>
     </div>
   </div>
 
