@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Patricio Pérez patricio.perez@ceinf.cl" />
+  <title>Control de versiones</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="reveal.js/css/reveal.min.css"/>
+    <style type="text/css">code{white-space: pre;}</style>
+    <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+    </style>
+    <link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">
+    <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+    <script>
+      if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'reveal.js/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+      }
+    </script>
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+    <h1 class="title">Control de versiones</h1>
+    <h2 class="author">Patricio Pérez <script type="text/javascript">
+<!--
+h='&#x63;&#x65;&#x69;&#110;&#102;&#46;&#x63;&#108;';a='&#64;';n='&#112;&#x61;&#116;&#114;&#x69;&#x63;&#x69;&#x6f;&#46;&#112;&#x65;&#114;&#x65;&#122;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#112;&#x61;&#116;&#114;&#x69;&#x63;&#x69;&#x6f;&#46;&#112;&#x65;&#114;&#x65;&#122;&#32;&#x61;&#116;&#32;&#x63;&#x65;&#x69;&#110;&#102;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#108;</noscript></h2>
+    <h3 class="date">Primer semestre 2015</h3>
+</section>
+
+<section><section id="control-de-versiones" class="titleslide slide level1"><h1>Control de versiones</h1></section><section id="para-que" class="slide level2">
+<h1>Para que?</h1>
+<p>Cuantas veces les ha ocurrido esto?</p>
+<figure>
+<img src="media/versiones_artesa.png" alt="Por favor no me hagan esto!" /><figcaption>Por favor no me hagan esto!</figcaption>
+</figure>
+</section><section id="control-de-versiones-1" class="slide level2">
+<h1>Control de versiones</h1>
+<p>Un <em>VCS</em> (Version Control System) registra los cambios realizados a su proyecto, permitiendo volver a versiones especificas a lo largo del tiempo.</p>
+</section><section id="características" class="slide level2">
+<h1>Características</h1>
+<ul>
+<li class="fragment">Revertir un fichero o todos a una revisión específica.</li>
+<li class="fragment">Realizar una comparación entre dos revisiones.</li>
+<li class="fragment">Conocer quien ha realizado cambios (problemáticos) sobre un fichero en particular.</li>
+<li class="fragment">Cuando se introdujo un bug (o feature) al proyecto.</li>
+</ul>
+</section></section>
+<section><section id="tipos-de-vcs" class="titleslide slide level1"><h1>Tipos de VCS</h1></section><section id="tipos-de-vcs-1" class="slide level2">
+<h1>Tipos de VCS</h1>
+<p>Existen tres tipos de <em>VCS</em>:</p>
+</section><section id="locales" class="slide level2">
+<h1>Locales</h1>
+<p>Son los abuelitos de los VCS, mantienen una base de datos local con todos los registros, no hay una forma sencilla de tener colaboración con más gente.</p>
+</section><section class="slide level2">
+
+<figure>
+<img src="media/local.png" alt="VCS Local" /><figcaption>VCS Local</figcaption>
+</figure>
+</section><section class="slide level2">
+
+<p>Ejemplos: <a href="https://www.gnu.org/s/rcs/">RCS</a>, <a href="http://en.wikipedia.org/wiki/QVCS">Quma Version Control System</a>.</p>
+</section><section id="centralizados" class="slide level2">
+<h1>Centralizados</h1>
+<p>La necesidad de colaborar fue la que requirió la transición hacia un <em>CVCS</em> (Centralized Version Control System), estos muestran un servidor único que contiene todos los ficheros versionados, y multiples clientes que piden ficheros desde este.</p>
+<aside class="notes">
+<p>Ganancia: * Todos ven lo que el resto esta haciendo, hasta cierto punto. * Control granular de permisos/acceso.</p>
+</aside>
+</section><section class="slide level2">
+
+<figure>
+<img src="media/centralized.png" alt="CVCS" /><figcaption>CVCS</figcaption>
+</figure>
+</section><section id="problemas-de-los-vcs-centralizados" class="slide level2">
+<h1>Problemas de los VCS centralizados</h1>
+<aside class="notes">
+<ul>
+<li class="fragment">Si el server dice #ahilosve estamos sonados hasta que vuelva</li>
+<li class="fragment">Si el server murio y no hay backups, no hay forma de restaurar el proyecto (con todas las versiones). #ahilosve</li>
+<li class="fragment">Toda operación le pega al server, si no hay internet/acceso cooperamos.</li>
+</ul>
+</aside>
+<ul>
+<li class="fragment">Punto único de fallo.</li>
+<li class="fragment">Integridad de datos.</li>
+<li class="fragment">Si no se puede acceder al server estamos fritos.</li>
+</ul>
+</section><section class="slide level2">
+
+<p>Ejemplos: <a href="http://www.nongnu.org/cvs/">CVS</a>, <a href="https://subversion.apache.org/">Subversion</a>.</p>
+</section><section id="distribuidos" class="slide level2">
+<h1>Distribuidos</h1>
+<p>Estos problemas llevaron a pensar un nuevo tipo de VCS, los <em>DVCS</em> (Distributed Version Control System), estos difieren en los centralizados en que los clientes guardan la copia completa del repositorio.</p>
+</section><section class="slide level2">
+
+<figure>
+<img src="media/distributed.png" alt="DVCS" /><figcaption>DVCS</figcaption>
+</figure>
+</section><section class="slide level2">
+
+<p>Ejemplos: <a href="http://git-scm.com">Git</a>, <a href="http://mercurial.selenic.com/">Mercurial</a>, <a href="http://bazaar.canonical.com/en/">Bazaar</a>.</p>
+</section></section>
+<section><section id="el-que-usaremos-git" class="titleslide slide level1"><h1>El que usaremos: git</h1></section><section id="que-es-git" class="slide level2">
+<h1>Que es git</h1>
+<figure>
+<img src="media/git_scm.png" alt="Git" /><figcaption>Git</figcaption>
+</figure>
+<p>Git es un sistema de control de versiones distribuido, usualmente un proveedor de la parte centralizada es <a href="http://github.com">github</a>, no hay que confundirlos.</p>
+</section><section class="slide level2">
+
+<figure>
+<img src="media/commit_tree.png" alt="Commits" /><figcaption>Commits</figcaption>
+</figure>
+</section><section class="slide level2">
+
+<figure>
+<img src="media/git_diff.png" alt="Ver un diff" /><figcaption>Ver un diff</figcaption>
+</figure>
+</section><section id="es-distribuido" class="slide level2">
+<h1>Es distribuido</h1>
+<aside class="notes">
+<ul>
+<li class="fragment">CVCS: &quot;Centralized Version Control System&quot; (ej: SVN, CVS)</li>
+<li class="fragment">DVCS: &quot;Distributed Version Control System&quot; (ej: Git, Mercual, Bazaar)</li>
+</ul>
+</aside>
+<figure>
+<img src="media/cvcs_vs_dvcs.png" alt="CVCS vs DVCS" /><figcaption>CVCS vs DVCS</figcaption>
+</figure>
+<p>Si se cae el servidor de github (Repositorio central en la imagen), aún pueden trabajar, hacer commits, consultar el log, crear branches (locales), y otras operaciones.</p>
+</section><section class="slide level2">
+
+<p>(Ojo! <a href="http://github.com">Github</a> no es el único proveedor de git, está <a href="http://bitbucket.org">bitbucket</a> y otros, incluso pueden alojarlo en un servidor propio, it's free!).</p>
+</section></section>
+<section><section id="instalando-git" class="titleslide slide level1"><h1>Instalando git</h1></section><section id="crear-la-cuenta-y-configurar-identidad" class="slide level2">
+<h1>Crear la cuenta y configurar identidad</h1>
+<ul>
+<li class="fragment">El primer paso sería entrar a <a href="http://github.com">github</a> y crear una cuenta</li>
+<li class="fragment"><p>Ahora debemos crear una llave ssh (Abran sus terminales y tipeen):</p></li>
+<li class="fragment"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">git</span> config --global user.name <span class="st">&quot;Patricio Pérez&quot;</span>
+<span class="kw">git</span> config --globa user.email pperez@boaboa.org
+<span class="kw">git</span> config --global color.ui auto
+<span class="kw">ssh-keygen</span> -t rsa -C pperez@badgerbook</code></pre></li>
+</ul>
+</section><section class="slide level2">
+
+<section>
+<video controls data-autoplay src="media/git01.webmsd.webm">
+</video>
+</section>
+</section><section id="agregar-llave-pública-a-github" class="slide level2">
+<h1>Agregar llave pública a github</h1>
+<ul>
+<li class="fragment">Ver el contenido de <code>~/.ssh/id_rsa.pub</code> y agregarla a Github (En la web 'Settings → SSH keys → Add SSH key')</li>
+</ul>
+</section><section class="slide level2">
+
+<figure>
+<img src="media/github_add_ssh_key.png" alt="Agregar llave SSH" /><figcaption>Agregar llave SSH</figcaption>
+</figure>
+</section><section id="crear-repositorio" class="slide level2">
+<h1>Crear repositorio</h1>
+<ul>
+<li class="fragment">Crear el repositorio ('Create new... → New repository')</li>
+</ul>
+<div class="fragment">
+<figure>
+<img src="media/github_new_repository.png" alt="Agregar repositorio" /><figcaption>Agregar repositorio</figcaption>
+</figure>
+<ul>
+<li class="fragment">Puntos extras si saben como licenciar su proyecto!!</li>
+</ul>
+</div>
+</section><section id="clonar-el-repositorio" class="slide level2">
+<h1>Clonar el repositorio</h1>
+<p>Vamos a la pagina del repositorio y copiamos la URL de clonado SSH (Parte inferior derecha), luego en la terminal:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">cd</span> ~
+<span class="kw">mkdir</span> code
+<span class="kw">git</span> clone git@github.com:pperez/app_evaluaciones_ingsw.git</code></pre>
+</section><section id="ta-dah" class="slide level2">
+<h1>Ta-Dah!</h1>
+<figure>
+<img src="media/repo_clonado.png" />
+</figure>
+<p>Su repositorio esta en <code>~/code/app_evaluaciones_ingsw</code></p>
+</section></section>
+<section><section id="comandos-git" class="titleslide slide level1"><h1>Comandos git</h1></section><section id="comandos-git-1" class="slide level2">
+<h1>Comandos git</h1>
+<aside class="notes">
+<ul>
+<li class="fragment"><code>git checkout -b nueva_rama</code> (Hace una nueva rama basada en la actual)</li>
+<li class="fragment"><code>git commit -m &quot;mensaje&quot;</code> (Hace un commit con el mensaje especificado en el -m)</li>
+<li class="fragment"><code>git checkout master</code> cambia a la branch que queramos</li>
+<li class="fragment"><code>git merge otrarama</code> hace un merge de la otra rama, cuidado con los problemas de merge!</li>
+</ul>
+</aside>
+<figure>
+<img src="media/comandos_git.png" />
+</figure>
+</section><section class="slide level2">
+
+<aside class="notes">
+<ul>
+<li class="fragment">El push requiere conexión al server (en este caso github)</li>
+<li class="fragment">Hay que tener cuidado con los merge y como manejarlos</li>
+</ul>
+</aside>
+<figure>
+<img src="media/comandos_git_2.png" />
+</figure>
+</section><section id="terminando-con-git" class="slide level2">
+<h1>Terminando con git</h1>
+<p>Eso sería lo básico, donde encontrar más:</p>
+<div class="fragment">
+<p>Github tiene una buena sección de recursos (<a href="https://help.github.com/articles/good-resources-for-learning-git-and-github/" class="uri">https://help.github.com/articles/good-resources-for-learning-git-and-github/</a>)</p>
+<p>Selección personal:</p>
+<ul>
+<li class="fragment">Cheatsheet (Torpedo) de git en español (<a href="https://training.github.com/kit/downloads/es/github-git-cheat-sheet.pdf" class="uri">https://training.github.com/kit/downloads/es/github-git-cheat-sheet.pdf</a>)</li>
+<li class="fragment">Pro Git (<a href="http://progit.org" class="uri">http://progit.org</a>)</li>
+<li class="fragment">Github Guides (<a href="https://guides.github.com/" class="uri">https://guides.github.com/</a>)</li>
+<li class="fragment">Gitflow (<a href="http://nvie.com/posts/a-successful-git-branching-model/">A successful Git branching model</a>)</li>
+</ul>
+</div>
+</section></section>
+    </div>
+  </div>
+
+
+  <script src="reveal.js/lib/js/head.min.js"></script>
+  <script src="reveal.js/js/reveal.min.js"></script>
+
+  <script>
+
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        theme: 'night', // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+//          { src: 'reveal.js/plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; }, }
+//          { src: 'reveal.js/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+]});
+    </script>
+    </body>
+</html>

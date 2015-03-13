@@ -6,7 +6,7 @@
 
 ## Como no hacerlo enojar ...
 
-![Profesor Salazar](images/jirafales.jpg)
+![Profesor Salazar](media/jirafales.jpg)
 
 . . .
 
@@ -16,7 +16,7 @@ Es un \_poco\_ cascarrabias ...
 
 ----
 
-![Github](images/github.jpg)
+![Github](media/github.jpg)
 
 . . .
 
@@ -24,7 +24,7 @@ Control de versiones distribuido
 
 ----
 
-![Laravel](images/laravel.png)
+![Laravel](media/laravel.png)
 
 . . .
 
@@ -32,11 +32,11 @@ Framework PHP para buenos tipos!
 
 ----
 
-![PostgreSQL](images/postgresql.jpg)
+![PostgreSQL](media/postgresql.jpg)
 
 ----
 
-![Ubuntu](images/ubuntu.png)
+![Ubuntu](media/ubuntu.png)
 
 . . .
 
@@ -103,7 +103,7 @@ Estas serán nuestras herramientas a lo largo del workshop (A.K.A Ayudantia):
 - Ya que les costará hacer cosas relativamente sencillas, perdiendo mucho tiempo, tiempo en el que podrían estar carreteando por ejemplo.
 </div>
 
-![](images/no_idea_dog.jpg)
+![](media/no_idea_dog.jpg)
 
 ## Sobre la realización del trabajo
 
@@ -142,7 +142,7 @@ Así que haganse el tiempo, o ...
 
 ## Dejen que el IDE lo haga!
 
-![IDE! Trabaja por mi pls](images/auto_format.png)
+![IDE! Trabaja por mi pls](media/auto_format.png)
 
 ## Uso de git
 
@@ -161,12 +161,12 @@ Así que haganse el tiempo, o ...
 
 ## Perfil
 
-![Mi perfil en github](images/github_profile.png)
+![Mi perfil en github](media/github_profile.png)
 
 ## Config git
 
-![Config git](images/git_config.png)
+![Config git](media/git_config.png)
 
 ## Log de commits
 
-![Commit log](images/commit_tree.png)
+![Commit log](media/commit_tree.png)
