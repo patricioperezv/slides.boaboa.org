@@ -130,9 +130,7 @@ ssh-keygen -t rsa -C pperez@badgerbook
 
 ---
 
-<section>
 <video controls data-autoplay src="media/git01.webmsd.webm"></video>
-</section>
 
 ## Agregar llave pública a github
 
