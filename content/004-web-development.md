@@ -4,9 +4,9 @@
 
 # Desarrollo web
 
-## Developers, Developers, Developers!
+## Developers!!1cientoonce!
 
-<video controls data-autoplay src="media/developers-developers-developers.webm"></video>
+<video controls width=640 height=480 src="media/developers-developers-developers.webm"></video>
 
 ## Modelo cliente/servidor
 
@@ -69,7 +69,7 @@ Pide una respuesta, del mismo estilo que `GET`, pero sin el cuerpo de la respues
 
 ## POST
 
-Envia información y realiza cambios en recursos, pueden crearse nuevos recursos, realizar cambios sobre recursos existentes. Esta es la acción que hacemos al pinchar '`Enviar`' en un formulario.
+Envia información y realiza cambios en recursos, pueden crearse nuevos recursos, realizar cambios sobre recursos existentes. Esta es la acción que casi siempre hacemos al pinchar '`Enviar`' en un formulario.
 
 ---
 
@@ -85,7 +85,7 @@ Tambien se envia información, sin embargo es más flexible, ya que se puede int
 
 ## DELETE
 
-Creo que ya se imaginan que hace.
+Creo que ya se imaginan que hace ...
 
 ## PATCH
 
@@ -95,7 +95,87 @@ Realiza modificaciones parciales a un recurso existente, hay que tener ojo, la e
 
 ![PATCH request](media/http_patch_request.png)
 
+## Códigos de estado
+
+<video controls width=640 height=480 src="media/http_status.webmsd.webm"></video>
+
 ## Patrones de diseño arquitectónico
 
-Es una solución reconocida (*connotada*) a un problema recurrente de diseño (Como estructuramos nuestra aplicación).
+Es una solución reconocida (*connotada*) a un problema recurrente de diseño (Como se ve la estructura de nuestra aplicación).
+Entre sus dominios encontramos:
 
+* Control de acceso
+* Concurrencia
+* Distribución
+* Persistencia
+
+## El que nos atañe: MVC
+
+<div class="notes">
+- Modelo: Objetos del mundo real, del dominio del problema, maneja datos, lógica y reglas de la app (ej: Usuario, Estudiante)
+- Vista: Representación de salida al usuario (ej: HTML, JSON, XML, etc)
+- Controlador: Lógica de interacción con el usuario, recibe, convierte datos e interactua con modelos y vistas
+</div>
+
+El patrón que utilizaremos será *MVC* o *M*odel *V*iew *C*ontroller, este separa la aplicación en 3 capas:
+
+* Modelos
+* Vistas
+* Controladores
+
+# MVC
+
+## Modelos
+
+<div class="notes">
+Blog: (Modelos: Entradas, Usuarios, Comentarios)
+Controladores: EntradasController, UsersController, ComentariosController
+
+/entradas/\{id\}/comentarios
+/usuarios/
+</div>
+
+Los modelos se refiere al conjunto de clases que representa nuestro dominio del problema (Relación con el paradigma orientado a objetos).
+
+## Modelos
+
+*Laravel* nos da una herramienta llamada *Eloquent* para manejar los modelos, estos tienen relación directa con nuestra base de datos (*Eloquent* es un *ORM*, este mapea objetos a filas de base de datos), el ORM automáticamente construira consultas para la base de datos.
+
+## Modelos
+
+El ORM permite trabajar los objetos, por ejemplo, `Modelo::all()` nos entregará una lista con todos los objetos de esa clase, `Modelo::find(5)` entregará el objeto cuya llave primaria sea igual a 5. Se pueden pedir otras cosas al ORM, como condiciones `where` o consultar relaciones `1/n`.
+
+. . .
+
+En fin, si quiere más información, lo veremos prontamente, por este mismo horario, mismo canal.
+
+## Controladores
+
+Los controladores son la forma en las que interactuamos con la aplicación, en el caso particular de los frameworks web que implementan MVC las acciones se realizan a través de una URI y de verbos HTTP, ejemplos:
+
+- `GET /perros`
+- `POST /perros`
+- `GET /perros/5`
+- `DELETE /perros/10`
+
+## Controladores
+
+Cada ruta de la aplicación (URI) y un verbo http correspondiente deben mapear a un método de un controlador, los métodos de un controlador pueden no recibir parámetros (ej: un index) o recibirlos (ej: mostrar el recurso 5).
+
+. . .
+
+El encargado de mapear una URI + verbo a un método es el framework de `Routing` (El que veremos en detalle más)
+
+## Vistas
+
+Es la representación de un recurso, presentada al usuario. Estás pueden tener distintos formatos, entre ellos:
+
+* XML
+* JSON
+* HTML
+* Otros
+
+
+## MVC Overview
+
+![Arquitectura MVC](media/ash-mvc-architecture.gif)
