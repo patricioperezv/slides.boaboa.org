@@ -40,9 +40,9 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
     <h3 class="date">Primer semestre 2015</h3>
 </section>
 
-<section><section id="desarrollo-web" class="titleslide slide level1"><h1>Desarrollo web</h1></section><section id="developers-developers-developers" class="slide level2">
-<h1>Developers, Developers, Developers!</h1>
-<video controls data-autoplay src="media/developers-developers-developers.webm">
+<section><section id="desarrollo-web" class="titleslide slide level1"><h1>Desarrollo web</h1></section><section id="developers1cientoonce" class="slide level2">
+<h1>Developers!!1cientoonce!</h1>
+<video controls width="640" height="480" src="media/developers-developers-developers.webm">
 </video>
 </section><section id="modelo-clienteservidor" class="slide level2">
 <h1>Modelo cliente/servidor</h1>
@@ -102,7 +102,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 </figure>
 </section><section id="post" class="slide level2">
 <h1>POST</h1>
-<p>Envia información y realiza cambios en recursos, pueden crearse nuevos recursos, realizar cambios sobre recursos existentes. Esta es la acción que hacemos al pinchar '<code>Enviar</code>' en un formulario.</p>
+<p>Envia información y realiza cambios en recursos, pueden crearse nuevos recursos, realizar cambios sobre recursos existentes. Esta es la acción que casi siempre hacemos al pinchar '<code>Enviar</code>' en un formulario.</p>
 </section><section class="slide level2">
 
 <figure>
@@ -118,7 +118,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 </figure>
 </section><section id="delete" class="slide level2">
 <h1>DELETE</h1>
-<p>Creo que ya se imaginan que hace.</p>
+<p>Creo que ya se imaginan que hace ...</p>
 </section><section id="patch" class="slide level2">
 <h1>PATCH</h1>
 <p>Realiza modificaciones parciales a un recurso existente, hay que tener ojo, la especificación recomienda que los cambios enviados sean un tipo de diferencia, esta es parseada por el servidor y realiza los cambios pertinentes, al contrario de la creencia común, de enviar una <code>campo:valor</code> y esperar que se modifique solo tal campo en el recurso.</p>
@@ -127,9 +127,80 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 <figure>
 <img src="media/http_patch_request.png" alt="PATCH request" /><figcaption>PATCH request</figcaption>
 </figure>
+</section><section id="códigos-de-estado" class="slide level2">
+<h1>Códigos de estado</h1>
+<video controls width="640" height="480" src="media/http_status.webmsd.webm">
+</video>
 </section><section id="patrones-de-diseño-arquitectónico" class="slide level2">
 <h1>Patrones de diseño arquitectónico</h1>
-<p>Es una solución reconocida (<em>connotada</em>) a un problema recurrente de diseño (Como estructuramos nuestra aplicación).</p>
+<p>Es una solución reconocida (<em>connotada</em>) a un problema recurrente de diseño (Como se ve la estructura de nuestra aplicación). Entre sus dominios encontramos:</p>
+<ul>
+<li class="fragment">Control de acceso</li>
+<li class="fragment">Concurrencia</li>
+<li class="fragment">Distribución</li>
+<li class="fragment">Persistencia</li>
+</ul>
+</section><section id="el-que-nos-atañe-mvc" class="slide level2">
+<h1>El que nos atañe: MVC</h1>
+<aside class="notes">
+<ul>
+<li>Modelo: Objetos del mundo real, del dominio del problema, maneja datos, lógica y reglas de la app (ej: Usuario, Estudiante)</li>
+<li>Vista: Representación de salida al usuario (ej: HTML, JSON, XML, etc)</li>
+<li>Controlador: Lógica de interacción con el usuario, recibe, convierte datos e interactua con modelos y vistas</li>
+</ul>
+</aside>
+<p>El patrón que utilizaremos será <em>MVC</em> o <em>M</em>odel <em>V</em>iew <em>C</em>ontroller, este separa la aplicación en 3 capas:</p>
+<ul>
+<li class="fragment">Modelos</li>
+<li class="fragment">Vistas</li>
+<li class="fragment">Controladores</li>
+</ul>
+</section></section>
+<section><section id="mvc" class="titleslide slide level1"><h1>MVC</h1></section><section id="modelos" class="slide level2">
+<h1>Modelos</h1>
+<aside class="notes">
+<p>Blog: (Modelos: Entradas, Usuarios, Comentarios) Controladores: EntradasController, UsersController, ComentariosController</p>
+<p>/entradas/{id}/comentarios /usuarios/</p>
+</aside>
+<p>Los modelos se refiere al conjunto de clases que representa nuestro dominio del problema (Relación con el paradigma orientado a objetos).</p>
+</section><section id="modelos-1" class="slide level2">
+<h1>Modelos</h1>
+<p><em>Laravel</em> nos da una herramienta llamada <em>Eloquent</em> para manejar los modelos, estos tienen relación directa con nuestra base de datos (<em>Eloquent</em> es un <em>ORM</em>, este mapea objetos a filas de base de datos), el ORM automáticamente construira consultas para la base de datos.</p>
+</section><section id="modelos-2" class="slide level2">
+<h1>Modelos</h1>
+<p>El ORM permite trabajar los objetos, por ejemplo, <code>Modelo::all()</code> nos entregará una lista con todos los objetos de esa clase, <code>Modelo::find(5)</code> entregará el objeto cuya llave primaria sea igual a 5. Se pueden pedir otras cosas al ORM, como condiciones <code>where</code> o consultar relaciones <code>1/n</code>.</p>
+<div class="fragment">
+<p>En fin, si quiere más información, lo veremos prontamente, por este mismo horario, mismo canal.</p>
+</div>
+</section><section id="controladores" class="slide level2">
+<h1>Controladores</h1>
+<p>Los controladores son la forma en las que interactuamos con la aplicación, en el caso particular de los frameworks web que implementan MVC las acciones se realizan a través de una URI y de verbos HTTP, ejemplos:</p>
+<ul>
+<li class="fragment"><code>GET /perros</code></li>
+<li class="fragment"><code>POST /perros</code></li>
+<li class="fragment"><code>GET /perros/5</code></li>
+<li class="fragment"><code>DELETE /perros/10</code></li>
+</ul>
+</section><section id="controladores-1" class="slide level2">
+<h1>Controladores</h1>
+<p>Cada ruta de la aplicación (URI) y un verbo http correspondiente deben mapear a un método de un controlador, los métodos de un controlador pueden no recibir parámetros (ej: un index) o recibirlos (ej: mostrar el recurso 5).</p>
+<div class="fragment">
+<p>El encargado de mapear una URI + verbo a un método es el framework de <code>Routing</code> (El que veremos en detalle más)</p>
+</div>
+</section><section id="vistas" class="slide level2">
+<h1>Vistas</h1>
+<p>Es la representación de un recurso, presentada al usuario. Estás pueden tener distintos formatos, entre ellos:</p>
+<ul>
+<li class="fragment">XML</li>
+<li class="fragment">JSON</li>
+<li class="fragment">HTML</li>
+<li class="fragment">Otros</li>
+</ul>
+</section><section id="mvc-overview" class="slide level2">
+<h1>MVC Overview</h1>
+<figure>
+<img src="media/ash-mvc-architecture.gif" alt="Arquitectura MVC" /><figcaption>Arquitectura MVC</figcaption>
+</figure>
 </section></section>
     </div>
   </div>
