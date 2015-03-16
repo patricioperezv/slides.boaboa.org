@@ -23,6 +23,10 @@ Creo que la instalación es bastante sencilla, asi que obviare temas como el par
 
 La querida terminal debería ser una de sus más grandes aliadas en este curso, así que tenganla a mano, la encontrarán como "terminal" y luce como las películas de hackers de los 80'.
 
+## Superusuario
+
+El super-usuario de unix es root, este puede hacer de todo en el sistema de ficheros, matar procesos y otras operaciones de sistema. Cada vez que necesiten ejecutar algún comando que tenga implicaciones en el sistema, deberán correr tal comando como root, para esto antepongan `sudo` al comando.
+
 ## Torpedo básico de comandos UNIX
 
 - Usar **TAB** para completar comandos, nombres de ficheros, siempre que se pueda!
@@ -137,9 +141,9 @@ Este instala los paquetes en el directorio `vendor` del proyecto, las dependenci
 
 . . .
 
-```bash
+~~~bash
 composer require resty/resty:@stable
-```
+~~~
 
 . . .
 
@@ -195,4 +199,27 @@ sudo -u postgres createuser --no-superuser --pwprompt miprimeradb
 sudo -u postgres createdb miprimeradb
 ~~~
 
-Nota: si el nombre de usuario coincide con el de la db tendrá todos los permisos listos.
+<div class="notes">
+Si el nombre de usuario coincide con el de la db tendrá todos los permisos listos.
+</div>
+
+## Abrir el proyecto en Eclipse
+
+<div class="notes">
+Cambiar el filtro para que se muestren los ficheros ocultos
+</div>
+
+Para abrir el proyecto en Eclipse, basta que pinchemos en crear nuevo proyecto de php, le damos que tenemos un directorio ya existente y listo.
+
+## Agregar el repositorio de github
+
+Usaremos la línea de comando:
+
+~~~bash
+cd code/proyectoso
+git init
+git remote add origin git@github.com:pperez/demol5.git
+git add .
+git commit -m "Commit inicial, laravel 5"
+git push -u origin master
+~~~

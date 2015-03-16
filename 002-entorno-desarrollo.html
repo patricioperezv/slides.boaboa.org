@@ -74,6 +74,9 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 </section><section id="línea-de-comandos" class="slide level2">
 <h1>Línea de comandos</h1>
 <p>La querida terminal debería ser una de sus más grandes aliadas en este curso, así que tenganla a mano, la encontrarán como &quot;terminal&quot; y luce como las películas de hackers de los 80'.</p>
+</section><section id="superusuario" class="slide level2">
+<h1>Superusuario</h1>
+<p>El super-usuario de unix es root, este puede hacer de todo en el sistema de ficheros, matar procesos y otras operaciones de sistema. Cada vez que necesiten ejecutar algún comando que tenga implicaciones en el sistema, deberán correr tal comando como root, para esto antepongan <code>sudo</code> al comando.</p>
 </section><section id="torpedo-básico-de-comandos-unix" class="slide level2">
 <h1>Torpedo básico de comandos UNIX</h1>
 <ul>
@@ -206,7 +209,24 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 <h1>Crear usuario y db</h1>
 <pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> -u postgres createuser --no-superuser --pwprompt miprimeradb
 <span class="kw">sudo</span> -u postgres createdb miprimeradb</code></pre>
-<p>Nota: si el nombre de usuario coincide con el de la db tendrá todos los permisos listos.</p>
+<aside class="notes">
+<p>Si el nombre de usuario coincide con el de la db tendrá todos los permisos listos.</p>
+</aside>
+</section><section id="abrir-el-proyecto-en-eclipse" class="slide level2">
+<h1>Abrir el proyecto en Eclipse</h1>
+<aside class="notes">
+<p>Cambiar el filtro para que se muestren los ficheros ocultos</p>
+</aside>
+<p>Para abrir el proyecto en Eclipse, basta que pinchemos en crear nuevo proyecto de php, le damos que tenemos un directorio ya existente y listo.</p>
+</section><section id="agregar-el-repositorio-de-github" class="slide level2">
+<h1>Agregar el repositorio de github</h1>
+<p>Usaremos la línea de comando:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">cd</span> code/proyectoso
+<span class="kw">git</span> init
+<span class="kw">git</span> remote add origin git@github.com:pperez/demol5.git
+<span class="kw">git</span> add .
+<span class="kw">git</span> commit -m <span class="st">&quot;Commit inicial, laravel 5&quot;</span>
+<span class="kw">git</span> push -u origin master</code></pre>
 </section></section>
     </div>
   </div>

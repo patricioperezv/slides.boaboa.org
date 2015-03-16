@@ -125,6 +125,7 @@ Si se cae el servidor de github (Repositorio central en la imagen), aún pueden 
 git config --global user.name "Patricio Pérez"
 git config --globa user.email pperez@boaboa.org
 git config --global color.ui auto
+git config --global push.default simple
 ssh-keygen -t rsa -C pperez@badgerbook
 ~~~
 
