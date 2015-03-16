@@ -37,8 +37,8 @@ Un *URI* es un identificador único de un recurso, ejs:
 
 ## Requests
 
-Un request es una *petición* realizada a un recurso mediante su *URI*, la petición debe indicar un **verbo http**, el que dice si estamos pidiendo, actualizando o enviando información (Aquí enviamos información al servidor).
-Un request debe tener una respuesta, la que es entregada al usuario, esta puede tener un código (i.e: 500, 200, el infame error 404, etc).
+Un request o *petición*, se realiza a un recurso mediante su *URI* usando un **verbo http**.
+Un request debe tener una respuesta, la que por lo bajo tiene un código (i.e: 500, 200, el infame error 404, etc) y otro tipo de información (headers), aparte de la respuesta.
 
 ## Verbos HTTP
 
@@ -143,28 +143,28 @@ Los modelos se refiere al conjunto de clases que representa nuestro dominio del 
 
 ## Modelos
 
-El ORM permite trabajar los objetos, por ejemplo, `Modelo::all()` nos entregará una lista con todos los objetos de esa clase, `Modelo::find(5)` entregará el objeto cuya llave primaria sea igual a 5. Se pueden pedir otras cosas al ORM, como condiciones `where` o consultar relaciones `1/n`.
+El ORM permite trabajar los objetos, por ejemplo, `Modelo::all()` nos entregará una lista con todos los objetos de esa clase, `Modelo::find(5)` entregará el objeto cuya llave primaria sea igual a 5. Se pueden pedir otras cosas al ORM, como condiciones `WHERE` o consultar relaciones `1/n`.
 
 . . .
 
-En fin, si quiere más información, lo veremos prontamente, por este mismo horario, mismo canal.
+En fin, si quiere más información, lo veremos prontamente, mismo horario, mismo canal.
 
 ## Controladores
 
 Los controladores son la forma en las que interactuamos con la aplicación, en el caso particular de los frameworks web que implementan MVC las acciones se realizan a través de una URI y de verbos HTTP, ejemplos:
 
-- `GET /perros`
-- `POST /perros`
-- `GET /perros/5`
-- `DELETE /perros/10`
+* `GET /perros`
+* `POST /perros`
+* `GET /perros/5`
+* `DELETE /perros/10`
 
 ## Controladores
 
-Cada ruta de la aplicación (URI) y un verbo http correspondiente deben mapear a un método de un controlador, los métodos de un controlador pueden no recibir parámetros (ej: un index) o recibirlos (ej: mostrar el recurso 5).
+Cada ruta de la aplicación (URI) y un verbo http correspondiente deben mapear a un método de un controlador, los métodos de un controlador pueden no recibir parámetros (ej: un index) o recibirlos (ej: mostrar el recurso con id 5).
 
 . . .
 
-El encargado de mapear una URI + verbo a un método es el framework de `Routing` (El que veremos en detalle más)
+El encargado de mapear una URI + verbo a un método es el framework de `Routing` (El que veremos en detalle más adelante)
 
 ## Vistas
 
@@ -174,7 +174,6 @@ Es la representación de un recurso, presentada al usuario. Estás pueden tener 
 * JSON
 * HTML
 * Otros
-
 
 ## MVC Overview
 
