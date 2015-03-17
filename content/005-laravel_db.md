@@ -444,3 +444,5 @@ Tambien es posible ejecutar los seeds luego de migrar, el comando mágico es:
 ~~~bash
 $ php artisan migrate:refresh --seed
 ~~~
+
+## Eso es todo amigos
