@@ -436,3 +436,11 @@ class DatabaseSeeder extends Seeder {
 ---
 
 ![En DB](media/seed_ok.png)
+
+## Ejecutarla despues de migrar
+
+Tambien es posible ejecutar los seeds luego de migrar, el comando mágico es:
+
+~~~bash
+$ php artisan migrate:refresh --seed
+~~~
