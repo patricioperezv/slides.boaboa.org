@@ -72,7 +72,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 </ul>
 </section><section id="requests" class="slide level2">
 <h1>Requests</h1>
-<p>Un request es una <em>petición</em> realizada a un recurso mediante su <em>URI</em>, la petición debe indicar un <strong>verbo http</strong>, el que dice si estamos pidiendo, actualizando o enviando información (Aquí enviamos información al servidor). Un request debe tener una respuesta, la que es entregada al usuario, esta puede tener un código (i.e: 500, 200, el infame error 404, etc).</p>
+<p>Un request o <em>petición</em>, se realiza a un recurso mediante su <em>URI</em> usando un <strong>verbo http</strong>. Un request debe tener una respuesta, la que por lo bajo tiene un código (i.e: 500, 200, el infame error 404, etc) y otro tipo de información (headers), aparte de la respuesta.</p>
 </section><section id="verbos-http" class="slide level2">
 <h1>Verbos HTTP</h1>
 <p>Los verbos HTTP más utilizados son:</p>
@@ -168,9 +168,9 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 <p><em>Laravel</em> nos da una herramienta llamada <em>Eloquent</em> para manejar los modelos, estos tienen relación directa con nuestra base de datos (<em>Eloquent</em> es un <em>ORM</em>, este mapea objetos a filas de base de datos), el ORM automáticamente construira consultas para la base de datos.</p>
 </section><section id="modelos-2" class="slide level2">
 <h1>Modelos</h1>
-<p>El ORM permite trabajar los objetos, por ejemplo, <code>Modelo::all()</code> nos entregará una lista con todos los objetos de esa clase, <code>Modelo::find(5)</code> entregará el objeto cuya llave primaria sea igual a 5. Se pueden pedir otras cosas al ORM, como condiciones <code>where</code> o consultar relaciones <code>1/n</code>.</p>
+<p>El ORM permite trabajar los objetos, por ejemplo, <code>Modelo::all()</code> nos entregará una lista con todos los objetos de esa clase, <code>Modelo::find(5)</code> entregará el objeto cuya llave primaria sea igual a 5. Se pueden pedir otras cosas al ORM, como condiciones <code>WHERE</code> o consultar relaciones <code>1/n</code>.</p>
 <div class="fragment">
-<p>En fin, si quiere más información, lo veremos prontamente, por este mismo horario, mismo canal.</p>
+<p>En fin, si quiere más información, lo veremos prontamente, mismo horario, mismo canal.</p>
 </div>
 </section><section id="controladores" class="slide level2">
 <h1>Controladores</h1>
@@ -183,9 +183,9 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 </ul>
 </section><section id="controladores-1" class="slide level2">
 <h1>Controladores</h1>
-<p>Cada ruta de la aplicación (URI) y un verbo http correspondiente deben mapear a un método de un controlador, los métodos de un controlador pueden no recibir parámetros (ej: un index) o recibirlos (ej: mostrar el recurso 5).</p>
+<p>Cada ruta de la aplicación (URI) y un verbo http correspondiente deben mapear a un método de un controlador, los métodos de un controlador pueden no recibir parámetros (ej: un index) o recibirlos (ej: mostrar el recurso con id 5).</p>
 <div class="fragment">
-<p>El encargado de mapear una URI + verbo a un método es el framework de <code>Routing</code> (El que veremos en detalle más)</p>
+<p>El encargado de mapear una URI + verbo a un método es el framework de <code>Routing</code> (El que veremos en detalle más adelante)</p>
 </div>
 </section><section id="vistas" class="slide level2">
 <h1>Vistas</h1>

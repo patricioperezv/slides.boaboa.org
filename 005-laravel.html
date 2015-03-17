@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Patricio Pérez patricio.perez@ceinf.cl" />
+  <title>Laravel 5.0</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="reveal.js/css/reveal.css"/>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">
+  <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+  <script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = 'reveal.js/css/print/pdf.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+  </script>
+  <!--[if lt IE 9]>
+  <script src="reveal.js/lib/js/html5shiv.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+    <h1 class="title">Laravel 5.0</h1>
+    <h2 class="author">Patricio Pérez <script type="text/javascript">
+<!--
+h='&#x63;&#x65;&#x69;&#110;&#102;&#46;&#x63;&#108;';a='&#64;';n='&#112;&#x61;&#116;&#114;&#x69;&#x63;&#x69;&#x6f;&#46;&#112;&#x65;&#114;&#x65;&#122;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#112;&#x61;&#116;&#114;&#x69;&#x63;&#x69;&#x6f;&#46;&#112;&#x65;&#114;&#x65;&#122;&#32;&#x61;&#116;&#32;&#x63;&#x65;&#x69;&#110;&#102;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#108;</noscript></h2>
+    <h3 class="date">Primer semestre 2015</h3>
+</section>
+
+<section><section id="laravel" class="titleslide slide level1"><h1>Laravel</h1></section><section class="slide level2">
+
+<figure>
+<img src="media/laravel.png" alt="" />
+</figure>
+</section><section id="laravel-1" class="slide level2">
+<h1>Laravel</h1>
+<p>Laravel es un framework para PHP que implementa el patrón MVC.</p>
+<div class="fragment">
+<p>Ya vimos como instalarlo, así que el que no tenga su proyecto listo para trabajar lease todas las diapos anteriores/blogs/etc.</p>
+</div>
+</section><section id="laravel-2" class="slide level2">
+<h1>Laravel</h1>
+<p>Características agradables que tiene:</p>
+<ul>
+<li class="fragment">Framework de ruteo.</li>
+<li class="fragment">Schema Builder + Migraciones.</li>
+<li class="fragment">ORM <em>Eloquent</em>.</li>
+<li class="fragment">Vistas con <em>Blade</em> Templating.</li>
+<li class="fragment">Manejo de cache.</li>
+<li class="fragment">Manejo de colas (<em>Queues</em>: Redis, Amazon SQS, otras).</li>
+</ul>
+</section><section id="artisan" class="slide level2">
+<h1>Artisan</h1>
+<p><em>Artisan</em> es la interfaz de línea de comando de <em>Laravel</em>. Incluye un montón de funciones útiles a la hora de desarrollar:</p>
+<ul>
+<li class="fragment">Servidor integrado de php (<code>php artisan serve</code>).</li>
+<li class="fragment">Manejo de migraciones (<code>php artisan migrate</code>).</li>
+<li class="fragment">Manejo de estado de la app (<code>php artisan down | php artisan up</code>).</li>
+<li class="fragment">Comandos personalizables.</li>
+</ul>
+</section></section>
+<section><section id="base-de-datos" class="titleslide slide level1"><h1>Base de datos</h1></section><section id="la-historia-de-la-migración-el-modelo-y-la-semilla" class="slide level2">
+<h1>La historia de la migración, el modelo y la semilla</h1>
+<p>Laravel incluye 3 piezas bien útiles:</p>
+</section><section id="migraciones-de-db" class="slide level2">
+<h1>Migraciones de DB</h1>
+<p>Las <em>migraciones</em> son una especie de control de versiones para la base de datos, permitiendo a un equipo de trabajo modificar la estructura de la DB sin tantos problemas.</p>
+</section><section id="modelos" class="slide level2">
+<h1>Modelos</h1>
+<p>Los modelos representan la lógica y reglas de nuestra aplicación. En el framework se utilizan modelos <em>Eloquent</em> (Un ORM), para utilizarlos basta con herederar desde la clase <code>Illuminate\Database\Eloquent\Model</code>.</p>
+</section><section id="seeds" class="slide level2">
+<h1>Seeds</h1>
+<p>Los <em>seeds</em> sirven para poblar la base de datos, pueden usarse para dejar la base de datos en su estado inicial (ej: añadir las facultades iniciales de la universidad, agregar docente por defecto para las asignaturas, etc).</p>
+</section></section>
+<section><section id="codeando-migraciones" class="titleslide slide level1"><h1>Codeando migraciones</h1></section><section id="crear-migraciones" class="slide level2">
+<h1>Crear migraciones</h1>
+<p>El framework incluye un generador para migraciones:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">php</span> artisan make:migration --create=carreras create_carreras_table</code></pre>
+<div class="fragment">
+<figure>
+<img src="media/tree_database_directory.png" alt="Arbol directorio database" /><figcaption>Arbol directorio database</figcaption>
+</figure>
+</div>
+</section><section class="slide level2">
+
+<aside class="notes">
+<p>Método up() se ejecuta cuando la migración se aplica. Método down() ejecutado cuando la migración se revierte (rollback).</p>
+</aside>
+<figure>
+<img src="media/migracion_nueva.png" alt="Migracion internals" /><figcaption>Migracion internals</figcaption>
+</figure>
+</section><section id="añadiendo-el-schema-builder" class="slide level2">
+<h1>Añadiendo el Schema Builder</h1>
+<p>El <a href="http://laravel.com/docs/5.0/schema">Schema Builder</a> de laravel permite hacer cambios sobre la estructura de la DB:</p>
+<ul>
+<li class="fragment">Añadir y quitar tablas</li>
+<li class="fragment">Añadir, renombrar, quitar columnas</li>
+<li class="fragment">Renombrar columnas</li>
+<li class="fragment">Agregar/Remover llaves foráneas</li>
+<li class="fragment">Otros</li>
+</ul>
+</section><section class="slide level2">
+
+<pre class="sourceCode php"><code class="sourceCode php"><span class="kw">&lt;?php</span>
+
+<span class="kw">use</span> Illuminate\Database\Schema\Blueprint<span class="ot">;</span>
+<span class="kw">use</span> Illuminate\Database\Migrations\Migration<span class="ot">;</span>
+
+<span class="kw">class</span> CreateCarrerasTable <span class="kw">extends</span> Migration {
+
+    <span class="co">/**</span>
+<span class="co">     * Run the migrations.</span>
+<span class="co">     *</span>
+<span class="co">     * </span><span class="kw">@return</span><span class="co"> void</span>
+<span class="co">     */</span>
+    <span class="kw">public</span> <span class="kw">function</span> up<span class="ot">()</span>
+    {
+        Schema::create<span class="ot">(</span><span class="st">&#39;carreras&#39;</span><span class="ot">,</span> <span class="kw">function</span><span class="ot">(</span>Blueprint <span class="kw">$table</span><span class="ot">)</span>
+        {
+            <span class="kw">$table</span>-&gt;increments<span class="ot">(</span><span class="st">&#39;id&#39;</span><span class="ot">);</span>
+            <span class="kw">$table</span>-&gt;string<span class="ot">(</span><span class="st">&#39;nombre&#39;</span><span class="ot">);</span>
+            <span class="kw">$table</span>-&gt;integer<span class="ot">(</span><span class="st">&#39;codigo&#39;</span><span class="ot">);</span>
+            <span class="kw">$table</span>-&gt;integer<span class="ot">(</span><span class="st">&#39;facultad_id&#39;</span><span class="ot">);</span>
+            <span class="kw">$table</span>-&gt;integer<span class="ot">(</span><span class="st">&#39;jefe_carrera_rut&#39;</span><span class="ot">)</span>-&gt;nullable<span class="ot">();</span>
+            <span class="kw">$table</span>-&gt;timestamps<span class="ot">();</span>
+        }<span class="ot">);</span>
+    }
+
+    <span class="co">/**</span>
+<span class="co">     * Reverse the migrations.</span>
+<span class="co">     *</span>
+<span class="co">     * </span><span class="kw">@return</span><span class="co"> void</span>
+<span class="co">     */</span>
+    <span class="kw">public</span> <span class="kw">function</span> down<span class="ot">()</span>
+    {
+        Schema::drop<span class="ot">(</span><span class="st">&#39;carreras&#39;</span><span class="ot">);</span>
+    }
+
+}</code></pre>
+</section><section id="llaves-foráneas-yes-please" class="slide level2">
+<h1>Llaves foráneas? Yes please!</h1>
+<p>Generalmente hago esto luego de haber definido todas las demás tablas con sus correspondientes campos. Recuerden que como tal la llave foránea es una restricción, independiente de los campos a los que se refiera.</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">php</span> artisan make:migration --table=carreras add_foreign_key_to_carreras_table</code></pre>
+</section><section class="slide level2">
+
+<pre class="sourceCode php"><code class="sourceCode php"><span class="kw">&lt;?php</span>
+
+<span class="kw">use</span> Illuminate\Database\Schema\Blueprint<span class="ot">;</span>
+<span class="kw">use</span> Illuminate\Database\Migrations\Migration<span class="ot">;</span>
+
+<span class="kw">class</span> AddForeignKeyToCarrerasTable <span class="kw">extends</span> Migration {
+
+    <span class="co">/**</span>
+<span class="co">     * Run the migrations.</span>
+<span class="co">     *</span>
+<span class="co">     * </span><span class="kw">@return</span><span class="co"> void</span>
+<span class="co">     */</span>
+    <span class="kw">public</span> <span class="kw">function</span> up<span class="ot">()</span>
+    {
+        Schema::table<span class="ot">(</span><span class="st">&#39;carreras&#39;</span><span class="ot">,</span> <span class="kw">function</span><span class="ot">(</span>Blueprint <span class="kw">$table</span><span class="ot">)</span>
+        {
+            <span class="kw">$table</span>-&gt;foreign<span class="ot">(</span><span class="st">&#39;facultad_id&#39;</span><span class="ot">)</span>-&gt;references<span class="ot">(</span><span class="st">&#39;id&#39;</span><span class="ot">)</span>-&gt;on<span class="ot">(</span><span class="st">&#39;facultades&#39;</span><span class="ot">);</span>
+            <span class="kw">$table</span>-&gt;foreign<span class="ot">(</span><span class="st">&#39;jefe_carrera_rut&#39;</span><span class="ot">)</span>-&gt;references<span class="ot">(</span><span class="st">&#39;rut&#39;</span><span class="ot">)</span>-&gt;on<span class="ot">(</span><span class="st">&#39;usuarios&#39;</span><span class="ot">);</span>
+        }<span class="ot">);</span>
+    }
+
+    <span class="co">/**</span>
+<span class="co">     * Reverse the migrations.</span>
+<span class="co">     *</span>
+<span class="co">     * </span><span class="kw">@return</span><span class="co"> void</span>
+<span class="co">     */</span>
+    <span class="kw">public</span> <span class="kw">function</span> down<span class="ot">()</span>
+    {
+        Schema::table<span class="ot">(</span><span class="st">&#39;carreras&#39;</span><span class="ot">,</span> <span class="kw">function</span><span class="ot">(</span>Blueprint <span class="kw">$table</span><span class="ot">)</span>
+        {
+            <span class="kw">$table</span>-&gt;dropForeign<span class="ot">(</span><span class="st">&#39;carreras_facultad_id_foreign&#39;</span><span class="ot">);</span>
+            <span class="kw">$table</span>-&gt;dropForeign<span class="ot">(</span><span class="st">&#39;carreras_jefe_carrera_rut_foreign&#39;</span><span class="ot">);</span>
+        }<span class="ot">);</span>
+    }
+
+}</code></pre>
+</section><section id="ejecutando-la-migración" class="slide level2">
+<h1>Ejecutando la migración</h1>
+<figure>
+<img src="media/migrate_exec.png" alt="php artisan migrate" /><figcaption>php artisan migrate</figcaption>
+</figure>
+</section><section id="ahora-rollback" class="slide level2">
+<h1>Ahora Rollback</h1>
+<figure>
+<img src="media/rollback_exec.png" alt="php artisan migrate:rollback" /><figcaption>php artisan migrate:rollback</figcaption>
+</figure>
+</section></section>
+<section><section id="codeando-modelos" class="titleslide slide level1"><h1>Codeando modelos</h1></section><section id="crear-modelos" class="slide level2">
+<h1>Crear modelos</h1>
+<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">php</span> artisan make:model Models/Carrera --no-migration
+$ <span class="kw">cat</span> app/Models/Carrera.php</code></pre>
+</section><section class="slide level2">
+
+<pre class="sourceCode php"><code class="sourceCode php"><span class="kw">&lt;?php</span> <span class="kw">namespace</span> App\Models<span class="ot">;</span>
+
+<span class="kw">use</span> Illuminate\Database\Eloquent\Model<span class="ot">;</span>
+
+<span class="kw">class</span> Carrera <span class="kw">extends</span> Model {
+
+    <span class="co">//</span>
+
+}</code></pre>
+</section><section id="convenciones-de-un-modelo" class="slide level2">
+<h1>Convenciones de un modelo</h1>
+<p>Laravel tiene un montón de convenciones, esto no es distinto para los modelos Eloquent. Las convenciones son las siguientes:</p>
+<ul>
+<li class="fragment">Deben heredar de la clase <code>Illuminate\Database\Eloquent\Model</code>.</li>
+<li class="fragment">El nombre de la tabla es el plural (en ingles) del nombre de la clase, en minúsculas.</li>
+<li class="fragment">La llave primaria es <code>id</code>.</li>
+<li class="fragment">Al declarar relaciones de db, la llave foránea es <code>clase_id</code> e <code>id</code>.</li>
+</ul>
+</section><section id="saltando-las-convenciones" class="slide level2">
+<h1>Saltando las convenciones</h1>
+<aside class="notes">
+<p>Es necesario saltarselas, debido a lo del ingles expuesto más atrás.</p>
+</aside>
+<p>Es posible saltarse las convenciones, modificando datos en la clase:</p>
+<ul>
+<li class="fragment"><code>private $table = 'salas'</code></li>
+<li class="fragment"><code>private $primaryKey = 'pk'</code></li>
+</ul>
+</section><section id="añadiendo-relaciones-entre-modelos" class="slide level2">
+<h1>Añadiendo relaciones entre modelos</h1>
+<p>Como mencioné anteriormente, es posible hacer las típicas relaciones de entidades:</p>
+<ul>
+<li class="fragment"><code>1:n</code></li>
+<li class="fragment"><code>1:1</code></li>
+<li class="fragment"><code>n:m</code></li>
+</ul>
+</section><section id="relación-1n" class="slide level2">
+<h1>Relación 1:n</h1>
+<p>Modelaremos la siguiente relación:</p>
+<figure>
+<img src="media/relacion_campus_facultades.png" alt="Relación campus-facultades" /><figcaption>Relación campus-facultades</figcaption>
+</figure>
+</section><section class="slide level2">
+
+<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">cat</span> app/Models/Facultad.php</code></pre>
+<pre class="sourceCode php"><code class="sourceCode php"><span class="kw">&lt;?php</span> <span class="kw">namespace</span> App\Models<span class="ot">;</span>
+
+<span class="kw">use</span> Illuminate\Database\Eloquent\Model<span class="ot">;</span>
+
+<span class="kw">class</span> Facultad <span class="kw">extends</span> Model
+{
+    <span class="kw">protected</span> <span class="kw">$table</span> = <span class="st">&#39;facultades&#39;</span><span class="ot">;</span>
+    <span class="kw">protected</span> <span class="kw">$fillable</span> = <span class="ot">[</span><span class="st">&#39;nombre&#39;</span><span class="ot">];</span>
+
+    <span class="kw">public</span> <span class="kw">function</span> campus<span class="ot">()</span>
+    {
+        <span class="kw">return</span> <span class="kw">$this</span>-&gt;belongsTo<span class="ot">(</span><span class="st">&#39;Campus&#39;</span><span class="ot">);</span>
+    }
+}</code></pre>
+</section><section class="slide level2">
+
+<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">cat</span> app/models/Campus.php</code></pre>
+<pre class="sourceCode php"><code class="sourceCode php"><span class="kw">&lt;?php</span> <span class="kw">namespace</span> App\Models<span class="ot">;</span>
+
+<span class="kw">use</span> Illuminate\Database\Eloquent\Model<span class="ot">;</span>
+
+
+<span class="kw">class</span> Campus <span class="kw">extends</span> Model
+{
+    <span class="kw">protected</span> <span class="kw">$table</span> = <span class="st">&#39;campus&#39;</span><span class="ot">;</span> <span class="co">// O sino laravel busca la tabla &#39;campuss&#39;</span>
+    <span class="kw">protected</span> <span class="kw">$fillable</span> = <span class="ot">[</span><span class="st">&#39;nombre&#39;</span><span class="ot">,</span> <span class="st">&#39;direccion&#39;</span><span class="ot">];</span>
+
+    <span class="kw">public</span> <span class="kw">function</span> facultades<span class="ot">()</span>
+    {
+        <span class="kw">return</span> <span class="kw">$this</span>-&gt;hasMany<span class="ot">(</span><span class="st">&#39;Facultad&#39;</span><span class="ot">);</span>
+    }
+}</code></pre>
+</section><section class="slide level2">
+
+<p>Listo, la relación y su inverso!</p>
+</section><section id="relacion-nm" class="slide level2">
+<h1>Relacion n:m</h1>
+<p>Esta reación es algo más complicada (?), necesitan una tabla pivote (Recuerdan normalizar una db con tía sarita hace un año atrás aprox?)</p>
+</section><section class="slide level2">
+
+<figure>
+<img src="media/diagram_roles_usuarios.png" alt="Relacion n:m" /><figcaption>Relacion n:m</figcaption>
+</figure>
+</section><section class="slide level2">
+
+<p>Tendremos dos modelos (<em>Rol</em> y <em>Usuario</em>):</p>
+<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">cat</span> app/Models/Rol.php</code></pre>
+<pre class="sourceCode php"><code class="sourceCode php"><span class="kw">&lt;?php</span> <span class="kw">namespace</span> App\Models<span class="ot">;</span>
+
+<span class="kw">use</span> Illuminate\Database\Eloquent\Model<span class="ot">;</span>
+
+<span class="kw">class</span> Rol <span class="kw">extends</span> Model
+{
+    <span class="kw">protected</span> <span class="kw">$table</span> = <span class="st">&#39;roles&#39;</span><span class="ot">;</span>
+    <span class="kw">protected</span> <span class="kw">$fillable</span> = <span class="ot">[</span><span class="st">&#39;nombre&#39;</span><span class="ot">];</span>
+
+    <span class="kw">public</span> <span class="kw">function</span> usuarios<span class="ot">()</span>
+    {
+        <span class="kw">return</span> <span class="kw">$this</span>-&gt;belongsToMany<span class="ot">(</span><span class="st">&#39;Usuario&#39;</span><span class="ot">,</span> <span class="st">&#39;usuario_tiene_roles&#39;</span><span class="ot">,</span> <span class="st">&#39;rol_id&#39;</span><span class="ot">,</span> <span class="st">&#39;usuario_rut&#39;</span><span class="ot">)</span>-&gt;withTimestamps<span class="ot">();</span>
+    }
+}</code></pre>
+</section><section class="slide level2">
+
+<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">cat</span> app/models/Usuario.php</code></pre>
+<pre class="sourceCode php"><code class="sourceCode php"><span class="kw">&lt;?php</span> <span class="kw">namespace</span> App\Models<span class="ot">;</span>
+
+<span class="kw">use</span> Illuminate\Database\Eloquent\Model<span class="ot">;</span>
+
+<span class="kw">class</span> Usuario <span class="kw">extends</span> Model
+{
+    <span class="kw">protected</span> <span class="kw">$primaryKey</span> = <span class="st">&#39;rut&#39;</span><span class="ot">;</span>
+    <span class="kw">protected</span> <span class="kw">$incrementing</span> = <span class="kw">false</span><span class="ot">;</span> <span class="co">// El rut no es autoincrementable .. dah</span>
+    <span class="kw">protected</span> <span class="kw">$fillable</span> = <span class="ot">[</span><span class="st">&#39;rut&#39;</span><span class="ot">,</span> <span class="st">&#39;nombres&#39;</span><span class="ot">,</span> <span class="st">&#39;apellidos&#39;</span><span class="ot">];</span>
+
+    <span class="kw">public</span> <span class="kw">function</span> roles<span class="ot">()</span>
+    {
+        <span class="kw">return</span> <span class="kw">$this</span>-&gt;belongsToMany<span class="ot">(</span><span class="st">&#39;Rol&#39;</span><span class="ot">,</span> <span class="st">&#39;usuario_tiene_roles&#39;</span><span class="ot">,</span> <span class="st">&#39;usuario_rut&#39;</span><span class="ot">,</span> <span class="st">&#39;rol_id&#39;</span><span class="ot">)</span>-&gt;withTimestamps<span class="ot">();</span>
+    }
+}</code></pre>
+</section></section>
+<section><section id="codeando-seeds" class="titleslide slide level1"><h1>Codeando Seeds</h1></section><section id="crear-seed" class="slide level2">
+<h1>Crear seed</h1>
+<p>Desafortunadamente no existen generadores para seeds integrados en laravel, asi que hay que crearlos a manito:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">cat</span> database/seeds/CampusTableSeeder.php</code></pre>
+</section><section class="slide level2">
+
+<pre class="sourceCode php"><code class="sourceCode php"><span class="kw">&lt;?php</span>
+
+<span class="kw">use</span> Illuminate\Database\Seeder<span class="ot">;</span>
+
+<span class="kw">class</span> CampusTableSeeder <span class="kw">extends</span> Seeder {
+
+    <span class="kw">public</span> <span class="kw">function</span> run<span class="ot">()</span>
+    {
+        <span class="co">//DB::table(&#39;campus&#39;)-&gt;delete();</span>
+        <span class="kw">$nombres</span> = <span class="ot">[</span><span class="st">&#39;Macul&#39;</span><span class="ot">,</span> <span class="st">&#39;FAE&#39;</span><span class="ot">,</span> <span class="st">&#39;Centro&#39;</span><span class="ot">];</span>
+        
+        <span class="kw">foreach</span><span class="ot">(</span><span class="kw">$nombres</span> <span class="kw">as</span> <span class="kw">$nombre</span><span class="ot">)</span>
+        {
+            <span class="kw">$campus</span> = Campus::create<span class="ot">([</span><span class="st">&#39;nombre&#39;</span> =&gt; <span class="kw">$nombre</span><span class="ot">]);</span>
+        }
+    }
+
+}</code></pre>
+</section><section class="slide level2">
+
+<p>Se ejecuta así:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">php</span> artisan db:seed --class=CampusTableSeeder</code></pre>
+</section><section id="ejecutar-una-serie-de-seeds" class="slide level2">
+<h1>Ejecutar una serie de seeds</h1>
+<p>Es latoso ejecutar un montón de seeds, si quitamos el parámetro <code>class</code> del comando anterior, se asume que se ejecuta la clase <code>DatabaseSeeder</code>, desde esta haremos <code>$this-&gt;call('TablaSeeder')</code> a todas las clases que queramos.</p>
+<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">cat</span> app/database/seeds/DatabaseSeeder.php</code></pre>
+</section><section class="slide level2">
+
+<pre class="sourceCode php"><code class="sourceCode php"><span class="kw">&lt;?php</span>
+
+<span class="kw">use</span> Illuminate\Database\Seeder<span class="ot">;</span>
+<span class="kw">use</span> Illuminate\Database\Eloquent\Model<span class="ot">;</span>
+
+<span class="kw">class</span> DatabaseSeeder <span class="kw">extends</span> Seeder {
+
+    <span class="co">/**</span>
+<span class="co">     * Run the database seeds.</span>
+<span class="co">     *</span>
+<span class="co">     * </span><span class="kw">@return</span><span class="co"> void</span>
+<span class="co">     */</span>
+    <span class="kw">public</span> <span class="kw">function</span> run<span class="ot">()</span>
+    {
+        Model::unguard<span class="ot">();</span>
+
+        <span class="kw">$this</span>-&gt;call<span class="ot">(</span><span class="st">&#39;UserTableSeeder&#39;</span><span class="ot">);</span> <span class="co">// Aquí!</span>
+    }
+
+}</code></pre>
+</section><section class="slide level2">
+
+<figure>
+<img src="media/seeded.png" alt="Seeded" /><figcaption>Seeded</figcaption>
+</figure>
+</section><section class="slide level2">
+
+<figure>
+<img src="media/seed_ok.png" alt="En DB" /><figcaption>En DB</figcaption>
+</figure>
+</section><section id="ejecutarla-despues-de-migrar" class="slide level2">
+<h1>Ejecutarla despues de migrar</h1>
+<p>Tambien es posible ejecutar los seeds luego de migrar, el comando mágico es:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">php</span> artisan migrate:refresh --seed</code></pre>
+</section></section>
+    </div>
+  </div>
+
+
+  <script src="reveal.js/lib/js/head.min.js"></script>
+  <script src="reveal.js/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        theme: 'night', // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+//          { src: 'reveal.js/plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; }, }
+//          { src: 'reveal.js/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+]});
+    </script>
+    </body>
+</html>
