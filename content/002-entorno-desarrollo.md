@@ -1,4 +1,4 @@
-% Entorno de desarrollo
+﻿% Entorno de desarrollo
 % Patricio Pérez <patricio.perez@ceinf.cl>
 % Primer semestre 2015
 
@@ -210,16 +210,3 @@ Cambiar el filtro para que se muestren los ficheros ocultos
 </div>
 
 Para abrir el proyecto en Eclipse, basta que pinchemos en crear nuevo proyecto de php, le damos que tenemos un directorio ya existente y listo.
-
-## Agregar el repositorio de github
-
-Usaremos la línea de comando:
-
-~~~bash
-cd code/proyectoso
-git init
-git remote add origin git@github.com:pperez/demol5.git
-git add .
-git commit -m "Commit inicial, laravel 5"
-git push -u origin master
-~~~
