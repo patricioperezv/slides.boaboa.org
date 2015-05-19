@@ -3,6 +3,12 @@ slides.boaboa.org
 
 Este repositorio contiene los fuentes y html de las presentaciones para boaboa.org, utiliza el hosting de github-pages (it's free!).
 
+Clonar con `git --recursive`, para que se clone el repositorio de reveal.js:
+
+~~~bash
+git clone --recursive git@github.com:pperez/slides.boaboa.org.git
+~~~
+
 Para utilizarlo es necesario instalar un par de cosillas:
 
 - [Pandoc](http://johnmacfarlane.net/pandoc/) (Transforma desde markdown al framework de presentaciones [reveal.js](http://lab.hakim.se/reveal-js/#/))
