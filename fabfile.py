@@ -21,14 +21,14 @@ def clean():
 def build():
     clean()
     #local('cp -rf {0} {1}'.format(REVEAL_JS_SOURCE_DIR, DEST_DIR))
-    local('cp -rf {0} {1}'.format(MEDIA_SOURCE_DIR, MEDIA_DEST_DIR))
+    local('cp -rf \'{0}\' \'{1}\''.format(MEDIA_SOURCE_DIR, MEDIA_DEST_DIR))
     for fichero in glob.glob(SOURCE_FILES):
         nombre = os.path.splitext(os.path.split(fichero)[-1])[0]
         destino = os.path.join(DEST_DIR, nombre + '.html')
         local('pandoc --slide-level 2 -f markdown -t revealjs --incremental --mathjax -V theme=night -s {0} -o {1}'.format(fichero, destino))
 
 def serve():
-    local('cd {0} && python -m SimpleHTTPServer 9000'.format(DEST_DIR))
+    local('cd \'{0}\' && python -m SimpleHTTPServer 9000'.format(DEST_DIR))
 
 def watch():
     build()

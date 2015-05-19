@@ -1,4 +1,4 @@
-﻿% Entorno de desarrollo
+% Entorno de desarrollo
 % Patricio Pérez <patricio.perez@ceinf.cl>
 % Primer semestre 2015
 
@@ -15,6 +15,10 @@
 
 Ubuntu es una *distribución de linux* (Algo así como un sabor), es una de las más usadas según [Distrowatch](http://distrowatch.com/dwres.php?resource=popularity) y personalmente encuentro más amigable trabajar desarrollos en esta plataforma.
 
+. . .
+
+Usar la versión de 64 bits!
+
 ## Disclaimer
 
 Creo que la instalación es bastante sencilla, asi que obviare temas como el particionado. Sin embargo, si tienen dudas no duden en dejarmelas ;)
@@ -22,6 +26,12 @@ Creo que la instalación es bastante sencilla, asi que obviare temas como el par
 ## Línea de comandos
 
 La querida terminal debería ser una de sus más grandes aliadas en este curso, así que tenganla a mano, la encontrarán como "terminal" y luce como las películas de hackers de los 80'.
+
+
+---
+
+![Terminal](media/terminal.png)
+
 
 ## Superusuario
 
@@ -37,12 +47,15 @@ El super-usuario de unix es root, este puede hacer de todo en el sistema de fich
 
 ----
 
-- Usar apt para manejar paquetes es super sencillo:
+- Usar apt para manejar paquetes es sencillo:
     * `apt-get install paquete otropaquete` Instalar
     * `apt-get remove paquete otropaquete` Desinstalar
     * `apt-cache search palabra buscar php` Buscar paquetes, en descripción etc, pueden ser muchas palabras
     * `apt-get update` Actualiza la base de datos de paquetes
     * `apt-get dist-upgrade` Actualiza todos los paquetes del sistema
+
+---
+
 - Usar `sudo` antes de cualquier comando que necesite permisos de administrador (ej: instalar paquetes con apt, modificar ficheros en `/etc`, etc)
 
 # Eclipse
@@ -64,7 +77,7 @@ Aceptamos la licencia y listo, java java doo.
 ## Instalar eclipse (+ PDT)
 
 ~~~bash
-wget http://carroll.aset.psu.edu/pub/eclipse//technology/epp/downloads/release/luna/SR2/eclipse-php-luna-SR2-linux-gtk-x86_64.tar.gz
+wget http://is.gd/pLYSGR -O eclipse-php-luna-SR2-linux-gtk-x86_64.tar.gz
 sudo tar xzvf eclipse-php-luna-SR2-linux-gtk-x86_64.tar.gz -C /opt
 sudo ln -s /opt/eclipse/eclipse /usr/local/bin
 sudo wget http://git.io/VhjClg -O /usr/share/applications/eclipse.desktop
@@ -75,7 +88,7 @@ Incluso tendran el icono en el lanzador de aplicaciones.
 
 ---
 
-![Eclipse](images/eclipse_icon.png)
+![Eclipse](media/eclipse_icon.png)
 
 # PHP, Composer, Laravel y Postgres
 
@@ -123,7 +136,7 @@ Tiene dos modos, *local* y *global*.
 
 ## Composer global
 
-Este instala los paquetes de composer en el *home* del usuario.
+Los paquetes/librerías instaladas de esta forma son globales para nuestro usuario.
 
 . . .
 
@@ -137,7 +150,7 @@ composer global require "laravel/installer=~1.1"
 
 ## Composer local
 
-Este instala los paquetes en el directorio `vendor` del proyecto, las dependencias se definen en el fichero `composer.json` en la raiz del proyecto
+Este instala los paquetes en el directorio `vendor` del proyecto, las dependencias se definen en el fichero `composer.json` en la raiz del proyecto. Ej:
 
 . . .
 
@@ -172,14 +185,22 @@ Como estamos trabajando con Laravel 5, la forma más sencilla y rápida es usand
 
 ## Instalar el instalador
 
-Suena mal, pero es la verdad, para esto debemos agregar `export PATH="$HOME/.composer/vendor/bin:$PATH"` a nuestro `.bashrc` o `.zshrc`, luego recargar la terminal y ejecutar:
+Suena mal, pero es la verdad, para esto ejecuten:
+
+~~~bash
+echo 'export PATH="$HOME/.composer/vendor/bin:$PATH"' >> ~/.bashrc
+~~~
+
+. . .
+
+Recargar la terminal (Abrir y cerrar), finalmente ejecutar:
 
 ~~~bash
 composer global require "laravel/installer=~1.1"
 laravel new proyectoso
 ~~~
 
-El proyecto estara en el directorio `proyectoso`
+El proyecto estara en el directorio `proyectoso` (O cualquier nombre que quieran usar)
 
 ## PostgreSQL
 

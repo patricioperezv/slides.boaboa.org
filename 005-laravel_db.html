@@ -8,9 +8,10 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <link rel="stylesheet" href="reveal.js/css/reveal.css"/>
-  <style type="text/css">code{white-space: pre;}</style>
-  <style type="text/css">
+  <link rel="stylesheet" href="reveal.js/css/reveal.min.css"/>
+    <style type="text/css">code{white-space: pre;}</style>
+    <style type="text/css">
+div.sourceCode { overflow-x: auto; }
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
   margin: 0; padding: 0; vertical-align: baseline; border: none; }
 table.sourceCode { width: 100%; line-height: 100%; }
@@ -28,21 +29,21 @@ code > span.ot { color: #007020; }
 code > span.al { color: #ff0000; font-weight: bold; }
 code > span.fu { color: #06287e; }
 code > span.er { color: #ff0000; font-weight: bold; }
-  </style>
-  <link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">
-  <!-- If the query includes 'print-pdf', include the PDF print sheet -->
-  <script>
-    if( window.location.search.match( /print-pdf/gi ) ) {
-      var link = document.createElement( 'link' );
-      link.rel = 'stylesheet';
-      link.type = 'text/css';
-      link.href = 'reveal.js/css/print/pdf.css';
-      document.getElementsByTagName( 'head' )[0].appendChild( link );
-    }
-  </script>
-  <!--[if lt IE 9]>
-  <script src="reveal.js/lib/js/html5shiv.js"></script>
-  <![endif]-->
+    </style>
+    <link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">
+    <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+    <script>
+      if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'reveal.js/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+      }
+    </script>
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
 </head>
 <body>
   <div class="reveal">
@@ -62,7 +63,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 <section><section id="laravel" class="titleslide slide level1"><h1>Laravel</h1></section><section class="slide level2">
 
 <figure>
-<img src="media/laravel.png" alt="" />
+<img src="media/laravel.png" />
 </figure>
 </section><section id="laravel-1" class="slide level2">
 <h1>Laravel</h1>
@@ -91,7 +92,17 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 <li class="fragment">Comandos personalizables.</li>
 </ul>
 </section></section>
-<section><section id="base-de-datos" class="titleslide slide level1"><h1>Base de datos</h1></section><section id="la-historia-de-la-migración-el-modelo-y-la-semilla" class="slide level2">
+<section><section id="base-de-datos" class="titleslide slide level1"><h1>Base de datos</h1></section><section id="hacer-que-laravel-utilice-nuestra-db" class="slide level2">
+<h1>Hacer que laravel utilice nuestra DB</h1>
+<p>Antes que todo, configuraremos laravel para que use la db que creamos anteriormente.</p>
+</section><section class="slide level2">
+
+<ol type="1">
+<li class="fragment">Modificamos el fichero <code>config/database.php</code>, cambiando el valor de <code>default</code> desde <code>mysql</code> a <code>pgsql</code>.</li>
+<li class="fragment">Modificamos el fichero <code>.env</code> cambiando las credenciales de la DB, usando los datos (usuario + db + password) creados con anterioridad.</li>
+<li class="fragment">Profit!</li>
+</ol>
+</section><section id="la-historia-de-la-migración-el-modelo-y-la-semilla" class="slide level2">
 <h1>La historia de la migración, el modelo y la semilla</h1>
 <p>Laravel incluye 3 piezas bien útiles:</p>
 </section><section id="migraciones-de-db" class="slide level2">
@@ -107,7 +118,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 <section><section id="codeando-migraciones" class="titleslide slide level1"><h1>Codeando migraciones</h1></section><section id="crear-migraciones" class="slide level2">
 <h1>Crear migraciones</h1>
 <p>El framework incluye un generador para migraciones:</p>
-<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">php</span> artisan make:migration --create=carreras create_carreras_table</code></pre>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">php</span> artisan make:migration --create=carreras create_carreras_table</code></pre></div>
 <div class="fragment">
 <figure>
 <img src="media/tree_database_directory.png" alt="Arbol directorio database" /><figcaption>Arbol directorio database</figcaption>
@@ -133,7 +144,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 </ul>
 </section><section class="slide level2">
 
-<pre class="sourceCode php"><code class="sourceCode php"><span class="kw">&lt;?php</span>
+<div class="sourceCode"><pre class="sourceCode php"><code class="sourceCode php"><span class="kw">&lt;?php</span>
 
 <span class="kw">use</span> Illuminate\Database\Schema\Blueprint<span class="ot">;</span>
 <span class="kw">use</span> Illuminate\Database\Migrations\Migration<span class="ot">;</span>
@@ -168,14 +179,14 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
         Schema::drop<span class="ot">(</span><span class="st">&#39;carreras&#39;</span><span class="ot">);</span>
     }
 
-}</code></pre>
+}</code></pre></div>
 </section><section id="llaves-foráneas-yes-please" class="slide level2">
 <h1>Llaves foráneas? Yes please!</h1>
 <p>Generalmente hago esto luego de haber definido todas las demás tablas con sus correspondientes campos. Recuerden que como tal la llave foránea es una restricción, independiente de los campos a los que se refiera.</p>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">php</span> artisan make:migration --table=carreras add_foreign_key_to_carreras_table</code></pre>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">php</span> artisan make:migration --table=carreras add_foreign_key_to_carreras_table</code></pre></div>
 </section><section class="slide level2">
 
-<pre class="sourceCode php"><code class="sourceCode php"><span class="kw">&lt;?php</span>
+<div class="sourceCode"><pre class="sourceCode php"><code class="sourceCode php"><span class="kw">&lt;?php</span>
 
 <span class="kw">use</span> Illuminate\Database\Schema\Blueprint<span class="ot">;</span>
 <span class="kw">use</span> Illuminate\Database\Migrations\Migration<span class="ot">;</span>
@@ -210,7 +221,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
         }<span class="ot">);</span>
     }
 
-}</code></pre>
+}</code></pre></div>
 </section><section id="ejecutando-la-migración" class="slide level2">
 <h1>Ejecutando la migración</h1>
 <figure>
@@ -224,11 +235,11 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 </section></section>
 <section><section id="codeando-modelos" class="titleslide slide level1"><h1>Codeando modelos</h1></section><section id="crear-modelos" class="slide level2">
 <h1>Crear modelos</h1>
-<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">php</span> artisan make:model Models/Carrera --no-migration
-$ <span class="kw">cat</span> app/Models/Carrera.php</code></pre>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">php</span> artisan make:model Models/Carrera --no-migration
+<span class="kw">cat</span> app/Models/Carrera.php</code></pre></div>
 </section><section class="slide level2">
 
-<pre class="sourceCode php"><code class="sourceCode php"><span class="kw">&lt;?php</span> <span class="kw">namespace</span> App\Models<span class="ot">;</span>
+<div class="sourceCode"><pre class="sourceCode php"><code class="sourceCode php"><span class="kw">&lt;?php</span> <span class="kw">namespace</span> App\Models<span class="ot">;</span>
 
 <span class="kw">use</span> Illuminate\Database\Eloquent\Model<span class="ot">;</span>
 
@@ -236,7 +247,7 @@ $ <span class="kw">cat</span> app/Models/Carrera.php</code></pre>
 
     <span class="co">//</span>
 
-}</code></pre>
+}</code></pre></div>
 </section><section id="convenciones-de-un-modelo" class="slide level2">
 <h1>Convenciones de un modelo</h1>
 <p>Laravel tiene un montón de convenciones, esto no es distinto para los modelos Eloquent. Las convenciones son las siguientes:</p>
@@ -272,8 +283,8 @@ $ <span class="kw">cat</span> app/Models/Carrera.php</code></pre>
 </figure>
 </section><section class="slide level2">
 
-<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">cat</span> app/Models/Facultad.php</code></pre>
-<pre class="sourceCode php"><code class="sourceCode php"><span class="kw">&lt;?php</span> <span class="kw">namespace</span> App\Models<span class="ot">;</span>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">cat</span> app/Models/Facultad.php</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode php"><code class="sourceCode php"><span class="kw">&lt;?php</span> <span class="kw">namespace</span> App\Models<span class="ot">;</span>
 
 <span class="kw">use</span> Illuminate\Database\Eloquent\Model<span class="ot">;</span>
 
@@ -286,11 +297,11 @@ $ <span class="kw">cat</span> app/Models/Carrera.php</code></pre>
     {
         <span class="kw">return</span> <span class="kw">$this</span>-&gt;belongsTo<span class="ot">(</span><span class="st">&#39;Campus&#39;</span><span class="ot">);</span>
     }
-}</code></pre>
+}</code></pre></div>
 </section><section class="slide level2">
 
-<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">cat</span> app/models/Campus.php</code></pre>
-<pre class="sourceCode php"><code class="sourceCode php"><span class="kw">&lt;?php</span> <span class="kw">namespace</span> App\Models<span class="ot">;</span>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">cat</span> app/models/Campus.php</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode php"><code class="sourceCode php"><span class="kw">&lt;?php</span> <span class="kw">namespace</span> App\Models<span class="ot">;</span>
 
 <span class="kw">use</span> Illuminate\Database\Eloquent\Model<span class="ot">;</span>
 
@@ -304,7 +315,7 @@ $ <span class="kw">cat</span> app/Models/Carrera.php</code></pre>
     {
         <span class="kw">return</span> <span class="kw">$this</span>-&gt;hasMany<span class="ot">(</span><span class="st">&#39;Facultad&#39;</span><span class="ot">);</span>
     }
-}</code></pre>
+}</code></pre></div>
 </section><section class="slide level2">
 
 <p>Listo, la relación y su inverso!</p>
@@ -319,8 +330,8 @@ $ <span class="kw">cat</span> app/Models/Carrera.php</code></pre>
 </section><section class="slide level2">
 
 <p>Tendremos dos modelos (<em>Rol</em> y <em>Usuario</em>):</p>
-<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">cat</span> app/Models/Rol.php</code></pre>
-<pre class="sourceCode php"><code class="sourceCode php"><span class="kw">&lt;?php</span> <span class="kw">namespace</span> App\Models<span class="ot">;</span>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">cat</span> app/Models/Rol.php</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode php"><code class="sourceCode php"><span class="kw">&lt;?php</span> <span class="kw">namespace</span> App\Models<span class="ot">;</span>
 
 <span class="kw">use</span> Illuminate\Database\Eloquent\Model<span class="ot">;</span>
 
@@ -333,11 +344,11 @@ $ <span class="kw">cat</span> app/Models/Carrera.php</code></pre>
     {
         <span class="kw">return</span> <span class="kw">$this</span>-&gt;belongsToMany<span class="ot">(</span><span class="st">&#39;Usuario&#39;</span><span class="ot">,</span> <span class="st">&#39;usuario_tiene_roles&#39;</span><span class="ot">,</span> <span class="st">&#39;rol_id&#39;</span><span class="ot">,</span> <span class="st">&#39;usuario_rut&#39;</span><span class="ot">)</span>-&gt;withTimestamps<span class="ot">();</span>
     }
-}</code></pre>
+}</code></pre></div>
 </section><section class="slide level2">
 
-<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">cat</span> app/models/Usuario.php</code></pre>
-<pre class="sourceCode php"><code class="sourceCode php"><span class="kw">&lt;?php</span> <span class="kw">namespace</span> App\Models<span class="ot">;</span>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">cat</span> app/models/Usuario.php</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode php"><code class="sourceCode php"><span class="kw">&lt;?php</span> <span class="kw">namespace</span> App\Models<span class="ot">;</span>
 
 <span class="kw">use</span> Illuminate\Database\Eloquent\Model<span class="ot">;</span>
 
@@ -351,15 +362,15 @@ $ <span class="kw">cat</span> app/Models/Carrera.php</code></pre>
     {
         <span class="kw">return</span> <span class="kw">$this</span>-&gt;belongsToMany<span class="ot">(</span><span class="st">&#39;Rol&#39;</span><span class="ot">,</span> <span class="st">&#39;usuario_tiene_roles&#39;</span><span class="ot">,</span> <span class="st">&#39;usuario_rut&#39;</span><span class="ot">,</span> <span class="st">&#39;rol_id&#39;</span><span class="ot">)</span>-&gt;withTimestamps<span class="ot">();</span>
     }
-}</code></pre>
+}</code></pre></div>
 </section></section>
 <section><section id="codeando-seeds" class="titleslide slide level1"><h1>Codeando Seeds</h1></section><section id="crear-seed" class="slide level2">
 <h1>Crear seed</h1>
 <p>Desafortunadamente no existen generadores para seeds integrados en laravel, asi que hay que crearlos a manito:</p>
-<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">cat</span> database/seeds/CampusTableSeeder.php</code></pre>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">cat</span> database/seeds/CampusTableSeeder.php</code></pre></div>
 </section><section class="slide level2">
 
-<pre class="sourceCode php"><code class="sourceCode php"><span class="kw">&lt;?php</span>
+<div class="sourceCode"><pre class="sourceCode php"><code class="sourceCode php"><span class="kw">&lt;?php</span>
 
 <span class="kw">use</span> Illuminate\Database\Seeder<span class="ot">;</span>
 
@@ -376,18 +387,18 @@ $ <span class="kw">cat</span> app/Models/Carrera.php</code></pre>
         }
     }
 
-}</code></pre>
+}</code></pre></div>
 </section><section class="slide level2">
 
 <p>Se ejecuta así:</p>
-<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">php</span> artisan db:seed --class=CampusTableSeeder</code></pre>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">php</span> artisan db:seed --class=CampusTableSeeder</code></pre></div>
 </section><section id="ejecutar-una-serie-de-seeds" class="slide level2">
 <h1>Ejecutar una serie de seeds</h1>
 <p>Es latoso ejecutar un montón de seeds, si quitamos el parámetro <code>class</code> del comando anterior, se asume que se ejecuta la clase <code>DatabaseSeeder</code>, desde esta haremos <code>$this-&gt;call('TablaSeeder')</code> a todas las clases que queramos.</p>
-<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">cat</span> app/database/seeds/DatabaseSeeder.php</code></pre>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">cat</span> app/database/seeds/DatabaseSeeder.php</code></pre></div>
 </section><section class="slide level2">
 
-<pre class="sourceCode php"><code class="sourceCode php"><span class="kw">&lt;?php</span>
+<div class="sourceCode"><pre class="sourceCode php"><code class="sourceCode php"><span class="kw">&lt;?php</span>
 
 <span class="kw">use</span> Illuminate\Database\Seeder<span class="ot">;</span>
 <span class="kw">use</span> Illuminate\Database\Eloquent\Model<span class="ot">;</span>
@@ -406,7 +417,7 @@ $ <span class="kw">cat</span> app/Models/Carrera.php</code></pre>
         <span class="kw">$this</span>-&gt;call<span class="ot">(</span><span class="st">&#39;UserTableSeeder&#39;</span><span class="ot">);</span> <span class="co">// Aquí!</span>
     }
 
-}</code></pre>
+}</code></pre></div>
 </section><section class="slide level2">
 
 <figure>
@@ -420,7 +431,7 @@ $ <span class="kw">cat</span> app/Models/Carrera.php</code></pre>
 </section><section id="ejecutarla-despues-de-migrar" class="slide level2">
 <h1>Ejecutarla despues de migrar</h1>
 <p>Tambien es posible ejecutar los seeds luego de migrar, el comando mágico es:</p>
-<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">php</span> artisan migrate:refresh --seed</code></pre>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">php</span> artisan migrate:refresh --seed</code></pre></div>
 </section><section id="eso-es-todo-amigos" class="slide level2">
 <h1>Eso es todo amigos</h1>
 </section></section>
@@ -429,7 +440,7 @@ $ <span class="kw">cat</span> app/Models/Carrera.php</code></pre>
 
 
   <script src="reveal.js/lib/js/head.min.js"></script>
-  <script src="reveal.js/js/reveal.js"></script>
+  <script src="reveal.js/js/reveal.min.js"></script>
 
   <script>
 

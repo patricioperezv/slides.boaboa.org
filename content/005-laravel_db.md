@@ -40,6 +40,16 @@ Incluye un montón de funciones útiles a la hora de desarrollar:
 
 # Base de datos
 
+## Hacer que laravel utilice nuestra DB
+
+Antes que todo, configuraremos laravel para que use la db que creamos anteriormente.
+
+---
+
+1. Modificamos el fichero `config/database.php`, cambiando el valor de `default` desde `mysql` a `pgsql`.
+2. Modificamos el fichero `.env` cambiando las credenciales de la DB, usando los datos (usuario + db + password) creados con anterioridad.
+3. Profit!
+
 ## La historia de la migración, el modelo y la semilla
 
 Laravel incluye 3 piezas bien útiles:
@@ -65,7 +75,7 @@ Los *seeds* sirven para poblar la base de datos, pueden usarse para dejar la bas
 El framework incluye un generador para migraciones:
 
 ~~~bash
-$ php artisan make:migration --create=carreras create_carreras_table
+php artisan make:migration --create=carreras create_carreras_table
 ~~~
 
 . . .
@@ -194,8 +204,8 @@ class AddForeignKeyToCarrerasTable extends Migration {
 ## Crear modelos
 
 ~~~bash
-$ php artisan make:model Models/Carrera --no-migration
-$ cat app/Models/Carrera.php
+php artisan make:model Models/Carrera --no-migration
+cat app/Models/Carrera.php
 ~~~
 
 ---
@@ -250,7 +260,7 @@ Modelaremos la siguiente relación:
 ---
 
 ~~~bash
-$ cat app/Models/Facultad.php
+cat app/Models/Facultad.php
 ~~~
 
 ~~~php
@@ -273,7 +283,7 @@ class Facultad extends Model
 ---
 
 ~~~bash
-$ cat app/models/Campus.php
+cat app/models/Campus.php
 ~~~
 
 ~~~php
@@ -311,7 +321,7 @@ Esta reación es algo más complicada (?), necesitan una tabla pivote (Recuerdan
 Tendremos dos modelos (*Rol* y *Usuario*):
 
 ~~~bash
-$ cat app/Models/Rol.php
+cat app/Models/Rol.php
 ~~~
 
 ~~~php
@@ -334,7 +344,7 @@ class Rol extends Model
 ---
 
 ~~~bash
-$ cat app/models/Usuario.php
+cat app/models/Usuario.php
 ~~~
 
 ~~~php
@@ -362,7 +372,7 @@ class Usuario extends Model
 Desafortunadamente no existen generadores para seeds integrados en laravel, asi que hay que crearlos a manito:
 
 ~~~bash
-$ cat database/seeds/CampusTableSeeder.php
+cat database/seeds/CampusTableSeeder.php
 ~~~
 
 ---
@@ -393,7 +403,7 @@ class CampusTableSeeder extends Seeder {
 Se ejecuta así:
 
 ~~~bash
-$ php artisan db:seed --class=CampusTableSeeder
+php artisan db:seed --class=CampusTableSeeder
 ~~~
 
 ## Ejecutar una serie de seeds
@@ -401,7 +411,7 @@ $ php artisan db:seed --class=CampusTableSeeder
 Es latoso ejecutar un montón de seeds, si quitamos el parámetro `class` del comando anterior, se asume que se ejecuta la clase `DatabaseSeeder`, desde esta haremos `$this->call('TablaSeeder')` a todas las clases que queramos.
 
 ~~~bash
-$ cat app/database/seeds/DatabaseSeeder.php
+cat app/database/seeds/DatabaseSeeder.php
 ~~~
 
 ---
@@ -442,7 +452,7 @@ class DatabaseSeeder extends Seeder {
 Tambien es posible ejecutar los seeds luego de migrar, el comando mágico es:
 
 ~~~bash
-$ php artisan migrate:refresh --seed
+php artisan migrate:refresh --seed
 ~~~
 
 ## Eso es todo amigos

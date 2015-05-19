@@ -8,9 +8,10 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <link rel="stylesheet" href="reveal.js/css/reveal.css"/>
-  <style type="text/css">code{white-space: pre;}</style>
-  <style type="text/css">
+  <link rel="stylesheet" href="reveal.js/css/reveal.min.css"/>
+    <style type="text/css">code{white-space: pre;}</style>
+    <style type="text/css">
+div.sourceCode { overflow-x: auto; }
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
   margin: 0; padding: 0; vertical-align: baseline; border: none; }
 table.sourceCode { width: 100%; line-height: 100%; }
@@ -28,21 +29,21 @@ code > span.ot { color: #007020; }
 code > span.al { color: #ff0000; font-weight: bold; }
 code > span.fu { color: #06287e; }
 code > span.er { color: #ff0000; font-weight: bold; }
-  </style>
-  <link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">
-  <!-- If the query includes 'print-pdf', include the PDF print sheet -->
-  <script>
-    if( window.location.search.match( /print-pdf/gi ) ) {
-      var link = document.createElement( 'link' );
-      link.rel = 'stylesheet';
-      link.type = 'text/css';
-      link.href = 'reveal.js/css/print/pdf.css';
-      document.getElementsByTagName( 'head' )[0].appendChild( link );
-    }
-  </script>
-  <!--[if lt IE 9]>
-  <script src="reveal.js/lib/js/html5shiv.js"></script>
-  <![endif]-->
+    </style>
+    <link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">
+    <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+    <script>
+      if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'reveal.js/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+      }
+    </script>
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
 </head>
 <body>
   <div class="reveal">
@@ -59,8 +60,8 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
     <h3 class="date">Primer semestre 2015</h3>
 </section>
 
-<section><section id="control-de-versiones" class="titleslide slide level1"><h1>Control de versiones</h1></section><section id="para-que" class="slide level2">
-<h1>Para que?</h1>
+<section><section id="control-de-versiones" class="titleslide slide level1"><h1>Control de versiones</h1></section><section id="para-qué" class="slide level2">
+<h1>¿Para qué?</h1>
 <p>Cuantas veces les ha ocurrido esto?</p>
 <figure>
 <img src="media/versiones_artesa.png" alt="Por favor no me hagan esto!" /><figcaption>Por favor no me hagan esto!</figcaption>
@@ -106,9 +107,9 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 <h1>Problemas de los VCS centralizados</h1>
 <aside class="notes">
 <ul>
-<li>Si el server dice #ahilosve estamos sonados hasta que vuelva</li>
-<li>Si el server murio y no hay backups, no hay forma de restaurar el proyecto (con todas las versiones). #ahilosve</li>
-<li>Toda operación le pega al server, si no hay internet/acceso cooperamos.</li>
+<li class="fragment">Si el server dice #ahilosve estamos sonados hasta que vuelva</li>
+<li class="fragment">Si el server murio y no hay backups, no hay forma de restaurar el proyecto (con todas las versiones). #ahilosve</li>
+<li class="fragment">Toda operación le pega al server, si no hay internet/acceso cooperamos.</li>
 </ul>
 </aside>
 <ul>
@@ -151,8 +152,8 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 <h1>Es distribuido</h1>
 <aside class="notes">
 <ul>
-<li>CVCS: &quot;Centralized Version Control System&quot; (ej: SVN, CVS)</li>
-<li>DVCS: &quot;Distributed Version Control System&quot; (ej: Git, Mercual, Bazaar)</li>
+<li class="fragment">CVCS: &quot;Centralized Version Control System&quot; (ej: SVN, CVS)</li>
+<li class="fragment">DVCS: &quot;Distributed Version Control System&quot; (ej: Git, Mercual, Bazaar)</li>
 </ul>
 </aside>
 <figure>
@@ -168,11 +169,11 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 <ul>
 <li class="fragment">El primer paso sería entrar a <a href="http://github.com">github</a> y crear una cuenta</li>
 <li class="fragment"><p>Ahora debemos crear una llave ssh (Abran sus terminales y tipeen):</p></li>
-<li class="fragment"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">git</span> config --global user.name <span class="st">&quot;Patricio Pérez&quot;</span>
+<li class="fragment"><div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">git</span> config --global user.name <span class="st">&quot;Patricio Pérez&quot;</span>
 <span class="kw">git</span> config --globa user.email pperez@boaboa.org
 <span class="kw">git</span> config --global color.ui auto
 <span class="kw">git</span> config --global push.default simple
-<span class="kw">ssh-keygen</span> -t rsa -C pperez@badgerbook</code></pre></li>
+<span class="kw">ssh-keygen</span> -t rsa -C pperez@badgerbook</code></pre></div></li>
 </ul>
 </section><section class="slide level2">
 
@@ -204,13 +205,13 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 </section><section id="clonar-el-repositorio" class="slide level2">
 <h1>Clonar el repositorio</h1>
 <p>Vamos a la pagina del repositorio y copiamos la URL de clonado SSH (Parte inferior derecha), luego en la terminal:</p>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">cd</span> ~
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">cd</span> ~
 <span class="kw">mkdir</span> code
-<span class="kw">git</span> clone git@github.com:pperez/app_evaluaciones_ingsw.git</code></pre>
+<span class="kw">git</span> clone git@github.com:pperez/app_evaluaciones_ingsw.git</code></pre></div>
 </section><section id="ta-dah" class="slide level2">
 <h1>Ta-Dah!</h1>
 <figure>
-<img src="media/repo_clonado.png" alt="" />
+<img src="media/repo_clonado.png" />
 </figure>
 <p>Su repositorio esta en <code>~/code/app_evaluaciones_ingsw</code></p>
 </section></section>
@@ -218,25 +219,25 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 <h1>Comandos git</h1>
 <aside class="notes">
 <ul>
-<li><code>git checkout -b nueva_rama</code> (Hace una nueva rama basada en la actual)</li>
-<li><code>git commit -m &quot;mensaje&quot;</code> (Hace un commit con el mensaje especificado en el -m)</li>
-<li><code>git checkout master</code> cambia a la branch que queramos</li>
-<li><code>git merge otrarama</code> hace un merge de la otra rama, cuidado con los problemas de merge!</li>
+<li class="fragment"><code>git checkout -b nueva_rama</code> (Hace una nueva rama basada en la actual)</li>
+<li class="fragment"><code>git commit -m &quot;mensaje&quot;</code> (Hace un commit con el mensaje especificado en el -m)</li>
+<li class="fragment"><code>git checkout master</code> cambia a la branch que queramos</li>
+<li class="fragment"><code>git merge otrarama</code> hace un merge de la otra rama, cuidado con los problemas de merge!</li>
 </ul>
 </aside>
 <figure>
-<img src="media/comandos_git.png" alt="" />
+<img src="media/comandos_git.png" />
 </figure>
 </section><section class="slide level2">
 
 <aside class="notes">
 <ul>
-<li>El push requiere conexión al server (en este caso github)</li>
-<li>Hay que tener cuidado con los merge y como manejarlos</li>
+<li class="fragment">El push requiere conexión al server (en este caso github)</li>
+<li class="fragment">Hay que tener cuidado con los merge y como manejarlos</li>
 </ul>
 </aside>
 <figure>
-<img src="media/comandos_git_2.png" alt="" />
+<img src="media/comandos_git_2.png" />
 </figure>
 </section><section id="terminando-con-git" class="slide level2">
 <h1>Terminando con git</h1>
@@ -257,7 +258,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 
 
   <script src="reveal.js/lib/js/head.min.js"></script>
-  <script src="reveal.js/js/reveal.js"></script>
+  <script src="reveal.js/js/reveal.min.js"></script>
 
   <script>
 
