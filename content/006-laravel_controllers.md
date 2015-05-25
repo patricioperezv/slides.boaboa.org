@@ -1,4 +1,4 @@
-% Laravel 5.0
+% Controladores en Laravel
 % Patricio Pérez <patricio.perez@ceinf.cl>
 % Primer semestre 2015
 
@@ -44,7 +44,7 @@ $carrera_informatica->codigo = 21030;
 $facultad_ing->carreras()->save($carrera_informatica);
 ~~~
 
-# Rutas y controladores
+# Rutas
 
 ## Servidor web
 
@@ -132,12 +132,98 @@ Algunas funcionalidades de rutas:
 
 * Restricciones con expresiones regulares (#valecorby)
 * Parámetros por defecto
-* Acceder a ellas por nombre (Lo veremos más a fondo)
+* Usar prefijos
 * Usar subdominios
 
 ---
 
-* Usar prefijos
+* Acceder a ellas por nombre (Lo veremos más a fondo)
 * Binding a modelos (Lo veremos más a fondo)
 * Pasar más de un parámetro (ej: /decir/hola/pedro; /decir/saludar/pedro)
 * Agrupar rutas (Para ejecución de `middlewares` y `namespaces`, lo veremos...)
+* Usar controladores RESTful
+
+# Controladores
+
+## La C del MVC
+
+Concentraremos la lógica de acción de nuestra aplicación en estos. Son básicamente el pegamento entre los datos (Modelos) y lo que se ve (Vistas).
+
+## Estructura
+
+Los controladores son clases, heredan de `Controller`, sus métodos son referenciados desde alguna ruta y se encargan de trabajar con datos en función a los requerimientos del usuario.
+
+---
+
+~~~php
+<?php namespace App\Http\Controllers;
+
+use App\Http\Controllers\Controller;
+
+class UserController extends Controller {
+
+    /**
+     * Show the profile for the given user.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function showProfile($id)
+    {
+        $user = User::findOrFail($id);
+        return view('user.profile')
+               ->with('user', $user);
+    }
+}
+~~~
+
+---
+
+~~~bash
+cat app/Http/routes.php
+~~~
+
+~~~php
+Route::get('user/{id}', 'UserController@showProfile');
+~~~
+
+## Controladores RESTful
+
+El tema con REST es aprovecharse de los verbos HTTP para modelar el comportamiento de la aplicación:
+
+* Al hacer POST a un recurso, crear un nuevo registro
+* Al hacer DELETE a un recurso específico, eliminarlo
+* Al hacer GET a un recurso específico, mostrar sus detalles
+
+## Crear un controlador RESTful
+
+Desde Laravel 5.0 se le puso más amor al generador de código:
+
+~~~bash
+php artisan make:controller Backend/SalasController
+~~~
+
+---
+
+~~~php
+<?php namespace App\Http\Controllers\Backend;
+
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+
+use Illuminate\Http\Request;
+
+class SalaController extends Controller {
+	public function index() {}
+	public function create() {}
+	public function store() {}
+	public function show($id) {}
+	public function edit($id) {}
+	public function update($id) {}
+	public function destroy($id) {}
+}
+~~~
+
+## Que haremos?
+
+Hoy armaremos una demo (funcional!) de un CRUD (Create, Read, Update, Delete) para el backend del encargado de campus.
