@@ -46,7 +46,98 @@ $facultad_ing->carreras()->save($carrera_informatica);
 
 # Rutas y controladores
 
+## Servidor web
+
+Este punto es importante, serviremos la aplicacion web usando el servidor integrado de php:
+
+~~~bash
+php artisan serve
+~~~
+
+Basta que abran el browser en [http://localhost:8000](http://localhost:8000)
+
+---
+
+![Welcome](media/welcome_l5.png)
+
 ## Rutas
 
 Es necesario definir como interactua el usuario final con nuestra aplicación, para esto se utiliza el framework de *Routing*, este mapea una *URI + verbo HTTP* a un método existente en algún controlador*.
 
+---
+
+~~~bash
+cat app/Http/routes.php
+~~~
+
+~~~php
+<?php
+
+// ...
+
+Route::get('/', 'WelcomeController@index');
+
+Route::get('home', 'HomeController@index');
+
+Route::controllers([
+	'auth' => 'Auth\AuthController',
+	'password' => 'Auth\PasswordController',
+]);
+~~~
+
+## Definiendo rutas
+
+Los verbos http son los que la llevan aquí:
+
+~~~php
+Route::get('pato', function()
+{
+    return 'Patoh';
+});
+
+Route::post('hola/holaa', function()
+{
+    return 'Hola World';
+});
+
+Route::put('foo/bar', function()
+{
+    //
+});
+
+Route::delete('foo/bar', function()
+{
+    //
+});
+~~~
+
+Basta que disparemos con nuestro navegador a las urls correspondientes y deberiamos 
+
+## Pasando parámetros
+
+Hagamoslo más interesante, obtengamos parámetros desde la url:
+
+~~~php
+Route::get('hola/{nombre}', function($nombre)
+{
+    return 'Hola ' . $nombre;
+});
+~~~
+
+Prueben en su [navegador](http://localhost:8000/hola/patricio)
+
+## Otros detalles
+
+Algunas funcionalidades de rutas:
+
+* Restricciones con expresiones regulares (#valecorby)
+* Parámetros por defecto
+* Acceder a ellas por nombre (Lo veremos más a fondo)
+* Usar subdominios
+
+---
+
+* Usar prefijos
+* Binding a modelos (Lo veremos más a fondo)
+* Pasar más de un parámetro (ej: /decir/hola/pedro; /decir/saludar/pedro)
+* Agrupar rutas (Para ejecución de `middlewares` y `namespaces`, lo veremos...)
