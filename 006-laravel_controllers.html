@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
   <meta name="author" content="Patricio Pérez patricio.perez@ceinf.cl" />
-  <title>Laravel 5.0</title>
+  <title>Controladores en Laravel</title>
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -50,7 +50,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
     <div class="slides">
 
 <section>
-    <h1 class="title">Laravel 5.0</h1>
+    <h1 class="title">Controladores en Laravel</h1>
     <h2 class="author">Patricio Pérez <script type="text/javascript">
 <!--
 h='&#x63;&#x65;&#x69;&#110;&#102;&#46;&#x63;&#108;';a='&#64;';n='&#112;&#x61;&#116;&#114;&#x69;&#x63;&#x69;&#x6f;&#46;&#112;&#x65;&#114;&#x65;&#122;';e=n+a+h;
@@ -92,7 +92,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 <span class="kw">$carrera_informatica</span>-&gt;codigo = <span class="dv">21030</span><span class="ot">;</span>
 <span class="kw">$facultad_ing</span>-&gt;carreras<span class="ot">()</span>-&gt;save<span class="ot">(</span><span class="kw">$carrera_informatica</span><span class="ot">);</span></code></pre></div>
 </section></section>
-<section><section id="rutas-y-controladores" class="titleslide slide level1"><h1>Rutas y controladores</h1></section><section id="servidor-web" class="slide level2">
+<section><section id="rutas" class="titleslide slide level1"><h1>Rutas</h1></section><section id="servidor-web" class="slide level2">
 <h1>Servidor web</h1>
 <p>Este punto es importante, serviremos la aplicacion web usando el servidor integrado de php:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">php</span> artisan serve</code></pre></div>
@@ -102,7 +102,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 <figure>
 <img src="media/welcome_l5.png" alt="Welcome" /><figcaption>Welcome</figcaption>
 </figure>
-</section><section id="rutas" class="slide level2">
+</section><section id="rutas-1" class="slide level2">
 <h1>Rutas</h1>
 <p>Es necesario definir como interactua el usuario final con nuestra aplicación, para esto se utiliza el framework de <em>Routing</em>, este mapea una <em>URI + verbo HTTP</em> a un método existente en algún controlador*.</p>
 </section><section class="slide level2">
@@ -157,17 +157,83 @@ Route::delete<span class="ot">(</span><span class="st">&#39;foo/bar&#39;</span><
 <ul>
 <li class="fragment">Restricciones con expresiones regulares (#valecorby)</li>
 <li class="fragment">Parámetros por defecto</li>
-<li class="fragment">Acceder a ellas por nombre (Lo veremos más a fondo)</li>
+<li class="fragment">Usar prefijos</li>
 <li class="fragment">Usar subdominios</li>
 </ul>
 </section><section class="slide level2">
 
 <ul>
-<li class="fragment">Usar prefijos</li>
+<li class="fragment">Acceder a ellas por nombre (Lo veremos más a fondo)</li>
 <li class="fragment">Binding a modelos (Lo veremos más a fondo)</li>
 <li class="fragment">Pasar más de un parámetro (ej: /decir/hola/pedro; /decir/saludar/pedro)</li>
 <li class="fragment">Agrupar rutas (Para ejecución de <code>middlewares</code> y <code>namespaces</code>, lo veremos...)</li>
+<li class="fragment">Usar controladores RESTful</li>
 </ul>
+</section></section>
+<section><section id="controladores" class="titleslide slide level1"><h1>Controladores</h1></section><section id="la-c-del-mvc" class="slide level2">
+<h1>La C del MVC</h1>
+<p>Concentraremos la lógica de acción de nuestra aplicación en estos. Son básicamente el pegamento entre los datos (Modelos) y lo que se ve (Vistas).</p>
+</section><section id="estructura" class="slide level2">
+<h1>Estructura</h1>
+<p>Los controladores son clases, heredan de <code>Controller</code>, sus métodos son referenciados desde alguna ruta y se encargan de trabajar con datos en función a los requerimientos del usuario.</p>
+</section><section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode php"><code class="sourceCode php"><span class="kw">&lt;?php</span> <span class="kw">namespace</span> App\Http\Controllers<span class="ot">;</span>
+
+<span class="kw">use</span> App\Http\Controllers\Controller<span class="ot">;</span>
+
+<span class="kw">class</span> UserController <span class="kw">extends</span> Controller {
+
+    <span class="co">/**</span>
+<span class="co">     * Show the profile for the given user.</span>
+<span class="co">     *</span>
+<span class="co">     * </span><span class="kw">@param</span><span class="co">  </span><span class="kw">int</span><span class="co">  $id</span>
+<span class="co">     * </span><span class="kw">@return</span><span class="co"> Response</span>
+<span class="co">     */</span>
+    <span class="kw">public</span> <span class="kw">function</span> showProfile<span class="ot">(</span><span class="kw">$id</span><span class="ot">)</span>
+    {
+        <span class="kw">$user</span> = User::findOrFail<span class="ot">(</span><span class="kw">$id</span><span class="ot">);</span>
+        <span class="kw">return</span> view<span class="ot">(</span><span class="st">&#39;user.profile&#39;</span><span class="ot">)</span>
+               -&gt;with<span class="ot">(</span><span class="st">&#39;user&#39;</span><span class="ot">,</span> <span class="kw">$user</span><span class="ot">);</span>
+    }
+}</code></pre></div>
+</section><section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">cat</span> app/Http/routes.php</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode php"><code class="sourceCode php">Route::get<span class="ot">(</span><span class="st">&#39;user/{id}&#39;</span><span class="ot">,</span> <span class="st">&#39;UserController@showProfile&#39;</span><span class="ot">);</span></code></pre></div>
+</section><section id="controladores-restful" class="slide level2">
+<h1>Controladores RESTful</h1>
+<p>El tema con REST es aprovecharse de los verbos HTTP para modelar el comportamiento de la aplicación:</p>
+<ul>
+<li class="fragment">Al hacer POST a un recurso, crear un nuevo registro</li>
+<li class="fragment">Al hacer DELETE a un recurso específico, eliminarlo</li>
+<li class="fragment">Al hacer GET a un recurso específico, mostrar sus detalles</li>
+</ul>
+</section><section id="crear-un-controlador-restful" class="slide level2">
+<h1>Crear un controlador RESTful</h1>
+<p>Desde Laravel 5.0 se le puso más amor al generador de código:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">php</span> artisan make:controller Backend/SalasController</code></pre></div>
+</section><section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode php"><code class="sourceCode php"><span class="kw">&lt;?php</span> <span class="kw">namespace</span> App\Http\Controllers\Backend<span class="ot">;</span>
+
+<span class="kw">use</span> App\Http\Requests<span class="ot">;</span>
+<span class="kw">use</span> App\Http\Controllers\Controller<span class="ot">;</span>
+
+<span class="kw">use</span> Illuminate\Http\Request<span class="ot">;</span>
+
+<span class="kw">class</span> SalaController <span class="kw">extends</span> Controller {
+    <span class="kw">public</span> <span class="kw">function</span> index<span class="ot">()</span> {}
+    <span class="kw">public</span> <span class="kw">function</span> create<span class="ot">()</span> {}
+    <span class="kw">public</span> <span class="kw">function</span> store<span class="ot">()</span> {}
+    <span class="kw">public</span> <span class="kw">function</span> show<span class="ot">(</span><span class="kw">$id</span><span class="ot">)</span> {}
+    <span class="kw">public</span> <span class="kw">function</span> edit<span class="ot">(</span><span class="kw">$id</span><span class="ot">)</span> {}
+    <span class="kw">public</span> <span class="kw">function</span> update<span class="ot">(</span><span class="kw">$id</span><span class="ot">)</span> {}
+    <span class="kw">public</span> <span class="kw">function</span> destroy<span class="ot">(</span><span class="kw">$id</span><span class="ot">)</span> {}
+}</code></pre></div>
+</section><section id="que-haremos" class="slide level2">
+<h1>Que haremos?</h1>
+<p>Hoy armaremos una demo (funcional!) de un CRUD (Create, Read, Update, Delete) para el backend del encargado de campus.</p>
 </section></section>
     </div>
   </div>
