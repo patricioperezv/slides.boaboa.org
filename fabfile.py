@@ -25,7 +25,7 @@ def build():
     for fichero in glob.glob(SOURCE_FILES):
         nombre = os.path.splitext(os.path.split(fichero)[-1])[0]
         destino = os.path.join(DEST_DIR, nombre + '.html')
-        local('pandoc --slide-level 2 -f markdown -t revealjs --incremental --mathjax -V theme=night -s {0} -o {1}'.format(fichero, destino))
+        local('pandoc -f markdown -t revealjs --incremental --mathjax -V theme=night -s {0} -o {1}'.format(fichero, destino))
 
 def serve():
     local('cd \'{0}\' && python -m SimpleHTTPServer 9000'.format(DEST_DIR))
